@@ -23,19 +23,14 @@ public class GameState extends State implements Serializable {
     private Camera camera;
     private OverworldMap map;
 
-    private boolean firstLaunch = true;
-    private boolean test = true;
-
     @Override
     public void init() {
-        if (!firstLaunch) return;
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         map = new OverworldMap(this, 64, 64);
         map.generate();
         player = new Player(this, map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);
-        firstLaunch = false;
     }
 
     @Override

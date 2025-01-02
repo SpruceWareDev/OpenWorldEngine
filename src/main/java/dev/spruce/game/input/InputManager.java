@@ -124,6 +124,10 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         return mouseY;
     }
 
+    public boolean isMouseOver(int x, int y, int width, int height) {
+        return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
+    }
+
     public static InputManager getInstance() {
         if (instance == null) {
             instance = new InputManager();

@@ -18,7 +18,7 @@ public class Game {
     public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
 
     private RenderPanel renderPanel;
-    private StateManager stateManager;
+    private static StateManager stateManager;
 
     private GameState currentGame;
 
@@ -66,5 +66,9 @@ public class Game {
 
     public void render(Graphics graphics) {
         stateManager.render(graphics);
+    }
+
+    public static StateManager getStateManager() {
+        return stateManager;
     }
 }
