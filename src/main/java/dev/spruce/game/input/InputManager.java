@@ -40,6 +40,14 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         mouseSubscribers.clear();
     }
 
+    public boolean isSubscribed(IKeyInput input) {
+        return keySubscribers.contains(input);
+    }
+
+    public boolean isSubscribed(IMouseInput input) {
+        return mouseSubscribers.contains(input);
+    }
+
     public boolean isKeyDown(int keyCode) {
         if (keyCode > 0 && keyCode < keys.length - 1)
             return keys[keyCode];
@@ -49,7 +57,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
     @Override
     public void keyTyped(KeyEvent e) {
         for (IKeyInput input : keySubscribers) {
-            input.onKeyTyped(e.getKeyCode());
+            input.onKeyTyped(e.getKeyCode(), e.getKeyChar());
         }
     }
 

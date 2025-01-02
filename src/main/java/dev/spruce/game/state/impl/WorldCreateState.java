@@ -1,44 +1,36 @@
 package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.ui.ScreenSnapPoint;
 import dev.spruce.game.graphics.ui.UIManager;
 import dev.spruce.game.graphics.ui.impl.UIButton;
+import dev.spruce.game.graphics.ui.impl.UITextBox;
 import dev.spruce.game.state.State;
-import dev.spruce.game.state.StateManager;
 
 import java.awt.*;
 
-public class MainMenuState extends State {
+public class WorldCreateState extends State {
 
     private UIManager uiManager;
+    private UITextBox worldName;
 
     @Override
     public void init() {
         uiManager = new UIManager();
+        worldName = new UITextBox(
+                0, 0, 200, 40,
+                ScreenSnapPoint.CENTER
+        );
+        uiManager.addElement(worldName);
         uiManager.addElement(new UIButton(
-                "New Game",
+                "Create",
                 Color.BLUE,
-                Window.getInstance().getWidth() / 2 - 100,
-                Window.getInstance().getHeight() / 2 - 50,
-                100,
-                80,
+                0, 0, 200, 80,
                 ScreenSnapPoint.CENTER,
-                () -> Game.getStateManager().setState(new WorldCreateState(), true)
-        ));
-
-        uiManager.addElement(new UIButton(
-                "Load Game",
-                Color.BLUE,
-                Window.getInstance().getWidth() / 2 - 100,
-                Window.getInstance().getHeight() / 2 - 50,
-                100,
-                80,
-                ScreenSnapPoint.CENTER,
-                () -> Game.getStateManager().setState(new GameSelectState(), true)
+                () -> Game.getStateManager().setState(new GameState(worldName.getText()), true)
         ));
     }
 
@@ -50,12 +42,11 @@ public class MainMenuState extends State {
     @Override
     public void render(Graphics graphics) {
         FontRenderer.drawStringCentred(
-                graphics, Game.FORMATTED_NAME,
-                Window.getInstance().getWidth() / 2,
+                graphics, "New Game.",
+                dev.spruce.game.graphics.Window.getInstance().getWidth() / 2,
                 Window.getInstance().getHeight() / 4,
                 Color.WHITE, Fonts.TITLE
         );
-
         uiManager.render(graphics);
     }
 

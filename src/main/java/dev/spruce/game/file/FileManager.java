@@ -3,6 +3,7 @@ package dev.spruce.game.file;
 import dev.spruce.game.state.impl.GameState;
 
 import java.io.*;
+import java.util.List;
 
 public class FileManager {
 
@@ -18,6 +19,11 @@ public class FileManager {
         if (!savesDirectory.exists()) {
             savesDirectory.mkdir();
         }
+    }
+
+    public static List<String> getGameNames() {
+        File savesDirectory = new File(SAVES_DIRECTORY);
+        return List.of(savesDirectory.list());
     }
 
     public static void saveGame(String name, GameState gameState) throws IOException {

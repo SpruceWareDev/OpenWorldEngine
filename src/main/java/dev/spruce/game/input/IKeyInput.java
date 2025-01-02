@@ -6,5 +6,5 @@ public interface IKeyInput {
 
     void onKeyRelease(int keyCode);
 
-    void onKeyTyped(int keyCode);
+    void onKeyTyped(int keyCode, char keyChar);
 }

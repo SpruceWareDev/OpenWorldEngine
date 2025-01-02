@@ -51,4 +51,9 @@ public class UIButton extends UIElement implements IMouseInput {
             action.run();
         }
     }
+
+    @Override
+    public void dispose() {
+        InputManager.getInstance().unsubscribe(this);
+    }
 }

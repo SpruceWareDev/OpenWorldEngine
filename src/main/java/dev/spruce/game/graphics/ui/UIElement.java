@@ -19,6 +19,8 @@ public abstract class UIElement {
 
     public abstract void render(Graphics graphics);
 
+    public void dispose() {}
+
     public ScreenSnapPoint getSnapPoint() {
         return snapPoint;
     }

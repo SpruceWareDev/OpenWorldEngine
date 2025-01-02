@@ -3,6 +3,7 @@ package dev.spruce.game;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.Window;
+import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.StateManager;
 import dev.spruce.game.state.impl.GameState;
@@ -19,8 +20,7 @@ public class Game {
 
     private RenderPanel renderPanel;
     private static StateManager stateManager;
-
-    private GameState currentGame;
+    private static ScreenManager screenManager;
 
     public void start() {
         System.out.println("Starting engine!");
@@ -34,41 +34,26 @@ public class Game {
         Window.init(800, 600, FORMATTED_NAME);
         renderPanel = new RenderPanel(this);
 
-        /*
-        try {
-            currentGame = FileManager.loadGame("nutsack");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //currentGame = new GameState();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                FileManager.saveGame("nutsack", currentGame);
-            } catch (IOException e) {
-                System.err.println("It brokie! >:3");
-                throw new RuntimeException(e);
-            }
-        }));
-
-         */
-
         stateManager = new StateManager(new MainMenuState());
+        screenManager = new ScreenManager();
         renderPanel.run();
     }
 
     public void update(double delta) {
         stateManager.update(delta);
+        screenManager.update(delta);
     }
 
     public void render(Graphics graphics) {
         stateManager.render(graphics);
+        screenManager.render(graphics);
     }
 
     public static StateManager getStateManager() {
         return stateManager;
+    }
+
+    public static ScreenManager getScreenManager() {
+        return screenManager;
     }
 }

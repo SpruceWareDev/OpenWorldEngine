@@ -42,6 +42,10 @@ public class UIManager {
         }
     }
 
+    public void dispose() {
+        elements.forEach(UIElement::dispose);
+    }
+
     public List<UIElement> getBySnapPoint(ScreenSnapPoint snapPoint) {
         return elements.stream().filter(element -> element.getSnapPoint() == snapPoint).toList();
     }
