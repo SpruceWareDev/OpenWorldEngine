@@ -4,5 +4,7 @@ import java.awt.*;
 
 public class Fonts {
 
-    public static final Font ARIAL_12 = new Font("Arial", Font.PLAIN, 12);
+    public static final Font DEFAULT = new Font("Arial", Font.PLAIN, 16);
+    public static final Font TITLE = new Font("Arial", Font.BOLD, 32);
+
 }

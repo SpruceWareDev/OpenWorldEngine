@@ -1,13 +1,15 @@
 package dev.spruce.game.world;
 
+import dev.spruce.game.assets.Textures;
 import dev.spruce.game.graphics.Camera;
 
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Map {
+public abstract class Map implements Serializable {
 
     protected GameState gameState;
     protected Tile[][] tiles;
@@ -36,7 +38,7 @@ public abstract class Map {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
                 Tile tile = tiles[x][y];
-                g2d.drawImage(tile.getTexture(),
+                g2d.drawImage(Textures.getInstance().getTileTexture(tile.getId()),
                         (int) ((x * tile.getSize()) - camera.getX()),
                         (int) ((y * tile.getSize()) - camera.getY()),
                         tile.getSize(), tile.getSize(), null

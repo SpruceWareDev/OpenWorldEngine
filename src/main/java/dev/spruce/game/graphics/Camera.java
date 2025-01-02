@@ -2,7 +2,9 @@ package dev.spruce.game.graphics;
 
 import dev.spruce.game.entity.Entity;
 
-public class Camera {
+import java.io.Serializable;
+
+public class Camera implements Serializable {
 
     private float x, y;
 

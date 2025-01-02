@@ -7,13 +7,9 @@ World Generation
 -- Spawn Structure
 
 File Management
-- Saving Worlds
--- Save world as rows for each tile id
--- Save all entity positions
--- ISaveable interface
---- Inherited by all objects that need specific data saving
---- save function returns String with data to be saved
---- load function has String data passed in when loaded
+- Saving Worlds (done for now)
+-- Serialise Everything!!! (done for now)
+
 
 Items
 

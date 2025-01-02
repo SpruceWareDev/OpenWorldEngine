@@ -6,8 +6,8 @@ public class TileManager {
 
     private static TileManager instance;
 
-    public final Tile GRASS = new Tile(0, Tile.SIZE, false, Textures.GRASS);
-    public final Tile CRACKED_STONE = new Tile(1, Tile.SIZE, false, Textures.CRACKED_STONE);
+    public final Tile GRASS = new Tile(0, Tile.SIZE, false);
+    public final Tile CRACKED_STONE = new Tile(1, Tile.SIZE, false);
 
     public static TileManager getInstance() {
         if (instance == null) {

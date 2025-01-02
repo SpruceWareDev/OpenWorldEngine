@@ -8,7 +8,7 @@ import dev.spruce.game.util.EntityCollider;
 import java.awt.*;
 import java.io.Serializable;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
     protected GameState gameState;
 
