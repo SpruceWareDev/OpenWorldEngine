@@ -5,13 +5,31 @@ Farming
 World Generation
 - Structures
 -- Spawn Structure
+- Entities
+-- Trees
+--- Acacia Tree (done)
+-- Rocks
+--- Small rock
+--- Large rock
+--- Ore rock
 
 File Management
 - Saving Worlds (done for now)
 -- Serialise Everything!!! (done for now)
 
+Screens
+- Pause Screen (In progress)
 
 Items
+- Item class
+- ItemStack class
+- Item attributes
+- Inventories
+
+Crafting
+- Recipe class
+- Recipe Manager
+
 
 Stations
 - Crafting Station
