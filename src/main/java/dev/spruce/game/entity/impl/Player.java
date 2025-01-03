@@ -27,6 +27,11 @@ public class Player extends Entity implements IMouseInput {
 
     @Override
     public void update(double delta) {
+        // TODO: Make this less ass
+        if (!InputManager.getInstance().isSubscribed(this)) {
+            InputManager.getInstance().subscribe(this);
+        }
+
         move((float) delta);
     }
 

@@ -19,6 +19,7 @@ public class Textures {
         tiles = new HashMap<>();
         tiles.put(TileManager.getInstance().GRASS.getId(), loadImage("assets/textures/tile_grass.png"));
         tiles.put(TileManager.getInstance().CRACKED_STONE.getId(), loadImage("assets/textures/tile_cracked_stone.png"));
+        tiles.put(TileManager.getInstance().WATER.getId(), loadImage("assets/textures/tile_water.png"));
     }
 
     // Entities

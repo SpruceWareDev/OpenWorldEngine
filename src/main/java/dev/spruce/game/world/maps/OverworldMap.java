@@ -2,6 +2,7 @@ package dev.spruce.game.world.maps;
 
 import dev.spruce.game.entity.impl.environment.AcaciaTree;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.util.Noise;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.Tile;
 import dev.spruce.game.world.TileManager;
@@ -9,6 +10,7 @@ import dev.spruce.game.world.TileManager;
 public class OverworldMap extends Map {
 
     private int spawnX, spawnY;
+    private Noise noise;
 
     public OverworldMap(GameState gameState, int width, int height) {
         super(gameState, width, height);
@@ -16,10 +18,15 @@ public class OverworldMap extends Map {
 
     @Override
     public void generate() {
+        noise = new Noise(4, 2f, 2f, 69420);
+        float[][] waterNoiseMap = noise.generateNoise(width, height);
+
         // Fill map with grass
         fillMap(TileManager.getInstance().GRASS);
         // Generate spawn point
         generateSpawn();
+        // Generate water
+        generateWater(waterNoiseMap);
         // Generate foliage
         generateFoliage();
     }
@@ -41,6 +48,17 @@ public class OverworldMap extends Map {
         for (int x = spawnX - 1; x <= spawnX + 1; x++) {
             for (int y = spawnY - 1; y <= spawnY + 1; y++) {
                 tiles[x][y] = TileManager.getInstance().CRACKED_STONE;
+            }
+        }
+    }
+
+    private void generateWater(float[][] noiseMap) {
+        // Generate water
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (noiseMap[x][y] > 0.8) {
+                    tiles[x][y] = TileManager.getInstance().WATER;
+                }
             }
         }
     }

@@ -32,7 +32,7 @@ public class UIButton extends UIElement implements IMouseInput {
     public void render(Graphics graphics) {
         graphics.setColor(color);
         graphics.fillRect(getX(), getY(), getWidth(), getHeight());
-        FontRenderer.drawStringCentred(graphics, text, getX() + getWidth() / 2, getY() + getHeight() / 2, Color.WHITE, Fonts.DEFAULT);
+        FontRenderer.drawStringCentredBoth(graphics, text, getX() + getWidth() / 2, getY() + getHeight() / 2, Color.WHITE, Fonts.DEFAULT);
     }
 
     @Override

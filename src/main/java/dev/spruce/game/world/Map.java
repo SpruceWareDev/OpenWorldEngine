@@ -1,5 +1,6 @@
 package dev.spruce.game.world;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.assets.Textures;
 import dev.spruce.game.graphics.Camera;
 
@@ -44,8 +45,10 @@ public abstract class Map implements Serializable {
                         tile.getSize(), tile.getSize(), null
                 );
 
-                graphics.setColor(Color.red);
-                graphics.drawRect((int) ((x * tile.getSize()) - camera.getX()), (int) ((y * tile.getSize()) - camera.getY()), tile.getSize(), tile.getSize());
+                if (Game.debug) {
+                    graphics.setColor(Color.red);
+                    graphics.drawRect((int) ((x * tile.getSize()) - camera.getX()), (int) ((y * tile.getSize()) - camera.getY()), tile.getSize(), tile.getSize());
+                }
             }
         }
     }

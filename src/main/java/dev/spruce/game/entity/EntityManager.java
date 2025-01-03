@@ -1,5 +1,6 @@
 package dev.spruce.game.entity;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.GameState;
 
@@ -34,6 +35,9 @@ public class EntityManager implements Serializable {
 
         // Update entities
         for (Entity entity : entities) {
+            if (!entity.isEntityOnScreen())
+                continue;
+
             entity.update(delta);
         }
     }
@@ -43,6 +47,10 @@ public class EntityManager implements Serializable {
             if (!entity.isEntityOnScreen())
                 continue;
             entity.render(graphics, camera);
+
+            if (Game.debug) {
+                entity.renderBoundingBox(graphics, camera);
+            }
         }
     }
 

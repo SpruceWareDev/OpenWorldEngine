@@ -38,7 +38,7 @@ public class GameState extends State implements Serializable, IKeyInput {
     public void init() {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
-        map = new OverworldMap(this, 64, 64);
+        map = new OverworldMap(this, 1024, 1024);
         map.generate();
         player = new Player(this, map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);

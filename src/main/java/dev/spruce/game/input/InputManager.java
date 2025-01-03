@@ -1,5 +1,7 @@
 package dev.spruce.game.input;
 
+import dev.spruce.game.Game;
+
 import java.awt.event.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -68,6 +70,10 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
             for (IKeyInput input : keySubscribers) {
                 input.onKeyPress(e.getKeyCode());
             }
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_F3) {
+            Game.debug = !Game.debug;
         }
     }
 

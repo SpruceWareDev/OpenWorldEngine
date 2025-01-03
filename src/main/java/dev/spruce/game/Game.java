@@ -18,6 +18,8 @@ public class Game {
     public static final String VERSION = "alpha-0.1";
     public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
 
+    public static boolean debug = false;
+
     private RenderPanel renderPanel;
     private static StateManager stateManager;
     private static ScreenManager screenManager;

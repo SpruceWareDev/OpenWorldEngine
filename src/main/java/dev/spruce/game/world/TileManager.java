@@ -8,6 +8,7 @@ public class TileManager {
 
     public final Tile GRASS = new Tile(0, Tile.SIZE, false);
     public final Tile CRACKED_STONE = new Tile(1, Tile.SIZE, false);
+    public final Tile WATER = new Tile(2, Tile.SIZE, true);
 
     public static TileManager getInstance() {
         if (instance == null) {

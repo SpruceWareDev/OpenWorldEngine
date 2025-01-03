@@ -20,25 +20,21 @@ public class MainMenuState extends State {
     public void init() {
         uiManager = new UIManager();
         uiManager.addElement(new UIButton(
-                "New Game",
-                Color.BLUE,
-                Window.getInstance().getWidth() / 2 - 100,
-                Window.getInstance().getHeight() / 2 - 50,
-                100,
-                80,
+                "New Game", Color.BLUE, 0, 0, 150, 50,
                 ScreenSnapPoint.CENTER,
                 () -> Game.getStateManager().setState(new WorldCreateState(), true)
         ));
 
         uiManager.addElement(new UIButton(
-                "Load Game",
-                Color.BLUE,
-                Window.getInstance().getWidth() / 2 - 100,
-                Window.getInstance().getHeight() / 2 - 50,
-                100,
-                80,
+                "Load Game", Color.BLUE, 0, 0, 150, 50,
                 ScreenSnapPoint.CENTER,
                 () -> Game.getStateManager().setState(new GameSelectState(), true)
+        ));
+
+        uiManager.addElement(new UIButton(
+                "Quit", Color.BLUE, 0, 0, 150, 50,
+                ScreenSnapPoint.CENTER,
+                () -> System.exit(0)
         ));
     }
 
