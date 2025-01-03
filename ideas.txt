@@ -1,10 +1,19 @@
+----------------
 Combat
+----------------
 
+----------------
 Farming
+----------------
 
+----------------
 World Generation
+----------------
+- Procedural Generation (done for now)
+
 - Structures
 -- Spawn Structure
+
 - Entities
 -- Trees
 --- Acacia Tree (done)
@@ -12,29 +21,46 @@ World Generation
 --- Small rock
 --- Large rock
 --- Ore rock
+----------------
 
+----------------
 File Management
+----------------
 - Saving Worlds (done for now)
 -- Serialise Everything!!! (done for now)
+----------------
 
+----------------
 Screens
+----------------
 - Pause Screen (In progress)
+----------------
 
+----------------
 Items
+----------------
 - Item class
 - ItemStack class
 - Item attributes
 - Inventories
+----------------
 
+----------------
 Crafting
+----------------
 - Recipe class
 - Recipe Manager
+----------------
 
-
+----------------
 Stations
+----------------
 - Crafting Station
 - Furnace Station
+----------------
 
+----------------
 Bosses
+----------------
 
 Enemies
