@@ -7,6 +7,7 @@ import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
+import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
@@ -31,6 +32,8 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
     private Camera camera;
     private OverworldMap map;
 
+    private InGameHUD inGameHUD;
+
     public GameState(String name) {
         this.name = name;
     }
@@ -43,6 +46,7 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
         map.generate();
         player = new Player(this, map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);
+        inGameHUD = new InGameHUD(this);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
         }
 
         entityManager.update(delta);
+        inGameHUD.update(delta);
     }
 
     @Override
@@ -63,6 +68,7 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
         camera.centerOn(player);
         map.render(graphics, camera);
         entityManager.render(graphics, camera);
+        inGameHUD.render(graphics);
     }
 
     @Override
@@ -80,6 +86,10 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
 
     public String getName() {
         return name;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     @Override

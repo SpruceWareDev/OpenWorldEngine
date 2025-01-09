@@ -1,4 +1,4 @@
-package dev.spruce.game.graphics.ui;
+package dev.spruce.game.graphics.ui.component;
 
 public enum ScreenSnapPoint {
     TOP_LEFT,

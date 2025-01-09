@@ -5,11 +5,10 @@ import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.ui.ScreenSnapPoint;
-import dev.spruce.game.graphics.ui.UIManager;
-import dev.spruce.game.graphics.ui.impl.UIButton;
+import dev.spruce.game.graphics.ui.component.ScreenSnapPoint;
+import dev.spruce.game.graphics.ui.component.UIManager;
+import dev.spruce.game.graphics.ui.component.impl.UIButton;
 import dev.spruce.game.state.State;
-import dev.spruce.game.state.StateManager;
 
 import java.awt.*;
 import java.util.List;

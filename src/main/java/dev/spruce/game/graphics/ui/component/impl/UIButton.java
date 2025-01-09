@@ -1,9 +1,9 @@
-package dev.spruce.game.graphics.ui.impl;
+package dev.spruce.game.graphics.ui.component.impl;
 
 import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.ui.ScreenSnapPoint;
-import dev.spruce.game.graphics.ui.UIElement;
+import dev.spruce.game.graphics.ui.component.ScreenSnapPoint;
+import dev.spruce.game.graphics.ui.component.UIElement;
 import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
 

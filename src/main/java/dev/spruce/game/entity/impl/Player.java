@@ -8,6 +8,7 @@ import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
+import dev.spruce.game.item.Inventory;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
 
@@ -20,8 +21,11 @@ public class Player extends Entity {
 
     public static final float PLAYER_SPEED = 5f;
 
+    private final Inventory inventory;
+
     public Player(GameState gameState, float x, float y) {
         super(gameState, x, y, 32, 32, 100);
+        this.inventory = new Inventory(8);
     }
 
     @Override
@@ -69,5 +73,9 @@ public class Player extends Entity {
     public void render(Graphics graphics, Camera camera) {
         graphics.setColor(Color.BLUE);
         graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }
