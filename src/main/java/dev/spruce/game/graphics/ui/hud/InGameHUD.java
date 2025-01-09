@@ -26,11 +26,17 @@ public class InGameHUD implements Serializable {
 
         // Render hotbar
         int slots = gameState.getPlayer().getInventory().getCapacity();
+        int hotbarX = (screenW / 2) - ((slots * (itemSlotSize + 4)) / 2);
+        int hotbarY = screenH - (itemSlotSize + 54);
         for (int i = 0; i < slots; i++) {
-            int x = (screenW / 2) - ((slots * (itemSlotSize + 4)) / 2) + (i * (itemSlotSize + 4));
-            int y = screenH - (itemSlotSize + 54);
+            int x = hotbarX + (i * (itemSlotSize + 4));
             graphics.setColor(new Color(0,0,0,128));
-            graphics.fillRect(x, y, itemSlotSize, itemSlotSize);
+            graphics.fillRect(x, hotbarY, itemSlotSize, itemSlotSize);
         }
+
+        // Render health
+        int healthWidth = (((itemSlotSize + 4) * slots) / 2) * (gameState.getPlayer().getHealth() / gameState.getPlayer().getMaxHealth());
+        graphics.setColor(Color.RED);
+        graphics.fillRect(hotbarX, hotbarY - 4, healthWidth, 2);
     }
 }

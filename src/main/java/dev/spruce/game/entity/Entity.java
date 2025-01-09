@@ -25,6 +25,7 @@ public abstract class Entity implements Serializable {
     private float dy;
 
     private int health;
+    private int maxHealth;
 
     private EntityCollider entityCollider;
     protected boolean shouldCollide = false;
@@ -36,6 +37,7 @@ public abstract class Entity implements Serializable {
         this.width = width;
         this.height = height;
         this.health = health;
+        this.maxHealth = health;
         this.dx = 0;
         this.dy = 0;
         this.entityCollider = new EntityCollider(this, new Rectangle(0, 0, (int) width, (int) height));
@@ -143,5 +145,13 @@ public abstract class Entity implements Serializable {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 }

@@ -23,10 +23,10 @@ public class OverworldMap extends Map {
 
         // Fill map with grass
         fillMap(TileManager.getInstance().GRASS);
-        // Generate spawn point
-        generateSpawn();
         // Generate water
         generateWater(waterNoiseMap);
+        // Generate spawn point
+        generateSpawn();
         // Generate foliage
         generateFoliage();
     }
