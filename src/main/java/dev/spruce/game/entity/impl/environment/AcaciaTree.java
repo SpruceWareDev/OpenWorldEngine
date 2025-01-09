@@ -1,13 +1,15 @@
 package dev.spruce.game.entity.impl.environment;
 
-import dev.spruce.game.assets.Textures;
+import dev.spruce.game.assets.Assets;
+import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class AcaciaTree extends Tree {
+public class AcaciaTree extends Entity {
 
     public AcaciaTree(GameState gameState, float x, float y) {
         super(gameState, x, y, 64, 128, 120);
@@ -22,9 +24,9 @@ public class AcaciaTree extends Tree {
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        // Render from origin (bottom center)
+        BufferedImage texture = Assets.getInstance().getEntityAssets().getAsset("acacia_tree").getSingle().get();
         int x = (int) (getX() - camera.getX());
         int y = (int) (getY() - camera.getY());
-        graphics.drawImage(Textures.ACACIA_TREE, x, y, (int) getWidth(), (int) getHeight(), null);
+        graphics.drawImage(texture, x, y, (int) getWidth(), (int) getHeight(), null);
     }
 }
