@@ -9,7 +9,6 @@ import dev.spruce.game.input.InputManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 
 public class UITextBox extends UIElement implements IKeyInput {
 
@@ -18,7 +17,7 @@ public class UITextBox extends UIElement implements IKeyInput {
     public UITextBox(int x, int y, int width, int height, ScreenSnapPoint snapPoint) {
         super(x, y, width, height, snapPoint);
         text = new StringBuilder();
-        InputManager.getInstance().subscribe(this);
+        InputManager.getInstance().subscribeKey(this);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class UITextBox extends UIElement implements IKeyInput {
 
     @Override
     public void dispose() {
-        InputManager.getInstance().unsubscribe(this);
+        InputManager.getInstance().unsubscribeKey(this);
     }
 
     public String getText() {

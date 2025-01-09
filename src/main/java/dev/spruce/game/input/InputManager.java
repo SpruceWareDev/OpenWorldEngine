@@ -21,19 +21,19 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         mouseSubscribers = new CopyOnWriteArrayList<>();
     }
 
-    public void subscribe(IKeyInput input) {
+    public void subscribeKey(IKeyInput input) {
         keySubscribers.add(input);
     }
 
-    public void unsubscribe(IKeyInput input) {
+    public void unsubscribeKey(IKeyInput input) {
         keySubscribers.remove(input);
     }
 
-    public void subscribe(IMouseInput input) {
+    public void subscribeMouse(IMouseInput input) {
         mouseSubscribers.add(input);
     }
 
-    public void unsubscribe(IMouseInput input) {
+    public void unsubscribeMouse(IMouseInput input) {
         mouseSubscribers.remove(input);
     }
 
@@ -42,11 +42,11 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         mouseSubscribers.clear();
     }
 
-    public boolean isSubscribed(IKeyInput input) {
+    public boolean isSubscribedKey(IKeyInput input) {
         return keySubscribers.contains(input);
     }
 
-    public boolean isSubscribed(IMouseInput input) {
+    public boolean isSubscribedMouse(IMouseInput input) {
         return mouseSubscribers.contains(input);
     }
 

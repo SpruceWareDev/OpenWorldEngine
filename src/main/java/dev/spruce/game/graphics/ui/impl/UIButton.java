@@ -20,7 +20,7 @@ public class UIButton extends UIElement implements IMouseInput {
         this.action = action;
         this.text = text;
         this.color = color;
-        InputManager.getInstance().subscribe(this);
+        InputManager.getInstance().subscribeMouse(this);
     }
 
     @Override
@@ -54,6 +54,6 @@ public class UIButton extends UIElement implements IMouseInput {
 
     @Override
     public void dispose() {
-        InputManager.getInstance().unsubscribe(this);
+        InputManager.getInstance().unsubscribeMouse(this);
     }
 }

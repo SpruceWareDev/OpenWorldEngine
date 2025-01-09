@@ -8,6 +8,7 @@ import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
 import dev.spruce.game.input.IKeyInput;
+import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.State;
 import dev.spruce.game.world.Map;
@@ -18,12 +19,12 @@ import java.awt.event.KeyEvent;
 import java.io.Serial;
 import java.io.Serializable;
 
-public class GameState extends State implements Serializable, IKeyInput {
+public class GameState extends State implements Serializable, IKeyInput, IMouseInput {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    private final String name;
 
     private EntityManager entityManager;
     private Player player;
@@ -47,9 +48,13 @@ public class GameState extends State implements Serializable, IKeyInput {
     @Override
     public void update(double delta) {
         // TODO: Make this less ass
-        if (!InputManager.getInstance().isSubscribed(this)) {
-            InputManager.getInstance().subscribe(this);
+        if (!InputManager.getInstance().isSubscribedKey(this)) {
+            InputManager.getInstance().subscribeKey(this);
         }
+        if (!InputManager.getInstance().isSubscribedMouse(this)) {
+            InputManager.getInstance().subscribeMouse(this);
+        }
+
         entityManager.update(delta);
     }
 
@@ -91,6 +96,21 @@ public class GameState extends State implements Serializable, IKeyInput {
 
     @Override
     public void onKeyTyped(int keyCode, char keyChar) {
+
+    }
+
+    @Override
+    public void onMousePress(int button, int x, int y) {
+        this.player.handleClick(button, x, y);
+    }
+
+    @Override
+    public void onMouseRelease(int button, int x, int y) {
+
+    }
+
+    @Override
+    public void onMouseClick(int button, int x, int y) {
 
     }
 }

@@ -16,22 +16,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Player extends Entity implements IMouseInput {
+public class Player extends Entity {
 
     public static final float PLAYER_SPEED = 5f;
 
     public Player(GameState gameState, float x, float y) {
         super(gameState, x, y, 32, 32, 100);
-        InputManager.getInstance().subscribe(this);
     }
 
     @Override
     public void update(double delta) {
-        // TODO: Make this less ass
-        if (!InputManager.getInstance().isSubscribed(this)) {
-            InputManager.getInstance().subscribe(this);
-        }
-
         move((float) delta);
     }
 
@@ -62,7 +56,7 @@ public class Player extends Entity implements IMouseInput {
         if(!collidingY) setY(getY() + (getDy() * delta * PLAYER_SPEED));
     }
 
-    private void handleClick(int button, int x, int y) {
+    public void handleClick(int button, int x, int y) {
         if (button != MouseEvent.BUTTON1) return;
 
         float angle = (float) Math.atan2(y - getScreenY(), x - getScreenX());
@@ -75,19 +69,5 @@ public class Player extends Entity implements IMouseInput {
     public void render(Graphics graphics, Camera camera) {
         graphics.setColor(Color.BLUE);
         graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
-    }
-
-    @Override
-    public void onMousePress(int button, int x, int y) {
-        handleClick(button, x, y);
-    }
-
-    @Override
-    public void onMouseRelease(int button, int x, int y) {
-
-    }
-
-    @Override
-    public void onMouseClick(int button, int x, int y) {
     }
 }

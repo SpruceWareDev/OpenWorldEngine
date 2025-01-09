@@ -31,14 +31,7 @@ public class GameSelectState extends State {
                     100,
                     80,
                     ScreenSnapPoint.CENTER,
-                    () -> {
-                        try {
-                            Game.getStateManager().setState(FileManager.loadGame(game), false);
-                        } catch (Exception e) {
-                            System.err.println("Failed to load game: " + game);
-                            e.printStackTrace();
-                        }
-                    }
+                    () -> Game.getStateManager().setState(new GameLoadingState(game, false), true)
             ));
         }
     }

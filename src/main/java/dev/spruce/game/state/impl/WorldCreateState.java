@@ -30,7 +30,7 @@ public class WorldCreateState extends State {
                 Color.BLUE,
                 0, 0, 200, 80,
                 ScreenSnapPoint.CENTER,
-                () -> Game.getStateManager().setState(new GameState(worldName.getText()), true)
+                () -> Game.getStateManager().setState(new GameLoadingState(worldName.getText(), true), true)
         ));
     }
 
