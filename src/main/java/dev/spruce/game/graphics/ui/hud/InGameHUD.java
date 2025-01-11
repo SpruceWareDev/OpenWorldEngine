@@ -1,6 +1,8 @@
 package dev.spruce.game.graphics.ui.hud;
 
+import dev.spruce.game.assets.Assets;
 import dev.spruce.game.graphics.Window;
+import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -21,6 +23,7 @@ public class InGameHUD implements Serializable {
     }
 
     public void render(Graphics graphics) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
         int screenW = Window.getInstance().getWidth();
         int screenH = Window.getInstance().getHeight();
 
@@ -32,6 +35,14 @@ public class InGameHUD implements Serializable {
             int x = hotbarX + (i * (itemSlotSize + 4));
             graphics.setColor(new Color(0,0,0,128));
             graphics.fillRect(x, hotbarY, itemSlotSize, itemSlotSize);
+
+            if (!gameState.getPlayer().getInventory().isSlotEmpty(i)) {
+                ItemStack stack = gameState.getPlayer().getInventory().getSlot(i);
+                graphics2D.drawImage(
+                        Assets.getInstance().getItemTextures().getAsset(stack.getItem().getName()),
+                        x, hotbarY, itemSlotSize, itemSlotSize, null
+                );
+            }
         }
 
         // Render health

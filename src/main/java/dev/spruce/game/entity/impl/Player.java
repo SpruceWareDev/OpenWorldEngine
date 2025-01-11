@@ -1,16 +1,12 @@
 package dev.spruce.game.entity.impl;
 
-import dev.spruce.game.Game;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.entity.impl.projectile.RockPellet;
 import dev.spruce.game.graphics.Camera;
-import dev.spruce.game.graphics.Window;
-import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.Inventory;
 import dev.spruce.game.state.impl.GameState;
-import dev.spruce.game.util.EntityCollider;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

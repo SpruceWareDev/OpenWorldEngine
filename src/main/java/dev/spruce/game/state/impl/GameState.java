@@ -1,18 +1,19 @@
 package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.entity.Entity;
+import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.graphics.Camera;
-import dev.spruce.game.graphics.screen.ScreenManager;
+import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
+import dev.spruce.game.item.ItemStack;
+import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
-import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
 
 import java.awt.*;
@@ -42,7 +43,7 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
     public void init() {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
-        map = new OverworldMap(this, 1024, 1024);
+        map = new OverworldMap(this, 128, 128);
         map.generate();
         player = new Player(this, map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);

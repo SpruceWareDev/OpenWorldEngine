@@ -40,7 +40,7 @@ public abstract class Map implements Serializable {
         for (int x = startX; x < endX; x++) {
             for (int y = startY; y < endY; y++) {
                 Tile tile = tiles[x][y];
-                BufferedImage texture = Assets.getInstance().getTileAssets().getAsset(tile.getId());
+                BufferedImage texture = Assets.getInstance().getTileTextures().getAsset(tile.getId());
                 g2d.drawImage(texture,
                         (int) ((x * tile.getSize()) - camera.getX()),
                         (int) ((y * tile.getSize()) - camera.getY()),

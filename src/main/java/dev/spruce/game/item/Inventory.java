@@ -1,6 +1,8 @@
 package dev.spruce.game.item;
 
+import javax.naming.spi.DirObjectFactory;
 import java.io.Serializable;
+import java.util.Optional;
 
 public class Inventory implements Serializable {
 
@@ -13,23 +15,49 @@ public class Inventory implements Serializable {
     }
 
     public boolean addItem(ItemStack stack) {
-        int freeSlot = getFreeSlot();
-        if (freeSlot == -1) return false;
-        items[freeSlot] = stack;
-        return true;
+        // Try to find existing stack.
+        Optional<Integer> existingItem = findItem(stack.getItem());
+        if (existingItem.isPresent()) {
+            // If it exists increase the quantity and return.
+            items[existingItem.get()].increaseQuantity(stack.getQuantity());
+            return true;
+        }
+
+        // Find free slot if existing item is not already in inventory.
+        Optional<Integer> freeSlot = getFreeSlot();
+        if (freeSlot.isPresent()) {
+            // If free slot is found add new stack to that slot.
+            items[freeSlot.get()] = stack;
+            return true;
+        }
+        return false;
     }
 
     public ItemStack getSlot(int slot) {
         return items[slot];
     }
 
-    public int getFreeSlot() {
+    public boolean isSlotEmpty(int slot) {
+        return items[slot] == null;
+    }
+
+    public Optional<Integer> findItem(Item item) {
+        for (int i = 0; i < capacity; i++) {
+            if (isSlotEmpty(i))
+                continue;
+            if (getSlot(i).getItem().equals(item))
+                return Optional.of(i);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Integer> getFreeSlot() {
         for (int i = 0; i < capacity; i++) {
             if (items[i] == null) {
-                return i;
+                return Optional.of(i);
             }
         }
-        return -1;
+        return Optional.empty();
     }
 
     public int getCapacity() {

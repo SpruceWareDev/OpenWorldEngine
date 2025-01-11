@@ -24,7 +24,7 @@ public class AcaciaTree extends Entity {
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        BufferedImage texture = Assets.getInstance().getEntityAssets().getAsset("acacia_tree").getSingle().get();
+        BufferedImage texture = Assets.getInstance().getEntityTextures().getAsset("acacia_tree").getSingle().get();
         int x = (int) (getX() - camera.getX());
         int y = (int) (getY() - camera.getY());
         graphics.drawImage(texture, x, y, (int) getWidth(), (int) getHeight(), null);

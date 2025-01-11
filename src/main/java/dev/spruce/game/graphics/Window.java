@@ -1,9 +1,6 @@
 package dev.spruce.game.graphics;
 
-import dev.spruce.game.input.InputManager;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class Window extends JFrame {
 

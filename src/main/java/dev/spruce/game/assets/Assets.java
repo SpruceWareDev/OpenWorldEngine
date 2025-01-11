@@ -1,15 +1,8 @@
 package dev.spruce.game.assets;
 
 import dev.spruce.game.assets.managers.EntityTextureManager;
+import dev.spruce.game.assets.managers.ItemTextureManager;
 import dev.spruce.game.assets.managers.TileTextureManager;
-import dev.spruce.game.world.TileManager;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class Assets {
 
@@ -17,18 +10,24 @@ public class Assets {
 
     private final TileTextureManager tileTextureManager;
     private final EntityTextureManager entityTextureManager;
+    private final ItemTextureManager itemTextureManager;
 
     private Assets() {
         tileTextureManager = new TileTextureManager();
         entityTextureManager = new EntityTextureManager();
+        itemTextureManager = new ItemTextureManager();
     }
 
-    public TileTextureManager getTileAssets() {
+    public TileTextureManager getTileTextures() {
         return tileTextureManager;
     }
 
-    public EntityTextureManager getEntityAssets() {
+    public EntityTextureManager getEntityTextures() {
         return entityTextureManager;
+    }
+
+    public ItemTextureManager getItemTextures() {
+        return itemTextureManager;
     }
 
     public static Assets getInstance() {
