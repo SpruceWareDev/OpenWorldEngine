@@ -2,8 +2,10 @@ package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Fonts;
+import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
@@ -14,52 +16,71 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
+import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
+import java.nio.FloatBuffer;
+import java.util.List;
 
-public class GameState extends State implements Serializable, IKeyInput, IMouseInput {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class GameState extends State implements IKeyInput, IMouseInput {
 
     private final String name;
+    private final boolean newGame;
 
-    private EntityManager entityManager;
+    private static EntityManager entityManager;
     private Player player;
-    private Camera camera;
-    private OverworldMap map;
+    private static Camera camera;
+    private static Map map;
 
     private InGameHUD inGameHUD;
 
-    public GameState(String name) {
+    public GameState(String name, boolean newGame) {
         this.name = name;
+        this.newGame = newGame;
     }
 
     @Override
     public void init() {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
-        map = new OverworldMap(this, 128, 128);
-        map.generate();
-        player = new Player(this, map.getSpawnX(), map.getSpawnY());
-        entityManager.spawn(player);
+        if (newGame) {
+            map = new OverworldMap(128, 128);
+            map.generate();
+            player = new Player(map.getSpawnX(), map.getSpawnY());
+            entityManager.spawn(player);
+        } else {
+            try {
+                map = FileManager.loadMap(name);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            List<Entity> loadedEntites;
+            try {
+                loadedEntites = FileManager.loadEntities(name);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            for (Entity e : loadedEntites) {
+                if (e instanceof Player) {
+                    player = (Player) e;
+                }
+                entityManager.spawn(e);
+            }
+        }
         inGameHUD = new InGameHUD(this);
+        InputManager.getInstance().subscribeMouse(this);
+        InputManager.getInstance().subscribeKey(this);
     }
 
     @Override
     public void update(double delta) {
-        // TODO: Make this less ass
-        if (!InputManager.getInstance().isSubscribedKey(this)) {
-            InputManager.getInstance().subscribeKey(this);
-        }
-        if (!InputManager.getInstance().isSubscribedMouse(this)) {
-            InputManager.getInstance().subscribeMouse(this);
-        }
-
         entityManager.update(delta);
         inGameHUD.update(delta);
     }
@@ -77,11 +98,11 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
         //entityManager.dispose();
     }
 
-    public Camera getCamera() {
+    public static Camera getCamera() {
         return camera;
     }
 
-    public EntityManager getEntityManager() {
+    public static EntityManager getEntityManager() {
         return entityManager;
     }
 
@@ -91,6 +112,10 @@ public class GameState extends State implements Serializable, IKeyInput, IMouseI
 
     public Player getPlayer() {
         return player;
+    }
+
+     public static Map getMap() {
+        return map;
     }
 
     @Override

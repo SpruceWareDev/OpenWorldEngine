@@ -13,8 +13,8 @@ public abstract class Projectile extends Entity {
 
     private int ticksAlive = 0;
 
-    public Projectile(GameState gameState, Entity owner, float x, float y, float dx, float dy, float width, float height, int damage, int lifeTimeTicks) {
-        super(gameState, x, y, width, height);
+    public Projectile(Entity owner, float x, float y, float dx, float dy, float width, float height, int damage, int lifeTimeTicks) {
+        super(x, y, width, height);
         this.owner = owner;
         this.damage = damage;
         this.lifeTimeTicks = lifeTimeTicks;
@@ -25,7 +25,7 @@ public abstract class Projectile extends Entity {
     protected void handleLifetime() {
         ticksAlive++;
         if (ticksAlive >= lifeTimeTicks) {
-            gameState.getEntityManager().despawn(this);
+            GameState.getEntityManager().despawn(this);
         }
     }
 

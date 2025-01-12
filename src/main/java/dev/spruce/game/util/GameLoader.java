@@ -19,17 +19,8 @@ public class GameLoader implements Runnable {
 
     @Override
     public void run() {
-        if (newGame) {
-            this.loadedGame = new GameState(name);
-            this.loadedGame.init();
-        } else {
-            try {
-                this.loadedGame = FileManager.loadGame(this.name);
-            } catch (IOException | ClassNotFoundException e) {
-                System.err.println("Failed to load existing world:");
-                throw new RuntimeException(e);
-            }
-        }
+        this.loadedGame = new GameState(name, newGame);
+        this.loadedGame.init();
     }
 
     public GameState getLoadedGame() {

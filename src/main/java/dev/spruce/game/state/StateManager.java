@@ -35,7 +35,7 @@ public class StateManager {
     public void setState(State state, boolean shouldInit) {
         finishedLoading = false;
         currentState.dispose();
-        InputManager.getInstance().unsubscribeAll();
+        if (shouldInit) InputManager.getInstance().unsubscribeAll();
         currentState = state;
         if (shouldInit) currentState.init();
         finishedLoading = true;

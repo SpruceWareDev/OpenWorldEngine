@@ -14,8 +14,8 @@ import java.awt.image.BufferedImage;
 
 public class AcaciaTree extends DamageableEntity {
 
-    public AcaciaTree(GameState gameState, float x, float y) {
-        super(gameState, x, y, 64, 128, 120);
+    public AcaciaTree(float x, float y) {
+        super(x, y, 64, 128, 120);
         this.setEntityCollider(new EntityCollider(this, new Rectangle(10, 84, 44, 44)));
         enableCollision();
     }
@@ -35,7 +35,7 @@ public class AcaciaTree extends DamageableEntity {
 
     @Override
     public void onDeath() {
-        gameState.getEntityManager().spawn(new ItemStackEntity(gameState, new ItemStack(Items.LOG), getX(), getY()));
-        gameState.getEntityManager().despawn(this);
+        GameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
+        GameState.getEntityManager().despawn(this);
     }
 }

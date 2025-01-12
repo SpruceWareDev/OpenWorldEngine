@@ -7,8 +7,8 @@ public abstract class DamageableEntity extends Entity {
     private int health;
     private int maxHealth;
 
-    public DamageableEntity(GameState gameState, float x, float y, float width, float height, int health) {
-        super(gameState, x, y, width, height);
+    public DamageableEntity(float x, float y, float width, float height, int health) {
+        super(x, y, width, height);
         this.health = health;
         this.maxHealth = health;
     }

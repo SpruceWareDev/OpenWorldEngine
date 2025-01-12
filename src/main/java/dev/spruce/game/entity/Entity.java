@@ -9,9 +9,6 @@ import java.awt.*;
 import java.io.Serializable;
 
 public abstract class Entity implements Serializable {
-
-    protected GameState gameState;
-
     // World position
     private float x;
     private float y;
@@ -27,8 +24,7 @@ public abstract class Entity implements Serializable {
     private EntityCollider entityCollider;
     protected boolean shouldCollide = false;
 
-    public Entity(GameState gameState, float x, float y, float width, float height) {
-        this.gameState = gameState;
+    public Entity(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -66,12 +62,12 @@ public abstract class Entity implements Serializable {
 
     // Finds the x position of the entity in window coordinates
     public float getScreenX() {
-        return x - gameState.getCamera().getX();
+        return x - GameState.getCamera().getX();
     }
 
     // Finds the y position of the entity in window coordinates
     public float getScreenY() {
-        return y - gameState.getCamera().getY();
+        return y - GameState.getCamera().getY();
     }
 
     public boolean isEntityOnScreen() {

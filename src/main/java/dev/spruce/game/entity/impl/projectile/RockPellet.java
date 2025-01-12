@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class RockPellet extends Projectile {
 
-    public RockPellet(GameState gameState, Entity owner, float x, float y, float dx, float dy, float width, float height) {
-        super(gameState, owner, x, y, dx, dy, width, height, 2, 60);
+    public RockPellet(Entity owner, float x, float y, float dx, float dy, float width, float height) {
+        super(owner, x, y, dx, dy, width, height, 2, 60);
     }
 
     @Override

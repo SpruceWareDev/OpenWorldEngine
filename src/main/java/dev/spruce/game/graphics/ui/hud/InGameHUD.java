@@ -8,7 +8,7 @@ import dev.spruce.game.state.impl.GameState;
 import java.awt.*;
 import java.io.Serializable;
 
-public class InGameHUD implements Serializable {
+public class InGameHUD {
 
     private final GameState gameState;
 

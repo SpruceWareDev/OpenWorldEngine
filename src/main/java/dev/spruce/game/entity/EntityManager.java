@@ -10,11 +10,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class EntityManager implements Serializable {
+public class EntityManager {
 
-    private GameState gameState;
+    private final GameState gameState;
 
-    private CopyOnWriteArrayList<Entity> entities;
+    private final CopyOnWriteArrayList<Entity> entities;
 
     public EntityManager(GameState gameState) {
         this.gameState = gameState;
@@ -60,5 +60,9 @@ public class EntityManager implements Serializable {
 
     public List<Entity> getOnScreenEntities() {
         return entities.stream().filter(Entity::isEntityOnScreen).toList();
+    }
+
+    public CopyOnWriteArrayList<Entity> getEntities() {
+        return entities;
     }
 }

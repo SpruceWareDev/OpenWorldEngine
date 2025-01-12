@@ -13,18 +13,19 @@ import java.io.Serializable;
 
 public abstract class Map implements Serializable {
 
-    protected GameState gameState;
     protected Tile[][] tiles;
     protected int width, height;
 
-    public Map(GameState gameState, int width, int height) {
-        this.gameState = gameState;
+    public Map(int width, int height) {
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
     }
 
     public abstract void generate();
+
+    public abstract float getSpawnX();
+    public abstract float getSpawnY();
 
     public void render(Graphics graphics, Camera camera) {
         Graphics2D g2d = (Graphics2D) graphics;

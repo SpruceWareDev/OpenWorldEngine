@@ -12,8 +12,8 @@ public class OverworldMap extends Map {
     private int spawnX, spawnY;
     private Noise noise;
 
-    public OverworldMap(GameState gameState, int width, int height) {
-        super(gameState, width, height);
+    public OverworldMap(int width, int height) {
+        super(width, height);
     }
 
     @Override
@@ -69,16 +69,18 @@ public class OverworldMap extends Map {
             int x = (int) (Math.random() * width) * Tile.SIZE;
             int y = (int) (Math.random() * height) * Tile.SIZE;
             if (tiles[x / Tile.SIZE][y / Tile.SIZE] == TileManager.getInstance().GRASS) {
-                gameState.getEntityManager().spawn(new AcaciaTree(gameState, x, y));
+                GameState.getEntityManager().spawn(new AcaciaTree(x, y));
             }
         }
     }
 
-    public int getSpawnX() {
+    @Override
+    public float getSpawnX() {
         return spawnX * Tile.SIZE;
     }
 
-    public int getSpawnY() {
+    @Override
+    public float getSpawnY() {
         return spawnY * Tile.SIZE;
     }
 }

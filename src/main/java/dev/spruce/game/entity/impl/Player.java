@@ -20,8 +20,8 @@ public class Player extends DamageableEntity {
 
     private final Inventory inventory;
 
-    public Player(GameState gameState, float x, float y) {
-        super(gameState, x, y, 32, 32, 100);
+    public Player(float x, float y) {
+        super(x, y, 32, 32, 100);
         this.inventory = new Inventory(8);
     }
 
@@ -44,7 +44,7 @@ public class Player extends DamageableEntity {
         }
 
         boolean collidingX = false, collidingY = false;
-        List<Entity> onScreenEntities = gameState.getEntityManager().getOnScreenEntities();
+        List<Entity> onScreenEntities = GameState.getEntityManager().getOnScreenEntities();
 
         for (Entity entity : onScreenEntities) {
             if (getEntityCollider().checkCollision(entity, getDx() * delta * PLAYER_SPEED, 0f))
@@ -63,7 +63,7 @@ public class Player extends DamageableEntity {
         float angle = (float) Math.atan2(y - getScreenY(), x - getScreenX());
         float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
         float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-        gameState.getEntityManager().spawn(new RockPellet(gameState, this, getX(), getY(), dx, dy, 16, 16));
+        GameState.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
     }
 
     @Override
