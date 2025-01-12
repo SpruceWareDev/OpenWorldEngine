@@ -1,15 +1,18 @@
 package dev.spruce.game.entity.impl.environment;
 
 import dev.spruce.game.assets.Assets;
+import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.item.ItemStack;
+import dev.spruce.game.item.Items;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class AcaciaTree extends Entity {
+public class AcaciaTree extends DamageableEntity {
 
     public AcaciaTree(GameState gameState, float x, float y) {
         super(gameState, x, y, 64, 128, 120);
@@ -28,5 +31,11 @@ public class AcaciaTree extends Entity {
         int x = (int) (getX() - camera.getX());
         int y = (int) (getY() - camera.getY());
         graphics.drawImage(texture, x, y, (int) getWidth(), (int) getHeight(), null);
+    }
+
+    @Override
+    public void onDeath() {
+        gameState.getEntityManager().spawn(new ItemStackEntity(gameState, new ItemStack(Items.LOG), getX(), getY()));
+        gameState.getEntityManager().despawn(this);
     }
 }

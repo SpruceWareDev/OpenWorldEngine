@@ -12,8 +12,8 @@ public class ItemStackEntity extends Entity {
 
     private final ItemStack itemStack;
 
-    public ItemStackEntity(GameState gameState, ItemStack itemStack, float x, float y, float width, float height) {
-        super(gameState, x, y, width, height, 1);
+    public ItemStackEntity(GameState gameState, ItemStack itemStack, float x, float y) {
+        super(gameState, x, y, 32, 32);
         this.itemStack = itemStack;
     }
 

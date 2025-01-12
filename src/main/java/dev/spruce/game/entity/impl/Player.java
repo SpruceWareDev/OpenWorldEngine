@@ -1,5 +1,6 @@
 package dev.spruce.game.entity.impl;
 
+import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.entity.impl.projectile.RockPellet;
@@ -13,7 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class Player extends Entity {
+public class Player extends DamageableEntity {
 
     public static final float PLAYER_SPEED = 5f;
 
@@ -73,5 +74,10 @@ public class Player extends Entity {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    @Override
+    public void onDeath() {
+        System.out.println("Player died! omg");
     }
 }
