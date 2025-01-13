@@ -5,6 +5,7 @@ import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.input.InputManager;
+import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
@@ -33,6 +34,7 @@ public class Game {
             System.err.println("Failed to create or check game data directories!");
             throw new RuntimeException(e);
         }
+        SoundManager.init();
         Window.init(800, 600, FORMATTED_NAME);
         renderPanel = new RenderPanel(this);
 

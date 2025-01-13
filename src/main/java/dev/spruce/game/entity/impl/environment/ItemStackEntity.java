@@ -2,13 +2,14 @@ package dev.spruce.game.entity.impl.environment;
 
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.entity.Entity;
+import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
 
-public class ItemStackEntity extends Entity {
+public class ItemStackEntity extends Entity implements Interactable {
 
     private final ItemStack itemStack;
 
@@ -33,5 +34,12 @@ public class ItemStackEntity extends Entity {
 
     public ItemStack getItemStack() {
         return itemStack;
+    }
+
+    @Override
+    public void interact() {
+        if (GameState.getPlayer().getInventory().addItem(itemStack)) {
+            GameState.getEntityManager().despawn(this);
+        }
     }
 }

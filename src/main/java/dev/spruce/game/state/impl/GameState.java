@@ -35,7 +35,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     private final boolean newGame;
 
     private static EntityManager entityManager;
-    private Player player;
+    private static Player player;
     private static Camera camera;
     private static Map map;
 
@@ -112,7 +112,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         return name;
     }
 
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 
