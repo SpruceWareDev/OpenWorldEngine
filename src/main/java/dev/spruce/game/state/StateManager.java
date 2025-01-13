@@ -27,7 +27,7 @@ public class StateManager {
     }
 
     public void render(Graphics graphics) {
-        if (!finishedLoading || paused)
+        if (!finishedLoading)
             return;
         currentState.render(graphics);
     }

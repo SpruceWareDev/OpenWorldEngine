@@ -54,35 +54,31 @@ public class FileManager {
         mapOutputStream.close();
 
         // Save entities
-        int id = 0;
-        for (Entity entity : gameState.getEntityManager().getEntities()) {
-            File entityFile = new File(saveFolder.getPath() + File.separator + "e" + id);
-            FileOutputStream entityOutputStream = new FileOutputStream(entityFile);
-            out = new ObjectOutputStream(entityOutputStream);
-            out.writeObject(entity);
-            out.close();
-            entityOutputStream.close();
-            id++;
-        }
+        EntitySerialWrapper entitySerialWrapper = new EntitySerialWrapper(GameState.getEntityManager().getEntities());
+        File entityFile = new File(saveFolder.getPath() + File.separator + "eData");
+        FileOutputStream entityOutputStream = new FileOutputStream(entityFile);
+        out = new ObjectOutputStream(entityOutputStream);
+        out.writeObject(entitySerialWrapper);
+        out.close();
+        entityOutputStream.close();
     }
 
     // Methods for loading game.
 
     public static List<Entity> loadEntities(String name) throws IOException, ClassNotFoundException {
-        List<Entity> entities = new ArrayList<>();
+        List<Entity> entities;
+        EntitySerialWrapper entitySerialWrapper;
         File gameFolder = new File(String.format("%s%s%s", SAVES_DIRECTORY, File.separator, name));
 
-        for (String fileName : Objects.requireNonNull(gameFolder.list())) {
-            if (!fileName.startsWith("e")) {
-                continue;
-            }
-            File entityFile = new File(gameFolder.getPath() + File.separator + fileName);
-            FileInputStream entityInputStream = new FileInputStream(entityFile);
-            ObjectInputStream in = new ObjectInputStream(entityInputStream);
-            entities.add((Entity) in.readObject());
-            in.close();
-            entityInputStream.close();
-        }
+        File entityFile = new File(gameFolder.getPath() + File.separator + "eData");
+        FileInputStream entityInputStream = new FileInputStream(entityFile);
+        ObjectInputStream in = new ObjectInputStream(entityInputStream);
+        entitySerialWrapper = (EntitySerialWrapper) in.readObject();
+        in.close();
+        entityInputStream.close();
+
+        entities = entitySerialWrapper.getEntities();
+
         return entities;
     }
 
