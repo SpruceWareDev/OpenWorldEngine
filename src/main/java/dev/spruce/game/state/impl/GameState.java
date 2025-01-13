@@ -4,6 +4,7 @@ import dev.spruce.game.Game;
 import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
+import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
@@ -16,6 +17,7 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
+import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
 
@@ -138,6 +140,29 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     @Override
     public void onMousePress(int button, int x, int y) {
         this.player.handleClick(button, x, y);
+
+        // Entity interactions
+        if (button == 1) {
+            for (Entity entity : entityManager.getOnScreenEntities()) {
+                if (entity instanceof Player || !(entity instanceof Interactable))
+                    continue;
+
+                float screenX = entity.getScreenX();
+                float screenY = entity.getScreenY();
+                float colliderX = (float) entity.getEntityCollider().getBounds().getX();
+                float colliderY = (float) entity.getEntityCollider().getBounds().getY();
+                float colliderW = (float) entity.getEntityCollider().getBounds().getWidth();
+                float colliderH = (float) entity.getEntityCollider().getBounds().getHeight();
+                boolean canInteract =
+                        InputManager.getInstance().isMouseOver(
+                                (int) (screenX + colliderX), (int) (screenY + colliderY), (int) colliderW, (int) colliderH
+                        ) && MathUtils.isWithinDistance(player, entity, Player.INTERACT_DISTANCE);
+
+                if (canInteract) {
+                    ((Interactable) entity).interact();
+                }
+            }
+        }
     }
 
     @Override

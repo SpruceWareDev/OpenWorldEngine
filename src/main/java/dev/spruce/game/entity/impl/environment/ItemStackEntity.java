@@ -27,7 +27,7 @@ public class ItemStackEntity extends Entity {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.drawImage(
                 Assets.getInstance().getItemTextures().getAsset(itemStack.getItem().getName()),
-                (int) getX(), (int) getY(), (int) getWidth(), (int) getHeight(), null
+                (int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight(), null
         );
     }
 

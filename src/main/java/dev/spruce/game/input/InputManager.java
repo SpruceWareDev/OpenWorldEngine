@@ -89,7 +89,6 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse click: " + e.getButton() + " at " + e.getX() + ", " + e.getY());
         for (IMouseInput input : mouseSubscribers) {
             input.onMouseClick(e.getButton(), e.getX(), e.getY());
         }

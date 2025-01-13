@@ -17,6 +17,7 @@ import java.util.List;
 public class Player extends DamageableEntity {
 
     public static final float PLAYER_SPEED = 5f;
+    public static final int INTERACT_DISTANCE = 125;
 
     private final Inventory inventory;
 
