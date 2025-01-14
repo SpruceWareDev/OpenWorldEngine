@@ -44,6 +44,7 @@ public class Game {
     }
 
     public void update(double delta) {
+        SoundManager.getInstance().update();
         stateManager.update(delta);
         screenManager.update(delta);
     }

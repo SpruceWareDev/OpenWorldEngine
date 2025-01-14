@@ -6,49 +6,39 @@ import dev.spruce.game.sound.effect.AudioEffect;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SoundManager {
 
     private static SoundManager instance;
 
-    public static void init() {
-        instance = new SoundManager();
+    public static final AudioFormat DEFAULT_FORMAT = new AudioFormat(44100, 16, 2, true, false);
+
+    private CopyOnWriteArrayList<Thread> audioThreads;
+
+    private SoundManager() {
+        audioThreads = new CopyOnWriteArrayList<>();
+        // Add a shutdown hook to stop all audio threads when the program is closed
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            for (Thread thread : audioThreads) {
+                thread.interrupt();
+            }
+        }));
+    }
+
+    public void update() {
+        audioThreads.removeIf(thread -> !thread.isAlive());
     }
 
     public void playSound(String soundName, AudioEffect... effects) {
-        try {
-            String filePath = Assets.getInstance().getSounds().getAsset(soundName);
-            File audioFile = new File(filePath);
+        Thread audioThread = new Thread(new SoundPlayer(soundName, effects));
+        audioThreads.add(audioThread);
+        audioThread.start();
+    }
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-
-            AudioFormat format = audioStream.getFormat();
-            DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
-
-            SourceDataLine sourceLine = (SourceDataLine) AudioSystem.getLine(info);
-            sourceLine.open(format);
-            sourceLine.start();
-
-            byte[] audioBuffer = new byte[4096];
-            int bytesRead;
-
-            while ((bytesRead = audioStream.read(audioBuffer, 0, audioBuffer.length)) != -1) {
-                // Apply each effect in the list
-                for (AudioEffect effect : effects) {
-                    effect.process(audioBuffer, format.getSampleSizeInBits() / 8, format.getChannels(), format);
-                }
-
-                // Write the processed audio data to the source line
-                sourceLine.write(audioBuffer, 0, bytesRead);
-            }
-
-            // Clean up
-            sourceLine.drain();
-            sourceLine.close();
-            audioStream.close();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
-        }
+    public static void init() {
+        instance = new SoundManager();
     }
 
     public static SoundManager getInstance() {

@@ -5,8 +5,13 @@ import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.item.ItemStack;
+import dev.spruce.game.sound.SoundManager;
+import dev.spruce.game.sound.effect.AudioEffect;
+import dev.spruce.game.sound.effect.impl.BitCrushEffect;
+import dev.spruce.game.sound.effect.impl.ReverbEffect;
 import dev.spruce.game.state.impl.GameState;
 
+import javax.sound.sampled.AudioFormat;
 import java.awt.*;
 
 public class ItemStackEntity extends Entity implements Interactable {
