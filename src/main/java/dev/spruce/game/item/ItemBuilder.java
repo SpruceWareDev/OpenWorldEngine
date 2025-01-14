@@ -6,8 +6,8 @@ public class ItemBuilder {
 
     private Item item;
 
-    public ItemBuilder(String itemName) {
-        item = new Item(itemName);
+    public ItemBuilder(String itemName, String displayName) {
+        item = new Item(itemName, displayName);
     }
 
     public ItemBuilder addAttribute(ItemAttribute attribute) {

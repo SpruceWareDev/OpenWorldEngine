@@ -11,10 +11,12 @@ import java.util.List;
 public class Item implements Serializable {
 
     private final String name;
+    private final String displayName;
     private final List<ItemAttribute> attributes;
 
-    public Item(String name) {
+    public Item(String name, String displayName) {
         this.name = name;
+        this.displayName = displayName;
         this.attributes = new ArrayList<>();
     }
 
@@ -32,6 +34,10 @@ public class Item implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public List<ItemAttribute> getAttributes() {
