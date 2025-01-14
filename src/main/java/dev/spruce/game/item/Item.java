@@ -10,9 +10,6 @@ import java.util.List;
 
 public class Item implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-
     private final String name;
     private final List<ItemAttribute> attributes;
 
