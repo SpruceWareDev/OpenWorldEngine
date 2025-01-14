@@ -5,24 +5,28 @@ import java.util.Optional;
 
 public class ScreenManager {
 
-    private Optional<Screen> currentScreen = Optional.empty();
+    private Screen currentScreen;
 
     public void update(double delta) {
-        currentScreen.ifPresent(screen -> screen.update(delta));
+        if (currentScreen == null) return;
+        currentScreen.update(delta);
     }
 
     public void render(Graphics graphics) {
-        currentScreen.ifPresent((screen -> screen.render(graphics)));
+        if (currentScreen == null) return;
+        currentScreen.render(graphics);
     }
 
     public void setScreen(Screen screen) {
-        currentScreen.ifPresent(Screen::dispose);
-        currentScreen = Optional.of(screen);
-        currentScreen.ifPresent(Screen::init);
+        if (currentScreen != null)
+            currentScreen.dispose();
+        currentScreen = screen;
+        currentScreen.init();
     }
 
     public void closeScreen() {
-        currentScreen.ifPresent(Screen::dispose);
-        currentScreen = Optional.empty();
+        if (currentScreen != null)
+            currentScreen.dispose();
+        currentScreen = null;
     }
 }

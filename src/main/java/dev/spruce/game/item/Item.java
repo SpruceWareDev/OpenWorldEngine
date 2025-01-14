@@ -3,11 +3,15 @@ package dev.spruce.game.item;
 import dev.spruce.game.item.attribute.AttributeType;
 import dev.spruce.game.item.attribute.ItemAttribute;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Item implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private final String name;
     private final List<ItemAttribute> attributes;

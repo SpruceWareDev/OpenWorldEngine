@@ -19,7 +19,7 @@ public class PauseScreen extends Screen {
 
     private UIManager uiManager;
 
-    private GameState gameState;
+    private final GameState gameState;
 
     public PauseScreen(GameState gameState) {
         this.gameState = gameState;

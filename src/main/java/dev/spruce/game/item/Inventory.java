@@ -1,6 +1,5 @@
 package dev.spruce.game.item;
 
-import javax.naming.spi.DirObjectFactory;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -45,7 +44,7 @@ public class Inventory implements Serializable {
         for (int i = 0; i < capacity; i++) {
             if (isSlotEmpty(i))
                 continue;
-            if (getSlot(i).getItem().equals(item))
+            if (getSlot(i).getItem().getName().equals(item.getName()))
                 return Optional.of(i);
         }
         return Optional.empty();
