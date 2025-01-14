@@ -79,6 +79,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         inGameHUD = new InGameHUD(this);
         InputManager.getInstance().subscribeMouse(this);
         InputManager.getInstance().subscribeKey(this);
+        camera.centerOn(player, false);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void render(Graphics graphics) {
-        camera.centerOn(player);
+        camera.centerOn(player, true);
         map.render(graphics, camera);
         entityManager.render(graphics, camera);
         inGameHUD.render(graphics);

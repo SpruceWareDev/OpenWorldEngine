@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/sounds/test.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/SoundAssetManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/SoundManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/effect/AudioEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/effect/impl/AdvancedReverbEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/effect/impl/ReverbEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/Assets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/Assets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/ItemStackEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/ItemStackEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/MathUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

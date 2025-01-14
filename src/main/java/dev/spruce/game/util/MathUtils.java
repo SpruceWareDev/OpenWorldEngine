@@ -30,4 +30,16 @@ public class MathUtils {
         double y = Math.pow(entityCentreY - entity1CentreY, 2);
         return Math.abs(Math.sqrt(x + y)) <= distance;
     }
+
+    /**
+     * Linearly interpolates between two values a and b by a factor t.
+     *
+     * @param a The starting value.
+     * @param b The ending value.
+     * @param t The interpolation factor (0.0 to 1.0).
+     * @return The interpolated value.
+     */
+    public static float lerp(float a, float b, float t) {
+        return a + t * (b - a);
+    }
 }
