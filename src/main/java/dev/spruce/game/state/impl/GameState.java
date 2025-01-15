@@ -8,6 +8,7 @@ import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.entity.impl.projectile.Projectile;
+import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.font.FontRenderer;
@@ -163,6 +164,9 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                     ((Interactable) entity).interact();
                 }
             }
+        } else if (button == 3) {
+            // TEST OF CRAFTING STATION
+            entityManager.spawn(new CraftingStation(x + camera.getX(), y + camera.getY()));
         }
     }
 

@@ -14,6 +14,7 @@ public class ItemTextureManager extends AssetManager<String, BufferedImage> {
         itemTextures = new HashMap<>();
         itemTextures.put("log", ImageUtils.loadImage("assets/textures/item_log.png"));
         itemTextures.put("charcoal", ImageUtils.loadImage("assets/textures/item_charcoal.png"));
+        itemTextures.put("crafting_station", ImageUtils.loadImage("assets/textures/item_crafting_station.png"));
     }
 
     @Override

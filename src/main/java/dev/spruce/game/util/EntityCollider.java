@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class EntityCollider implements Serializable {
 
-    private Entity entity;
+    private final Entity entity;
     private Rectangle bounds;
 
     public EntityCollider(Entity entity, Rectangle bounds) {
