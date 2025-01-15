@@ -67,7 +67,6 @@ public class Player extends DamageableEntity {
     }
 
     public void handleClick(Camera camera, int button, int x, int y) {
-        GameState gs = Game.getStateManager().getGameState();
         if (button != MouseEvent.BUTTON1) return;
 
         float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));

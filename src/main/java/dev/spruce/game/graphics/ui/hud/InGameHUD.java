@@ -8,15 +8,16 @@ import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.util.RenderUtils;
 
 import java.awt.*;
-import java.io.Serializable;
 
 public class InGameHUD {
 
     private final GameState gameState;
 
-    private final int itemSlotSize = 56;
+    private static final int ITEM_SLOT_SIZE = 56;
+    private static final int ITEM_SLOT_PADDING = 4;
 
     public InGameHUD(GameState gameState) {
         this.gameState = gameState;
@@ -40,32 +41,41 @@ public class InGameHUD {
 
         // Render hotbar
         int slots = gameState.getPlayer().getInventory().getCapacity();
-        int hotbarX = (screenW / 2) - ((slots * (itemSlotSize + 4)) / 2);
-        int hotbarY = screenH - (itemSlotSize + 54);
+        float hotbarWidth = (slots * (ITEM_SLOT_SIZE + ITEM_SLOT_PADDING));
+
+        float hotbarX = (screenW / 2f) - (hotbarWidth / 2);
+        float hotbarY = screenH - (ITEM_SLOT_SIZE + 54);
+
         for (int i = 0; i < slots; i++) {
-            int x = hotbarX + (i * (itemSlotSize + 4));
-            graphics.setColor(new Color(0,0,0,128));
-            graphics.fillRect(x, hotbarY, itemSlotSize, itemSlotSize);
+            float x = hotbarX + (i * (ITEM_SLOT_SIZE + ITEM_SLOT_PADDING));
+            RenderUtils.drawRect(graphics, (int) x, (int) hotbarY, ITEM_SLOT_SIZE, ITEM_SLOT_SIZE, new Color(0,0,0,128));
 
             if (!gameState.getPlayer().getInventory().isSlotEmpty(i)) {
                 ItemStack stack = gameState.getPlayer().getInventory().getSlot(i);
                 // Draw item image
                 graphics2D.drawImage(
                         Assets.getInstance().getItemTextures().getAsset(stack.getItem().getName()),
-                        x, hotbarY, itemSlotSize, itemSlotSize, null
+                        (int) x, (int) hotbarY, ITEM_SLOT_SIZE, ITEM_SLOT_SIZE, null
                 );
                 // Draw stack amount
                 FontRenderer.drawString(
                         graphics, String.valueOf(stack.getQuantity()),
-                        x + itemSlotSize - 12, hotbarY + itemSlotSize - 12,
+                        (int) (x + ITEM_SLOT_SIZE - 12), (int) (hotbarY + ITEM_SLOT_SIZE - 12),
                         false, Color.white, Fonts.DEFAULT
                 );
             }
         }
 
         // Render health
-        int healthWidth = (((itemSlotSize + 4) * slots) / 2) * (gameState.getPlayer().getHealth() / gameState.getPlayer().getMaxHealth());
-        graphics.setColor(Color.RED);
-        graphics.fillRect(hotbarX, hotbarY - 4, healthWidth, 2);
+        float healthWidth = ((hotbarWidth / 2f) * ((float) gameState.getPlayer().getHealth() / gameState.getPlayer().getMaxHealth())) - ITEM_SLOT_PADDING;
+        RenderUtils.drawRect(graphics, hotbarX, hotbarY - 8, healthWidth, 4, Color.RED);
+
+        // Render mana
+        float manaWidth = (
+                (hotbarWidth / 2f) * (
+                        (float) gameState.getPlayer().getManaManager().getMana() / gameState.getPlayer().getManaManager().getMaxMana()
+                ))
+                - ITEM_SLOT_PADDING;
+        RenderUtils.drawRect(graphics, hotbarX + (hotbarWidth / 2f), hotbarY - 8, manaWidth, 4, Color.BLUE);
     }
 }

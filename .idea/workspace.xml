@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/magic/ManaManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/magic/spell/Spell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/magic/spell/SpellManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/magic/spell/impl/TestSpell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/RenderUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/workspace.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/Open World Engine.md" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/Open World Engine.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
