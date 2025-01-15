@@ -65,14 +65,14 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 throw new RuntimeException(e);
             }
 
-            List<Entity> loadedEntites;
+            List<Entity> loadedEntities;
             try {
-                loadedEntites = FileManager.loadEntities(name);
+                loadedEntities = FileManager.loadEntities(name);
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
 
-            for (Entity e : loadedEntites) {
+            for (Entity e : loadedEntities) {
                 if (e instanceof Player) {
                     player = (Player) e;
                 }

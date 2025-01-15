@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Open World Engine.md",
+                "file": "0.1-alpha release.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Open World Engine"
+              "title": "0.1-alpha release"
             }
           }
         ]
@@ -109,7 +109,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Open World Engine.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Open World Engine"
+              "title": "Backlinks"
             }
           },
           {
@@ -161,12 +160,12 @@
               "title": "Outline of Open World Engine"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -178,7 +177,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "548583f07d8e235e",
+  "active": "f6811fad33ac516d",
   "lastOpenFiles": [
     "0.1-alpha release.md",
     "Open World Engine.md"

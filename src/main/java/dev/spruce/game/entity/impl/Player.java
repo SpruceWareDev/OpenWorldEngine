@@ -8,6 +8,8 @@ import dev.spruce.game.entity.impl.projectile.RockPellet;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.Inventory;
+import dev.spruce.game.magic.ManaManager;
+import dev.spruce.game.magic.spell.SpellManager;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -20,11 +22,15 @@ public class Player extends DamageableEntity {
     public static final float PLAYER_SPEED = 5f;
     public static final int INTERACT_DISTANCE = 125;
 
+    private final ManaManager manaManager;
+    private final SpellManager spellManager;
     private final Inventory inventory;
 
     public Player(float x, float y) {
         super(x, y, 32, 32, 100);
         this.inventory = new Inventory(8);
+        this.manaManager = new ManaManager(10);
+        this.spellManager = new SpellManager();
     }
 
     @Override
@@ -61,16 +67,11 @@ public class Player extends DamageableEntity {
     }
 
     public void handleClick(Camera camera, int button, int x, int y) {
-        /*
         GameState gs = Game.getStateManager().getGameState();
         if (button != MouseEvent.BUTTON1) return;
 
         float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
-        float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
-        float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-        gs.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
-
-         */
+        spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
     }
 
     @Override
@@ -79,12 +80,20 @@ public class Player extends DamageableEntity {
         graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
     }
 
+    @Override
+    public void onDeath() {
+        System.out.println("Player died! omg");
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
 
-    @Override
-    public void onDeath() {
-        System.out.println("Player died! omg");
+    public ManaManager getManaManager() {
+        return manaManager;
+    }
+
+    public SpellManager getSpellManager() {
+        return spellManager;
     }
 }
