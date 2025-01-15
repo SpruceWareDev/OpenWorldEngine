@@ -33,8 +33,10 @@ public class InGameHUD {
 
         // Render development info
         FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
-        FontRenderer.drawString(graphics, "Entity Count: " + gameState.getEntityManager().getEntities().size(), 10, 30, false, Color.white, Fonts.DEFAULT);
-        FontRenderer.drawString(graphics, "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(), 10, 50, false, Color.white, Fonts.DEFAULT);
+        if (Game.debug) {
+            FontRenderer.drawString(graphics, "Entity Count: " + gameState.getEntityManager().getEntities().size(), 10, 30, false, Color.white, Fonts.DEFAULT);
+            FontRenderer.drawString(graphics, "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(), 10, 50, false, Color.white, Fonts.DEFAULT);
+        }
 
         // Render hotbar
         int slots = gameState.getPlayer().getInventory().getCapacity();

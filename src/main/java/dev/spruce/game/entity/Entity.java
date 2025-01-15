@@ -62,19 +62,20 @@ public abstract class Entity implements Serializable {
     }
 
     // Finds the x position of the entity in window coordinates
-    public float getScreenX() {
-        GameState gs = Game.getStateManager().getGameState();
-        return x - gs.getCamera().getX();
+    public float getScreenX(Camera camera) {
+        return x - camera.getX();
     }
 
     // Finds the y position of the entity in window coordinates
-    public float getScreenY() {
-        GameState gs = Game.getStateManager().getGameState();
-        return y - gs.getCamera().getY();
+    public float getScreenY(Camera camera) {
+        return y - camera.getY();
     }
 
-    public boolean isEntityOnScreen() {
-        return getScreenX() + width > 0 && getScreenX() < Window.getInstance().getWidth() && getScreenY() + height > 0 && getScreenY() < Window.getInstance().getHeight();
+    public boolean isEntityOnScreen(Camera camera) {
+        return getScreenX(camera) + width > 0 &&
+                getScreenX(camera) < Window.getInstance().getWidth() &&
+                getScreenY(camera) + height > 0 &&
+                getScreenY(camera) < Window.getInstance().getHeight();
     }
 
     public EntityCollider getEntityCollider() {

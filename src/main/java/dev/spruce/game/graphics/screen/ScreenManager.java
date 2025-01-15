@@ -1,5 +1,7 @@
 package dev.spruce.game.graphics.screen;
 
+import dev.spruce.game.Game;
+
 import java.awt.*;
 import java.util.Optional;
 
@@ -17,9 +19,9 @@ public class ScreenManager {
         currentScreen.render(graphics);
     }
 
-    public void setScreen(Screen screen) {
-        if (currentScreen != null)
-            currentScreen.dispose();
+    public void setScreen(Screen screen, boolean pauseCurrentState) {
+        if (currentScreen != null) currentScreen.dispose();
+        if (pauseCurrentState) Game.getStateManager().togglePause();
         currentScreen = screen;
         currentScreen.init();
     }
@@ -27,6 +29,7 @@ public class ScreenManager {
     public void closeScreen() {
         if (currentScreen != null)
             currentScreen.dispose();
+        if (Game.getStateManager().isPaused()) Game.getStateManager().togglePause();
         currentScreen = null;
     }
 }

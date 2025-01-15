@@ -27,7 +27,6 @@ public class PauseScreen extends Screen {
 
     @Override
     public void init() {
-        Game.getStateManager().togglePause();
         uiManager = new UIManager();
         uiManager.addElement(new UIButton(
                 "Resume", Color.BLUE, 0, 0, 100, 80,
@@ -39,13 +38,13 @@ public class PauseScreen extends Screen {
                 "Save Game", Color.BLUE, 0, 0, 100, 80,
                 ScreenSnapPoint.CENTER,
                 () -> {
-                    Game.getScreenManager().closeScreen();
                     try {
                         FileManager.saveGame(gameState.getName(), gameState);
                     } catch (IOException e) {
                         System.err.println("Failed to save world!");
                         throw new RuntimeException(e);
                     }
+                    Game.getScreenManager().closeScreen();
                     Game.getStateManager().setState(new MainMenuState(), true);
                 }
         ));
@@ -72,6 +71,5 @@ public class PauseScreen extends Screen {
     @Override
     public void dispose() {
         uiManager.dispose();
-        Game.getStateManager().togglePause();
     }
 }

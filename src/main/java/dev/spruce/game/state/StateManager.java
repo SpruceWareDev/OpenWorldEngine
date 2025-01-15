@@ -45,6 +45,10 @@ public class StateManager {
         paused = !paused;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
     public GameState getGameState() {
         if (!(currentState instanceof GameState))
             throw new RuntimeException("Tried to access game state from another state!");

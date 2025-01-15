@@ -1,5 +1,13 @@
+(0.1-alpha) = Tasks for first alpha release
+
 ----------------
 Combat
+----------------
+- Magic System
+-- Spells
+
+----------------
+Player Stats
 ----------------
 
 ----------------
@@ -9,10 +17,11 @@ Farming
 ----------------
 World Generation
 ----------------
-- Procedural Generation (done for now)
+- Procedural Generation (started)
+-- Overworld
 
 - Structures
--- Spawn Structure
+-- Spawn Structure (started)
 
 - Entities
 -- Trees
@@ -24,10 +33,15 @@ World Generation
 ----------------
 
 ----------------
+Ores
+----------------
+
+----------------
 File Management
 ----------------
-- Saving Worlds (done for now)
--- Serialise Everything!!! (done for now)
+- Saving Worlds (done)
+-- Serialise all entities as a single file (done)
+-- Serialise map as a single file (done)
 ----------------
 
 ----------------
@@ -39,10 +53,10 @@ Screens
 ----------------
 Items
 ----------------
-- Item class
-- ItemStack class
-- Item attributes
-- Inventories
+- Item class (done)
+- ItemStack class (done)
+- Item attributes (done)
+- Inventories (done)
 ----------------
 
 ----------------
@@ -63,4 +77,6 @@ Stations
 Bosses
 ----------------
 
+----------------
 Enemies
+----------------

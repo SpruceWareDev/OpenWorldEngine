@@ -48,10 +48,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void init() {
-        entityManager = new EntityManager();
+        entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         if (newGame) {
-            map = new OverworldMap(128, 128);
+            map = new OverworldMap(1024, 1024);
             map.generate(this);
             player = new Player(map.getSpawnX(), map.getSpawnY());
             entityManager.spawn(player);
@@ -84,6 +84,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void update(double delta) {
+        camera.update(delta);
         entityManager.update(delta);
         inGameHUD.update(delta);
     }
@@ -97,34 +98,9 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     }
 
     @Override
-    public void dispose() {
-        //entityManager.dispose();
-    }
-
-    public  Camera getCamera() {
-        return camera;
-    }
-
-    public  EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public  Player getPlayer() {
-        return player;
-    }
-
-     public  Map getMap() {
-        return map;
-    }
-
-    @Override
     public void onKeyPress(int keyCode) {
         switch (keyCode) {
-            case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this));
+            case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this), true);
         }
     }
 
@@ -140,7 +116,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void onMousePress(int button, int x, int y) {
-        this.player.handleClick(button, x, y);
+        this.player.handleClick(camera, button, x, y);
 
         // Entity interactions
         if (button == 1) {
@@ -148,8 +124,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 if (entity instanceof Player || !(entity instanceof Interactable))
                     continue;
 
-                float screenX = entity.getScreenX();
-                float screenY = entity.getScreenY();
+                float screenX = entity.getScreenX(camera);
+                float screenY = entity.getScreenY(camera);
                 float colliderX = (float) entity.getEntityCollider().getBounds().getX();
                 float colliderY = (float) entity.getEntityCollider().getBounds().getY();
                 float colliderW = (float) entity.getEntityCollider().getBounds().getWidth();
@@ -174,5 +150,30 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     @Override
     public void onMouseClick(int button, int x, int y) {
 
+    }
+
+    @Override
+    public void dispose() {
+        //entityManager.dispose();
+    }
+
+    public  Camera getCamera() {
+        return camera;
+    }
+
+    public  EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public  Player getPlayer() {
+        return player;
+    }
+
+    public  Map getMap() {
+        return map;
     }
 }

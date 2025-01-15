@@ -12,10 +12,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EntityManager {
 
+    private final GameState gameState;
     private final CopyOnWriteArrayList<Entity> entities;
 
-    public EntityManager() {
-        entities = new CopyOnWriteArrayList<>();
+    public EntityManager(GameState gameState) {
+        this.entities = new CopyOnWriteArrayList<>();
+        this.gameState = gameState;
     }
 
     public void spawn(Entity entity) {
@@ -32,7 +34,7 @@ public class EntityManager {
 
         // Update entities
         for (Entity entity : entities) {
-            if (!entity.isEntityOnScreen())
+            if (!entity.isEntityOnScreen(gameState.getCamera()))
                 continue;
 
             entity.update(delta);
@@ -41,7 +43,7 @@ public class EntityManager {
 
     public void render(Graphics graphics, Camera camera) {
         for (Entity entity : entities) {
-            if (!entity.isEntityOnScreen())
+            if (!entity.isEntityOnScreen(gameState.getCamera()))
                 continue;
             entity.render(graphics, camera);
 
@@ -56,7 +58,7 @@ public class EntityManager {
     }
 
     public List<Entity> getOnScreenEntities() {
-        return entities.stream().filter(Entity::isEntityOnScreen).toList();
+        return entities.stream().filter(entity -> entity.isEntityOnScreen(gameState.getCamera())).toList();
     }
 
     public CopyOnWriteArrayList<Entity> getEntities() {

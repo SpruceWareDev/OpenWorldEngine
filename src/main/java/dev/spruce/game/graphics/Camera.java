@@ -8,10 +8,19 @@ import java.io.Serializable;
 public class Camera implements Serializable {
 
     private float x, y;
+    private float targetX, targetY;
+    private boolean interpolateCamera;
 
     public Camera(float x, float y) {
         this.x = x;
         this.y = y;
+        this.targetX = x;
+        this.targetY = y;
+    }
+
+    public void update(double delta) {
+        this.x = interpolateCamera ? MathUtils.lerp(this.x, targetX, 0.1f) : targetX;
+        this.y = interpolateCamera ? MathUtils.lerp(this.y, targetY, 0.1f) : targetY;
     }
 
     public void move(float x, float y) {
@@ -20,10 +29,9 @@ public class Camera implements Serializable {
     }
 
     public void centerOn(float x, float y, boolean interpolated) {
-        float newX = x - Window.getInstance().getWidth() / 2f;
-        float newY = y - Window.getInstance().getHeight() / 2f;
-        this.x = interpolated ? MathUtils.lerp(this.x, newX, 0.001f) : newX;
-        this.y = interpolated ? MathUtils.lerp(this.y, newY, 0.001f) : newY;
+        targetX = x - Window.getInstance().getWidth() / 2f;
+        targetY = y - Window.getInstance().getHeight() / 2f;
+        interpolateCamera = interpolated;
     }
 
     public void centerOn(Entity entity, boolean interpolated) {
