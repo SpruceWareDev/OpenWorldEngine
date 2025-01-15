@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0.1-alpha release.md",
+                "file": "1.1-alpha release.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0.1-alpha release"
+              "title": "1.1-alpha release"
             }
           }
         ]
@@ -109,6 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "1.1-alpha release.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 1.1-alpha release"
             }
           },
           {
@@ -127,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Open World Engine.md",
+                "file": "1.1-alpha release.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Open World Engine"
+              "title": "Outgoing links from 1.1-alpha release"
             }
           },
           {
@@ -177,9 +178,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f6811fad33ac516d",
+  "active": "548583f07d8e235e",
   "lastOpenFiles": [
-    "0.1-alpha release.md",
-    "Open World Engine.md"
+    "Open World Engine.md",
+    "1.1-alpha release.md"
   ]
 }

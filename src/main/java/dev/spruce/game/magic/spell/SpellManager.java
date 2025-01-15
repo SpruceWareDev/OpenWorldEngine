@@ -1,7 +1,9 @@
 package dev.spruce.game.magic.spell;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.entity.impl.projectile.Fireball;
 import dev.spruce.game.magic.ManaManager;
+import dev.spruce.game.magic.spell.impl.BasicFireSpell;
 import dev.spruce.game.magic.spell.impl.TestSpell;
 import dev.spruce.game.state.impl.GameState;
 
@@ -17,7 +19,7 @@ public class SpellManager implements Serializable {
     public SpellManager() {
         this.spells = new ArrayList<>();
 
-        TestSpell startingSpell = new TestSpell();
+        BasicFireSpell startingSpell = new BasicFireSpell();
         addSpell(startingSpell);
         currentSpell = startingSpell;
     }

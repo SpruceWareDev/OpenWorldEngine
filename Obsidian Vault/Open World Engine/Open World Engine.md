@@ -2,7 +2,7 @@
 # Combat
 
 - Magic System 
-- [ ] Spells
+- [x] Spell System ([[1.1-alpha release]])
   
 ----------------  
 # Player Stats
@@ -15,8 +15,8 @@
 
 ##### Procedural Generation (started)
 ###### Overworld
-- [ ] Create reliable spawn placement ([[0.1-alpha release]])
-- [ ] Spawn trees while correctly checking bad placements ([[0.1-alpha release]])
+- [x] Create reliable spawn placement ([[1.1-alpha release]])
+- [ ] Spawn trees while correctly checking bad placements ([[1.1-alpha release]])
   
 - Structures  
 - [ ] Spawn structure 
@@ -48,10 +48,10 @@
 ----------------  
 # Items  
 ----------------  
-- Item class (done)  ([[0.1-alpha release]])
-- ItemStack class (done)  ([[0.1-alpha release]])
-- Item attributes (done)  ([[0.1-alpha release]])
-- Inventories (done)  ([[0.1-alpha release]])
+- Item class (done)  ([[1.1-alpha release]])
+- ItemStack class (done)  ([[1.1-alpha release]])
+- Item attributes (done)  ([[1.1-alpha release]])
+- Inventories (done)  ([[1.1-alpha release]])
 ----------------  
   
 ----------------  
@@ -65,7 +65,7 @@
 # Stations  
   
 - [ ] Crafting Station  
-- [ ] Furnace Station  ([[0.1-alpha release]])
+- [ ] Furnace Station  ([[1.1-alpha release]])
 ----------------  
   
 ----------------  
