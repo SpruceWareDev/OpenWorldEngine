@@ -17,6 +17,8 @@ public class UITextBox extends UIElement implements IKeyInput, IMouseInput {
     private boolean focused;
     private final AllowedChars allowedChars;
 
+    private boolean backspace;
+
     public UITextBox(int x, int y, int width, int height, ScreenSnapPoint snapPoint, AllowedChars allowedChars) {
         super(x, y, width, height, snapPoint);
         text = new StringBuilder();
@@ -27,7 +29,6 @@ public class UITextBox extends UIElement implements IKeyInput, IMouseInput {
 
     @Override
     public void update() {
-
     }
 
     @Override
@@ -43,21 +44,26 @@ public class UITextBox extends UIElement implements IKeyInput, IMouseInput {
 
     @Override
     public void onKeyPress(int keyCode) {
+        if (!focused) return;
 
+        if (keyCode == KeyEvent.VK_BACK_SPACE && !backspace) {
+            if (!text.isEmpty()) {
+                text.deleteCharAt(text.length() - 1);
+            }
+            backspace = true;
+        }
     }
 
     @Override
     public void onKeyRelease(int keyCode) {
-
+        if (keyCode == KeyEvent.VK_BACK_SPACE) {
+            backspace = false;
+        }
     }
 
     @Override
     public void onKeyTyped(int keyCode, char keyChar) {
         if (!focused) return;
-        if (keyCode == KeyEvent.VK_BACK_SPACE && !text.isEmpty()) {
-            text.deleteCharAt(text.length() - 1);
-            return;
-        }
         if (!String.valueOf(keyChar).matches(allowedChars.getRegex())) return;
         text.append(keyChar);
     }
