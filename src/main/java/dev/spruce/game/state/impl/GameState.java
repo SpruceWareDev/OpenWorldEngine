@@ -124,6 +124,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void onKeyPress(int keyCode) {
+        if (Game.getStateManager().isPaused()) return;
+        
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this), true);
         }
@@ -141,6 +143,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void onMousePress(int button, int x, int y) {
+        if (Game.getStateManager().isPaused()) return;
+
         this.player.handleClick(camera, button, x, y);
 
         // Entity interactions

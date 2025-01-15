@@ -4,6 +4,7 @@ import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.screen.ScreenManager;
+import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
@@ -11,9 +12,10 @@ import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-public class Game {
+public class Game implements IKeyInput {
 
     public static final String NAME = "Open World";
     public static final String VERSION = "alpha-1.1";
@@ -47,6 +49,9 @@ public class Game {
         SoundManager.getInstance().update();
         stateManager.update(delta);
         screenManager.update(delta);
+        if (!InputManager.getInstance().isSubscribedKey(this)) {
+            InputManager.getInstance().subscribeKey(this);
+        }
     }
 
     public void render(Graphics graphics) {
@@ -60,5 +65,22 @@ public class Game {
 
     public static ScreenManager getScreenManager() {
         return screenManager;
+    }
+
+    @Override
+    public void onKeyPress(int keyCode) {
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            screenManager.closeScreen();
+        }
+    }
+
+    @Override
+    public void onKeyRelease(int keyCode) {
+
+    }
+
+    @Override
+    public void onKeyTyped(int keyCode, char keyChar) {
+
     }
 }

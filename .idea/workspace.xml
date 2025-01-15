@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/textures/item_crafting_station.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/CraftingStation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/StationEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/StationType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/recipe/Recipe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/recipe/RecipeIngredient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/CraftingStationScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/1.1-alpha release.md" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/1.1-alpha release.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/ItemTextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/ItemTextureManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/ItemBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/item/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/CraftingStation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/CraftingStation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/EntityCollider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/EntityCollider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +52,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RunManager">

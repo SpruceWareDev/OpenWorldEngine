@@ -3,6 +3,7 @@ package dev.spruce.game.entity.impl.station;
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.impl.environment.ItemStackEntity;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.screen.impl.CraftingStationScreen;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.impl.GameState;
@@ -35,6 +36,6 @@ public class CraftingStation extends StationEntity {
 
     @Override
     public void interact() {
-
+        Game.getScreenManager().setScreen(new CraftingStationScreen(), true);
     }
 }
