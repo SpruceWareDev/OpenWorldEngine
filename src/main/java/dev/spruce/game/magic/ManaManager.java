@@ -7,9 +7,19 @@ public class ManaManager implements Serializable {
     private int mana;
     private int maxMana;
 
+    private int manaRegenTicks = 0;
+
     public ManaManager(int maxMana) {
         this.maxMana = maxMana;
         this.mana = maxMana;
+    }
+
+    public void update() {
+        manaRegenTicks++;
+        if (mana < maxMana && manaRegenTicks > 100) {
+            mana++;
+            manaRegenTicks = 0;
+        }
     }
 
     public void addMana(int amount) {

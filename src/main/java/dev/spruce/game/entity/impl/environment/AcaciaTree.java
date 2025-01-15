@@ -6,6 +6,7 @@ import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.item.Item;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
@@ -15,10 +16,10 @@ import dev.spruce.game.util.EntityCollider;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class AcaciaTree extends DamageableEntity implements Interactable {
+public class AcaciaTree extends DamageableEntity {
 
     public AcaciaTree(float x, float y) {
-        super(x, y, 64, 128, 120);
+        super(x, y, 64, 128, 20);
         this.setEntityCollider(new EntityCollider(this, new Rectangle(10, 84, 44, 44)));
         enableCollision();
     }
@@ -38,13 +39,6 @@ public class AcaciaTree extends DamageableEntity implements Interactable {
 
     @Override
     public void onDeath() {
-        GameState gs = Game.getStateManager().getGameState();
-        gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
-        gs.getEntityManager().despawn(this);
-    }
-
-    @Override
-    public void interact() {
         GameState gs = Game.getStateManager().getGameState();
         gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
         gs.getEntityManager().despawn(this);

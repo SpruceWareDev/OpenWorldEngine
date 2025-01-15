@@ -35,6 +35,7 @@ public class Player extends DamageableEntity {
 
     @Override
     public void update(double delta) {
+        manaManager.update();
         move((float) delta);
     }
 

@@ -40,6 +40,19 @@ public class EntityCollider implements Serializable {
         );
     }
 
+    public boolean isPointColliding(float px, float py) {
+        return getWorldBounds().contains(px, py);
+    }
+
+    public Rectangle getWorldBounds() {
+        return new Rectangle(
+                (int) (entity.getX() + bounds.x),
+                (int) (entity.getY() + bounds.y),
+                (int) bounds.width,
+                (int) bounds.height
+        );
+    }
+
     public void setBounds(Rectangle bounds) {
         this.bounds = bounds;
     }

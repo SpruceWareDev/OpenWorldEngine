@@ -2,10 +2,12 @@ package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Fonts;
+import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.font.FontRenderer;
@@ -89,7 +91,26 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     public void update(double delta) {
         camera.update(delta);
         entityManager.update(delta);
+        checkProjectileCollisions();
         inGameHUD.update(delta);
+    }
+
+    private void checkProjectileCollisions() {
+        for (Entity entity : entityManager.getOnScreenEntities()) {
+            if (!(entity instanceof Projectile projectile))
+                continue;
+            for (Entity collidingEntity : entityManager.getEntities()) {
+                if (collidingEntity.equals(entity) || projectile.getOwner().equals(collidingEntity))
+                    continue;
+                if (!(collidingEntity instanceof DamageableEntity damageableEntity))
+                    continue;
+
+                if (collidingEntity.getEntityCollider().isPointColliding(projectile.getX(), projectile.getY())) {
+                    entityManager.despawn(projectile);
+                    damageableEntity.dealDamage(projectile.getDamage());
+                }
+            }
+        }
     }
 
     @Override
