@@ -33,6 +33,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     private final String name;
     private final boolean newGame;
+    private int seed;
 
     private EntityManager entityManager;
     private Player player;
@@ -41,9 +42,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     private InGameHUD inGameHUD;
 
-    public GameState(String name, boolean newGame) {
+    public GameState(String name, boolean newGame, int seed) {
         this.name = name;
         this.newGame = newGame;
+        this.seed = seed;
     }
 
     @Override
@@ -51,13 +53,14 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         if (newGame) {
-            map = new OverworldMap(1024, 1024);
+            map = new OverworldMap(1024, 1024, seed);
             map.generate(this);
             player = new Player(map.getSpawnX(), map.getSpawnY());
             entityManager.spawn(player);
         } else {
             try {
                 map = FileManager.loadMap(name);
+                seed = map.getSeed();
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -175,5 +178,9 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     public  Map getMap() {
         return map;
+    }
+
+    public int getSeed() {
+        return seed;
     }
 }

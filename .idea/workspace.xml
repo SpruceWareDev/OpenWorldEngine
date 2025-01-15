@@ -5,23 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/appearance.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/core-plugins.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/graph.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/workspace.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/0.1-alpha release.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/Open World Engine.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ideas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ideas.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/EntityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/EntityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/core-plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/core-plugins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/graph.json" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/graph.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/Obsidian Vault/Open World Engine/.obsidian/workspace.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/ScreenManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/PauseScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/PauseScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/impl/UITextBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/impl/UITextBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/WorldCreateState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/WorldCreateState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/GameLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/GameLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/maps/OverworldMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/maps/OverworldMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,16 +51,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Gradle.Build OpenWorldEngine.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OpenWorldEngine [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Gradle.Build OpenWorldEngine.executor": "Run",
+    "Gradle.OpenWorldEngine [:Main.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />

@@ -61,6 +61,7 @@ public class Player extends DamageableEntity {
     }
 
     public void handleClick(Camera camera, int button, int x, int y) {
+        /*
         GameState gs = Game.getStateManager().getGameState();
         if (button != MouseEvent.BUTTON1) return;
 
@@ -68,6 +69,8 @@ public class Player extends DamageableEntity {
         float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
         float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
         gs.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
+
+         */
     }
 
     @Override

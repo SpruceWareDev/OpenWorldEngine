@@ -15,8 +15,9 @@ public abstract class Map implements Serializable {
 
     protected Tile[][] tiles;
     protected int width, height;
+    protected int seed;
 
-    public Map(int width, int height) {
+    public Map(int width, int height, int seed) {
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
@@ -58,5 +59,17 @@ public abstract class Map implements Serializable {
 
     public Tile getTile(int x, int y) {
         return tiles[x][y];
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getSeed() {
+        return seed;
     }
 }

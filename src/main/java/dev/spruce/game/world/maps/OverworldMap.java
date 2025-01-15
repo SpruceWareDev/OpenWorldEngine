@@ -13,13 +13,13 @@ public class OverworldMap extends Map {
     private int spawnX, spawnY;
     private Noise noise;
 
-    public OverworldMap(int width, int height) {
-        super(width, height);
+    public OverworldMap(int width, int height, int seed) {
+        super(width, height, seed);
     }
 
     @Override
     public void generate(GameState gameState) {
-        noise = new Noise(4, 2f, 2f, 69420);
+        noise = new Noise(4, 2f, 2f, seed);
         float[][] waterNoiseMap = noise.generateNoise(width, height);
 
         // Fill map with grass
