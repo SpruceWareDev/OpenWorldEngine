@@ -1,5 +1,6 @@
 package dev.spruce.game.entity;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.state.impl.GameState;
@@ -62,12 +63,14 @@ public abstract class Entity implements Serializable {
 
     // Finds the x position of the entity in window coordinates
     public float getScreenX() {
-        return x - GameState.getCamera().getX();
+        GameState gs = Game.getStateManager().getGameState();
+        return x - gs.getCamera().getX();
     }
 
     // Finds the y position of the entity in window coordinates
     public float getScreenY() {
-        return y - GameState.getCamera().getY();
+        GameState gs = Game.getStateManager().getGameState();
+        return y - gs.getCamera().getY();
     }
 
     public boolean isEntityOnScreen() {

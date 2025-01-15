@@ -22,7 +22,7 @@ public abstract class Map implements Serializable {
         tiles = new Tile[width][height];
     }
 
-    public abstract void generate();
+    public abstract void generate(GameState gameState);
 
     public abstract float getSpawnX();
     public abstract float getSpawnY();

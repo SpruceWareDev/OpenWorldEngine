@@ -1,10 +1,12 @@
 package dev.spruce.game.graphics.ui.hud;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.item.ItemStack;
+import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -29,8 +31,13 @@ public class InGameHUD {
         int screenW = Window.getInstance().getWidth();
         int screenH = Window.getInstance().getHeight();
 
+        // Render development info
+        FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
+        FontRenderer.drawString(graphics, "Entity Count: " + gameState.getEntityManager().getEntities().size(), 10, 30, false, Color.white, Fonts.DEFAULT);
+        FontRenderer.drawString(graphics, "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(), 10, 50, false, Color.white, Fonts.DEFAULT);
+
         // Render hotbar
-        int slots = GameState.getPlayer().getInventory().getCapacity();
+        int slots = gameState.getPlayer().getInventory().getCapacity();
         int hotbarX = (screenW / 2) - ((slots * (itemSlotSize + 4)) / 2);
         int hotbarY = screenH - (itemSlotSize + 54);
         for (int i = 0; i < slots; i++) {
@@ -38,8 +45,8 @@ public class InGameHUD {
             graphics.setColor(new Color(0,0,0,128));
             graphics.fillRect(x, hotbarY, itemSlotSize, itemSlotSize);
 
-            if (!GameState.getPlayer().getInventory().isSlotEmpty(i)) {
-                ItemStack stack = GameState.getPlayer().getInventory().getSlot(i);
+            if (!gameState.getPlayer().getInventory().isSlotEmpty(i)) {
+                ItemStack stack = gameState.getPlayer().getInventory().getSlot(i);
                 // Draw item image
                 graphics2D.drawImage(
                         Assets.getInstance().getItemTextures().getAsset(stack.getItem().getName()),
@@ -55,7 +62,7 @@ public class InGameHUD {
         }
 
         // Render health
-        int healthWidth = (((itemSlotSize + 4) * slots) / 2) * (GameState.getPlayer().getHealth() / GameState.getPlayer().getMaxHealth());
+        int healthWidth = (((itemSlotSize + 4) * slots) / 2) * (gameState.getPlayer().getHealth() / gameState.getPlayer().getMaxHealth());
         graphics.setColor(Color.RED);
         graphics.fillRect(hotbarX, hotbarY - 4, healthWidth, 2);
     }

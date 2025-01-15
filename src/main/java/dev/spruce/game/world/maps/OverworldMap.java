@@ -1,5 +1,6 @@
 package dev.spruce.game.world.maps;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.entity.impl.environment.AcaciaTree;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.Noise;
@@ -17,7 +18,7 @@ public class OverworldMap extends Map {
     }
 
     @Override
-    public void generate() {
+    public void generate(GameState gameState) {
         noise = new Noise(4, 2f, 2f, 69420);
         float[][] waterNoiseMap = noise.generateNoise(width, height);
 
@@ -28,7 +29,7 @@ public class OverworldMap extends Map {
         // Generate spawn point
         generateSpawn();
         // Generate foliage
-        generateFoliage();
+        generateFoliage(gameState);
     }
 
     private void fillMap(Tile tile) {
@@ -63,13 +64,13 @@ public class OverworldMap extends Map {
         }
     }
 
-    private void generateFoliage() {
+    private void generateFoliage(GameState gameState) {
         // Generate foliage
         for (int i = 0; i < ((width * height) / 8); i++) {
             int x = (int) (Math.random() * width) * Tile.SIZE;
             int y = (int) (Math.random() * height) * Tile.SIZE;
             if (tiles[x / Tile.SIZE][y / Tile.SIZE] == TileManager.getInstance().GRASS) {
-                GameState.getEntityManager().spawn(new AcaciaTree(x, y));
+                gameState.getEntityManager().spawn(new AcaciaTree(x, y));
             }
         }
     }

@@ -54,7 +54,7 @@ public class FileManager {
         mapOutputStream.close();
 
         // Save entities
-        EntitySerialWrapper entitySerialWrapper = new EntitySerialWrapper(GameState.getEntityManager().getEntities());
+        EntitySerialWrapper entitySerialWrapper = new EntitySerialWrapper(gameState.getEntityManager().getEntities());
         File entityFile = new File(saveFolder.getPath() + File.separator + "eData");
         FileOutputStream entityOutputStream = new FileOutputStream(entityFile);
         out = new ObjectOutputStream(entityOutputStream);

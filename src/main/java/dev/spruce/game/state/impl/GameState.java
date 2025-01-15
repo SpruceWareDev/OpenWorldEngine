@@ -34,10 +34,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     private final String name;
     private final boolean newGame;
 
-    private static EntityManager entityManager;
-    private static Player player;
-    private static Camera camera;
-    private static Map map;
+    private EntityManager entityManager;
+    private Player player;
+    private Camera camera;
+    private Map map;
 
     private InGameHUD inGameHUD;
 
@@ -48,11 +48,11 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void init() {
-        entityManager = new EntityManager(this);
+        entityManager = new EntityManager();
         camera = new Camera(0, 0);
         if (newGame) {
             map = new OverworldMap(128, 128);
-            map.generate();
+            map.generate(this);
             player = new Player(map.getSpawnX(), map.getSpawnY());
             entityManager.spawn(player);
         } else {
@@ -101,11 +101,11 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         //entityManager.dispose();
     }
 
-    public static Camera getCamera() {
+    public  Camera getCamera() {
         return camera;
     }
 
-    public static EntityManager getEntityManager() {
+    public  EntityManager getEntityManager() {
         return entityManager;
     }
 
@@ -113,11 +113,11 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         return name;
     }
 
-    public static Player getPlayer() {
+    public  Player getPlayer() {
         return player;
     }
 
-     public static Map getMap() {
+     public  Map getMap() {
         return map;
     }
 

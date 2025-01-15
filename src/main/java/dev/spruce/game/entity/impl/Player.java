@@ -1,5 +1,6 @@
 package dev.spruce.game.entity.impl;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.impl.projectile.Projectile;
@@ -32,6 +33,7 @@ public class Player extends DamageableEntity {
     }
 
     private void move(float delta) {
+        GameState gs = Game.getStateManager().getGameState();
         resetVelocity();
         if (InputManager.getInstance().isKeyDown(KeyEvent.VK_W)) {
             setDy(-1);
@@ -45,7 +47,7 @@ public class Player extends DamageableEntity {
         }
 
         boolean collidingX = false, collidingY = false;
-        List<Entity> onScreenEntities = GameState.getEntityManager().getOnScreenEntities();
+        List<Entity> onScreenEntities = gs.getEntityManager().getOnScreenEntities();
 
         for (Entity entity : onScreenEntities) {
             if (getEntityCollider().checkCollision(entity, getDx() * delta * PLAYER_SPEED, 0f))
@@ -59,12 +61,13 @@ public class Player extends DamageableEntity {
     }
 
     public void handleClick(int button, int x, int y) {
+        GameState gs = Game.getStateManager().getGameState();
         if (button != MouseEvent.BUTTON1) return;
 
         float angle = (float) Math.atan2(y - getScreenY(), x - getScreenX());
         float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
         float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-        GameState.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
+        gs.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
     }
 
     @Override

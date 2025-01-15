@@ -12,12 +12,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class EntityManager {
 
-    private final GameState gameState;
-
     private final CopyOnWriteArrayList<Entity> entities;
 
-    public EntityManager(GameState gameState) {
-        this.gameState = gameState;
+    public EntityManager() {
         entities = new CopyOnWriteArrayList<>();
     }
 

@@ -1,5 +1,6 @@
 package dev.spruce.game.entity.impl.environment;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
@@ -37,13 +38,15 @@ public class AcaciaTree extends DamageableEntity implements Interactable {
 
     @Override
     public void onDeath() {
-        GameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
-        GameState.getEntityManager().despawn(this);
+        GameState gs = Game.getStateManager().getGameState();
+        gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
+        gs.getEntityManager().despawn(this);
     }
 
     @Override
     public void interact() {
-        GameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
-        GameState.getEntityManager().despawn(this);
+        GameState gs = Game.getStateManager().getGameState();
+        gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
+        gs.getEntityManager().despawn(this);
     }
 }
