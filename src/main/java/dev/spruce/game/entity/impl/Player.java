@@ -3,8 +3,6 @@ package dev.spruce.game.entity.impl;
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
-import dev.spruce.game.entity.impl.projectile.Projectile;
-import dev.spruce.game.entity.impl.projectile.RockPellet;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.Inventory;
@@ -24,7 +22,10 @@ public class Player extends DamageableEntity {
 
     private final ManaManager manaManager;
     private final SpellManager spellManager;
+
     private final Inventory inventory;
+    private int selectedSlot = 0;
+    private boolean usingSpells = false;
 
     public Player(float x, float y) {
         super(x, y, 32, 32, 100);
@@ -69,9 +70,26 @@ public class Player extends DamageableEntity {
 
     public void handleClick(Camera camera, int button, int x, int y) {
         if (button != MouseEvent.BUTTON1) return;
+        if (usingSpells) {
+            float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
+            spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
+        }
+    }
 
-        float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
-        spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
+    public void handleKey(int keyCode) {
+        switch (keyCode) {
+            case KeyEvent.VK_1 -> selectedSlot = 0;
+            case KeyEvent.VK_2 -> selectedSlot = 1;
+            case KeyEvent.VK_3 -> selectedSlot = 2;
+            case KeyEvent.VK_4 -> selectedSlot = 3;
+            case KeyEvent.VK_5 -> selectedSlot = 4;
+            case KeyEvent.VK_6 -> selectedSlot = 5;
+            case KeyEvent.VK_7 -> selectedSlot = 6;
+            case KeyEvent.VK_8 -> selectedSlot = 7;
+            case KeyEvent.VK_R -> {
+                usingSpells = !usingSpells;
+            }
+        }
     }
 
     @Override
@@ -95,5 +113,13 @@ public class Player extends DamageableEntity {
 
     public SpellManager getSpellManager() {
         return spellManager;
+    }
+
+    public boolean isUsingSpells() {
+        return usingSpells;
+    }
+
+    public int getSelectedSlot() {
+        return selectedSlot;
     }
 }

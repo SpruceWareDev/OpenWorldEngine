@@ -49,6 +49,13 @@ public class InGameHUD {
         for (int i = 0; i < slots; i++) {
             float x = hotbarX + (i * (ITEM_SLOT_SIZE + ITEM_SLOT_PADDING));
             RenderUtils.drawRect(graphics, (int) x, (int) hotbarY, ITEM_SLOT_SIZE, ITEM_SLOT_SIZE, new Color(0,0,0,128));
+            // Highlight selected slot if not using spells
+            if (!gameState.getPlayer().isUsingSpells()) {
+                int slot = gameState.getPlayer().getSelectedSlot();
+                if (i == slot) {
+                    RenderUtils.drawRect(graphics, (int) x - 1, (int) hotbarY - 1, ITEM_SLOT_SIZE + 2, ITEM_SLOT_SIZE + 2, new Color(255, 255, 255, 128));
+                }
+            }
 
             if (!gameState.getPlayer().getInventory().isSlotEmpty(i)) {
                 ItemStack stack = gameState.getPlayer().getInventory().getSlot(i);
@@ -60,7 +67,7 @@ public class InGameHUD {
                 // Draw stack amount
                 FontRenderer.drawString(
                         graphics, String.valueOf(stack.getQuantity()),
-                        (int) (x + ITEM_SLOT_SIZE - 12), (int) (hotbarY + ITEM_SLOT_SIZE - 12),
+                        (int) (x + ITEM_SLOT_SIZE - 24), (int) (hotbarY + ITEM_SLOT_SIZE - 24),
                         false, Color.white, Fonts.DEFAULT
                 );
             }

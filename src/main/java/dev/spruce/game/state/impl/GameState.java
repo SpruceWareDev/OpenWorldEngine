@@ -12,6 +12,7 @@ import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.font.FontRenderer;
+import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
@@ -44,6 +45,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     private Map map;
 
     private InGameHUD inGameHUD;
+    private ParticleRenderer particleRenderer;
 
     public GameState(String name, boolean newGame, int seed) {
         this.name = name;
@@ -86,6 +88,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         InputManager.getInstance().subscribeMouse(this);
         InputManager.getInstance().subscribeKey(this);
         camera.centerOn(player, false);
+        particleRenderer = new ParticleRenderer();
     }
 
     @Override
@@ -94,6 +97,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager.update(delta);
         checkProjectileCollisions();
         inGameHUD.update(delta);
+        particleRenderer.update(delta);
     }
 
     private void checkProjectileCollisions() {
@@ -119,26 +123,26 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         camera.centerOn(player, true);
         map.render(graphics, camera);
         entityManager.render(graphics, camera);
+        particleRenderer.render(graphics, camera);
         inGameHUD.render(graphics);
     }
 
     @Override
     public void onKeyPress(int keyCode) {
+        player.handleKey(keyCode);
+    }
+
+    @Override
+    public void onKeyRelease(int keyCode) {
         if (Game.getStateManager().isPaused()) return;
-        
+
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this), true);
         }
     }
 
     @Override
-    public void onKeyRelease(int keyCode) {
-
-    }
-
-    @Override
     public void onKeyTyped(int keyCode, char keyChar) {
-
     }
 
     @Override
@@ -211,5 +215,9 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     public int getSeed() {
         return seed;
+    }
+
+    public ParticleRenderer getParticleRenderer() {
+        return particleRenderer;
     }
 }

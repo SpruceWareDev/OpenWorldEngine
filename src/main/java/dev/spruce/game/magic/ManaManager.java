@@ -8,6 +8,7 @@ public class ManaManager implements Serializable {
     private int maxMana;
 
     private int manaRegenTicks = 0;
+    private int manaRegenWaitTicks = 30;
 
     public ManaManager(int maxMana) {
         this.maxMana = maxMana;
@@ -16,7 +17,7 @@ public class ManaManager implements Serializable {
 
     public void update() {
         manaRegenTicks++;
-        if (mana < maxMana && manaRegenTicks > 100) {
+        if (mana < maxMana && manaRegenTicks > manaRegenWaitTicks) {
             mana++;
             manaRegenTicks = 0;
         }
