@@ -1,82 +1,13 @@
 (0.1-alpha) = Tasks for first alpha release
 
-----------------
-Combat
-----------------
-- Magic System
--- Spells
+TODO:
+-> Make Wooden Rod, Wooden Staff Head and Wooden Staff textures
+-> Implement spell HUD (will be next to hotbar?!?!? probably)
+-> Implement spell GUI
+-> Make crafting station texture
+-> Make building system (for placing down objects in the world like stations)
 
-----------------
-Player Stats
-----------------
+IN-PROGRESS:
+-> Implement crafting station for basic recipes
 
-----------------
-Farming
-----------------
-
-----------------
-World Generation
-----------------
-- Procedural Generation (started)
--- Overworld
-
-- Structures
--- Spawn Structure (started)
-
-- Entities
--- Trees
---- Acacia Tree (done)
--- Rocks
---- Small rock
---- Large rock
---- Ore rock
-----------------
-
-----------------
-Ores
-----------------
-
-----------------
-File Management
-----------------
-- Saving Worlds (done)
--- Serialise all entities as a single file (done)
--- Serialise map as a single file (done)
-----------------
-
-----------------
-Screens
-----------------
-- Pause Screen (In progress)
-----------------
-
-----------------
-Items
-----------------
-- Item class (done)
-- ItemStack class (done)
-- Item attributes (done)
-- Inventories (done)
-----------------
-
-----------------
-Crafting
-----------------
-- Recipe class
-- Recipe Manager
-----------------
-
-----------------
-Stations
-----------------
-- Crafting Station
-- Furnace Station
-----------------
-
-----------------
-Bosses
-----------------
-
-----------------
-Enemies
-----------------
+FINISHED:

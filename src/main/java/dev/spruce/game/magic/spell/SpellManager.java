@@ -1,10 +1,8 @@
 package dev.spruce.game.magic.spell;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.entity.impl.projectile.Fireball;
 import dev.spruce.game.magic.ManaManager;
 import dev.spruce.game.magic.spell.impl.BasicFireSpell;
-import dev.spruce.game.magic.spell.impl.TestSpell;
 import dev.spruce.game.state.impl.GameState;
 
 import java.io.Serializable;
