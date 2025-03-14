@@ -21,7 +21,7 @@ public class ScreenManager {
 
     public void setScreen(Screen screen, boolean pauseCurrentState) {
         if (currentScreen != null) currentScreen.dispose();
-        if (pauseCurrentState) Game.getStateManager().togglePause();
+        if (pauseCurrentState) Game.getStateManager().setPaused(true);
         currentScreen = screen;
         currentScreen.init();
     }
@@ -29,7 +29,11 @@ public class ScreenManager {
     public void closeScreen() {
         if (currentScreen != null)
             currentScreen.dispose();
-        if (Game.getStateManager().isPaused()) Game.getStateManager().togglePause();
+        if (Game.getStateManager().isPaused()) Game.getStateManager().setPaused(false);
         currentScreen = null;
+    }
+
+    public boolean isScreenOpen() {
+        return currentScreen != null;
     }
 }

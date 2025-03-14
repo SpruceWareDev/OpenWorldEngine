@@ -15,7 +15,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-public class Game implements IKeyInput {
+public class Game {
 
     public static final String NAME = "Open World";
     public static final String VERSION = "alpha-1.1";
@@ -49,9 +49,6 @@ public class Game implements IKeyInput {
         SoundManager.getInstance().update();
         stateManager.update(delta);
         screenManager.update(delta);
-        if (!InputManager.getInstance().isSubscribedKey(this)) {
-            InputManager.getInstance().subscribeKey(this);
-        }
     }
 
     public void render(Graphics graphics) {
@@ -65,22 +62,5 @@ public class Game implements IKeyInput {
 
     public static ScreenManager getScreenManager() {
         return screenManager;
-    }
-
-    @Override
-    public void onKeyPress(int keyCode) {
-        if (keyCode == KeyEvent.VK_ESCAPE) {
-            screenManager.closeScreen();
-        }
-    }
-
-    @Override
-    public void onKeyRelease(int keyCode) {
-
-    }
-
-    @Override
-    public void onKeyTyped(int keyCode, char keyChar) {
-
     }
 }

@@ -41,8 +41,8 @@ public class StateManager {
         finishedLoading = true;
     }
 
-    public void togglePause() {
-        paused = !paused;
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
     public boolean isPaused() {

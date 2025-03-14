@@ -1,7 +1,5 @@
 package dev.spruce.game.world;
 
-import dev.spruce.game.assets.Textures;
-
 public class TileManager {
 
     private static TileManager instance;

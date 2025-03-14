@@ -134,10 +134,14 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void onKeyRelease(int keyCode) {
-        if (Game.getStateManager().isPaused()) return;
-
         switch (keyCode) {
-            case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this), true);
+            case KeyEvent.VK_ESCAPE -> {
+                if (Game.getScreenManager().isScreenOpen()) {
+                    Game.getScreenManager().closeScreen();
+                } else {
+                    Game.getScreenManager().setScreen(new PauseScreen(this), true);
+                }
+            }
         }
     }
 
