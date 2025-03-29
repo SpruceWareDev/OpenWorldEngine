@@ -7,6 +7,8 @@ import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.entity.impl.hostile.TestEnemy;
 import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
@@ -58,10 +60,14 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         if (newGame) {
-            map = new OverworldMap(1024, 1024, seed);
+            map = new OverworldMap(256, 256, seed);
             map.generate(this);
             player = new Player(map.getSpawnX(), map.getSpawnY());
             entityManager.spawn(player);
+
+            // TODO: Remove this bc its to test entities
+            TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30, 20, 20);
+            entityManager.spawn(testEnemy);
         } else {
             try {
                 map = FileManager.loadMap(name);
@@ -172,7 +178,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                                 (int) (screenX + colliderX), (int) (screenY + colliderY), (int) colliderW, (int) colliderH
                         ) && MathUtils.isWithinDistance(player, entity, Player.INTERACT_DISTANCE);
 
-                if (canInteract) {
+                if (canInteract && !player.isUsingSpells()) {
                     ((Interactable) entity).interact();
                 }
             }

@@ -1,4 +1,13 @@
-(0.1-alpha) = Tasks for first alpha release
+(0.2-alpha)
+TODO:
+-> Implement hostile entity classes
+-> Implement test enemy
+--> Test attacks
+--> Basic Enemy AI
+FINISHED:
+
+
+(1.0-alpha) = Tasks for first alpha release
 
 TODO:
 -> Make Wooden Rod, Wooden Staff Head and Wooden Staff textures

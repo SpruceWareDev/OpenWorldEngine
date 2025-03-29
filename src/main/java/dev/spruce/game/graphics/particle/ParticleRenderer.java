@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ParticleRenderer {
 
-    private CopyOnWriteArrayList<Particle> particles = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<Particle> particles = new CopyOnWriteArrayList<>();
 
     public void spawnParticle(float x, float y, float size, int lifetimeTicks, Particle.ParticleType type, Color color) {
         particles.add(new Particle(x, y, size, lifetimeTicks, type, color));
@@ -26,5 +26,9 @@ public class ParticleRenderer {
         for (Particle particle : particles) {
             particle.render(graphics, camera);
         }
+    }
+
+    public int getParticleCount() {
+        return particles.size();
     }
 }

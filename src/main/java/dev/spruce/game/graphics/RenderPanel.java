@@ -7,6 +7,9 @@ import java.awt.*;
 
 public class RenderPanel {
 
+    public static final int FPS_TARGET = 240;
+    public static final int TICK_RATE = 60;
+
     private Game game;
     private Canvas canvas;
     private Graphics graphics;
@@ -32,9 +35,12 @@ public class RenderPanel {
     }
 
     public void run() {
-        double ns = 1000000000.0 / 60.0;
+        double ns = 1000000000.0 / TICK_RATE;
+        double renderNs = 1000000000.0 / FPS_TARGET;
         double delta = 0;
+        double renderDelta = 0;
         long lastTime = System.nanoTime();
+        long renderTime = System.nanoTime();
         long timer = System.currentTimeMillis();
         int frames = 0;
         int updates = 0;
@@ -48,8 +54,14 @@ public class RenderPanel {
                 updates++;
                 delta--;
             }
-            render();
-            frames++;
+            now = System.nanoTime();
+            renderDelta += (now - renderTime) / renderNs;
+            renderTime = now;
+            while (renderDelta >= 1) {
+                render();
+                renderDelta--;
+                frames++;
+            }
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 Window.getInstance().setTitle(String.format("%s (%s ups, %s fps)", Game.FORMATTED_NAME, updates, frames));

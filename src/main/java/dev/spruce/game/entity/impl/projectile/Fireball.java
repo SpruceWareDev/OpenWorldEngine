@@ -20,10 +20,14 @@ public class Fireball extends Projectile {
         handleLifetime();
         setX(getX() + (getDx() * (float) delta));
         setY(getY() + (getDy() * (float) delta));
-        Game.getStateManager()
-                .getGameState()
-                .getParticleRenderer()
-                .spawnParticle(getX(), getY(), 5, 20, Particle.ParticleType.SQUARE, Color.ORANGE);
+
+        for (int i = 0; i < 2; i++) {
+            Game.getStateManager()
+                    .getGameState()
+                    .getParticleRenderer()
+                    .spawnParticle(getX(), getY(), 5f, 50, Particle.ParticleType.SQUARE, Color.ORANGE);
+
+        }
     }
 
     @Override

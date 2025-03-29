@@ -5,6 +5,7 @@ import dev.spruce.game.assets.Assets;
 import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
+import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
@@ -35,8 +36,18 @@ public class InGameHUD {
         // Render development info
         FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
         if (Game.debug) {
-            FontRenderer.drawString(graphics, "Entity Count: " + gameState.getEntityManager().getEntities().size(), 10, 30, false, Color.white, Fonts.DEFAULT);
-            FontRenderer.drawString(graphics, "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(), 10, 50, false, Color.white, Fonts.DEFAULT);
+            FontRenderer.drawString(graphics,
+                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
+                    10, 30, false, Color.white, Fonts.DEFAULT
+            );
+            FontRenderer.drawString(graphics,
+                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
+                    10, 50, false, Color.white, Fonts.DEFAULT
+            );
+            FontRenderer.drawString(graphics,
+                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
+                    10, 70, false, Color.white, Fonts.DEFAULT
+            );
         }
 
         // Render hotbar

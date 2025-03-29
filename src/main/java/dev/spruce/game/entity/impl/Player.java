@@ -86,9 +86,7 @@ public class Player extends DamageableEntity {
             case KeyEvent.VK_6 -> selectedSlot = 5;
             case KeyEvent.VK_7 -> selectedSlot = 6;
             case KeyEvent.VK_8 -> selectedSlot = 7;
-            case KeyEvent.VK_R -> {
-                usingSpells = !usingSpells;
-            }
+            case KeyEvent.VK_R -> usingSpells = !usingSpells;
         }
     }
 

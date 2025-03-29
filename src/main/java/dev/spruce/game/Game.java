@@ -4,21 +4,18 @@ import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.screen.ScreenManager;
-import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
-import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class Game {
 
     public static final String NAME = "Open World";
-    public static final String VERSION = "alpha-1.1";
+    public static final String VERSION = "alpha-0.1";
     public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
 
     public static boolean debug = false;
