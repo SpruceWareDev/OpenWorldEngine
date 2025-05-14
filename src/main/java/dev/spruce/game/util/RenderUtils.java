@@ -33,4 +33,14 @@ public class RenderUtils {
 
         graphics2D.fill(triangle);
     }
+
+    public static void scale(Graphics graphics, float scaleX, float scaleY) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.scale(scaleX, scaleY);
+    }
+
+    public static void endScale(Graphics graphics) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.scale(1, 1);
+    }
 }

@@ -23,6 +23,7 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
+import dev.spruce.game.state.StateManager;
 import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
@@ -60,34 +61,13 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         if (newGame) {
-            map = new OverworldMap(256, 256, seed);
-            map.generate(this);
-            player = new Player(map.getSpawnX(), map.getSpawnY());
-            entityManager.spawn(player);
-
-            // TODO: Remove this bc its to test entities
-            TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30, 20, 20);
-            entityManager.spawn(testEnemy);
+            newGameInit();
         } else {
             try {
-                map = FileManager.loadMap(name);
-                seed = map.getSeed();
+                loadInit();
             } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-            List<Entity> loadedEntities;
-            try {
-                loadedEntities = FileManager.loadEntities(name);
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-            for (Entity e : loadedEntities) {
-                if (e instanceof Player) {
-                    player = (Player) e;
-                }
-                entityManager.spawn(e);
+                System.out.println("Failed to load game state: " + e.getMessage());
+                Game.getStateManager().setState(new MainMenuState(), true);
             }
         }
         inGameHUD = new InGameHUD(this);
@@ -95,6 +75,34 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         InputManager.getInstance().subscribeKey(this);
         camera.centerOn(player, false);
         particleRenderer = new ParticleRenderer();
+    }
+
+    // Only called when a new game is started
+    private void newGameInit() {
+        map = new OverworldMap(256, 256, seed);
+        map.generate(this);
+        player = new Player(map.getSpawnX(), map.getSpawnY());
+        entityManager.spawn(player);
+
+        // TODO: Remove this bc its to test entities
+        TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30, 20, 20);
+        entityManager.spawn(testEnemy);
+    }
+
+    // Only called when the game is loaded from a save
+    private void loadInit() throws IOException, ClassNotFoundException {
+        map = FileManager.loadMap(name);
+        seed = map.getSeed();
+
+        List<Entity> loadedEntities;
+        loadedEntities = FileManager.loadEntities(name);
+
+        for (Entity e : loadedEntities) {
+            if (e instanceof Player) {
+                player = (Player) e;
+            }
+            entityManager.spawn(e);
+        }
     }
 
     @Override
