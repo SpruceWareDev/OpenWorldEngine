@@ -12,7 +12,12 @@ public class AiStateMachine implements Serializable {
         this.nextState = AiState.IDLE;
     }
 
-    public void transitionToNext(AiState newNextState) {
+    public void transitionTo(AiState state, AiState newNextState) {
+        this.currentState = state;
+        this.nextState = newNextState;
+    }
+
+    public void transition(AiState newNextState) {
         this.currentState = nextState;
         nextState = newNextState;
     }

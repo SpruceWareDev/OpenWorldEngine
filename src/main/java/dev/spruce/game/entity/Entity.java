@@ -53,6 +53,18 @@ public abstract class Entity implements Serializable {
         dy = 0;
     }
 
+    /**
+    Method that can be called by children of entity class to apply
+    the current dx and dy velocity values to the entity's current
+    position.
+     @param delta delta time for updates (from update method)
+     @param speed the speed the entity should move at
+     */
+    protected void applyVelocity(double delta, float speed) {
+        setX((float) (getX() + (getDx() * delta * speed)));
+        setY((float) (getY() + (getDy() * delta * speed)));
+    }
+
     public void enableCollision() {
         shouldCollide = true;
     }

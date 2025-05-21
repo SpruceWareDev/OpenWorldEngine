@@ -13,8 +13,10 @@ import java.awt.*;
 
 public class TestEnemy extends HostileEntity {
 
+    // TODO: Make standard move speeds for all entities in a static class
     private static final float MOVE_SPEED = 4.5f;
 
+    // Timer values for attacking
     private static final int SHOOT_DELAY_TICKS = 120;
     private int shootTimerTicks = 0;
 
@@ -28,22 +30,22 @@ public class TestEnemy extends HostileEntity {
     @Override
     public void update(double delta) {
         resetVelocity();
-
-        if (MathUtils.isWithinDistance(this, Game.getStateManager().getGameState().getPlayer(), 4f * Tile.SIZE)) {
-            stateMachine.setNextState(AiState.ATTACKING);
-            stateMachine.transition();
-            stateMachine.setNextState(AiState.CHASING);
-        } else if (stateMachine.getNextState().equals(AiState.CHASING)) {
-            stateMachine.transition();
-        }
+        handleAiState();
 
         switch (stateMachine.getCurrentState()) {
             case ATTACKING -> attack();
             case CHASING -> chase();
         }
 
-        setX((float) (getX() + (getDx() * delta * MOVE_SPEED)));
-        setY((float) (getY() + (getDy() * delta * MOVE_SPEED)));
+        applyVelocity(delta, MOVE_SPEED);
+    }
+
+    private void handleAiState() {
+        if (MathUtils.isWithinDistance(this, Game.getStateManager().getGameState().getPlayer(), 4f * Tile.SIZE)) {
+            stateMachine.transitionTo(AiState.ATTACKING, AiState.CHASING);
+        } else if (stateMachine.getNextState().equals(AiState.CHASING)) {
+            stateMachine.transition();
+        }
     }
 
     private void attack() {

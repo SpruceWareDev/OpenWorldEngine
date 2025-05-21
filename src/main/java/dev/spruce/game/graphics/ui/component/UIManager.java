@@ -38,6 +38,7 @@ public class UIManager {
                         i++;
                     }
                 }
+                case NONE -> getBySnapPoint(snapPoint).forEach(uiElement -> uiElement.render(graphics));
             }
         }
     }
