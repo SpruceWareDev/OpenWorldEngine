@@ -3,8 +3,10 @@ package dev.spruce.game.entity;
 import dev.spruce.game.Game;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.Window;
+import dev.spruce.game.graphics.particle.Particle;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
+import dev.spruce.game.util.MathUtils;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -25,6 +27,8 @@ public abstract class Entity implements Serializable {
     private EntityCollider entityCollider;
     protected boolean shouldCollide = false;
 
+    private boolean onFire = false;
+
     public Entity(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
@@ -38,6 +42,17 @@ public abstract class Entity implements Serializable {
     public abstract void update(double delta);
 
     public abstract void render(Graphics graphics, Camera camera);
+
+    public void updateParticles() {
+        if (onFire) {
+            float x = getX() + (MathUtils.RANDOM.nextFloat() * 2f) - 1f;
+            float y = getY() + (MathUtils.RANDOM.nextFloat() * 2f) - 1f;
+            Game.getStateManager()
+                    .getGameState()
+                    .getParticleRenderer()
+                    .spawnParticle(x, y, 5f, 10, Particle.ParticleType.SQUARE, Color.ORANGE);
+        }
+    }
 
     protected void renderBoundingBox(Graphics graphics, Camera camera) {
         int x = (int) (getX() + getEntityCollider().getBounds().x - camera.getX());
@@ -144,5 +159,13 @@ public abstract class Entity implements Serializable {
 
     public void setDy(float dy) {
         this.dy = dy;
+    }
+
+    public boolean isOnFire() {
+        return onFire;
+    }
+
+    public void setOnFire(boolean onFire) {
+        this.onFire = onFire;
     }
 }

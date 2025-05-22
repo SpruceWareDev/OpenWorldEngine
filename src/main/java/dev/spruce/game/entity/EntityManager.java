@@ -38,6 +38,7 @@ public class EntityManager {
                 continue;
 
             entity.update(delta);
+            entity.updateParticles();
         }
     }
 

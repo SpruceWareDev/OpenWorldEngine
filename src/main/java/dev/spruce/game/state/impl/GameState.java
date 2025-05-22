@@ -118,6 +118,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         for (Entity entity : entityManager.getOnScreenEntities()) {
             if (!(entity instanceof Projectile projectile))
                 continue;
+
             for (Entity collidingEntity : entityManager.getEntities()) {
                 if (collidingEntity.equals(entity) || projectile.getOwner().equals(collidingEntity))
                     continue;
@@ -127,6 +128,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 if (collidingEntity.getEntityCollider().isPointColliding(projectile.getX(), projectile.getY())) {
                     entityManager.despawn(projectile);
                     damageableEntity.dealDamage(projectile.getDamage());
+
+                    if (projectile.isOnFire()) {
+                        damageableEntity.setOnFire(true);
+                    }
                 }
             }
         }

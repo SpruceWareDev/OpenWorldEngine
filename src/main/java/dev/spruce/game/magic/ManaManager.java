@@ -8,7 +8,7 @@ public class ManaManager implements Serializable {
     private int maxMana;
 
     private int manaRegenTicks = 0;
-    private int manaRegenWaitTicks = 30;
+    private int manaRegenWaitTicks = 2;
 
     public ManaManager(int maxMana) {
         this.maxMana = maxMana;

@@ -13,6 +13,7 @@ public class Fireball extends Projectile {
 
     public Fireball(Entity owner, float x, float y, float dx, float dy) {
         super(owner, x, y, dx, dy, 10, 10, 10, 60);
+        setOnFire(true);
     }
 
     @Override

@@ -2,7 +2,11 @@ package dev.spruce.game.util;
 
 import dev.spruce.game.entity.Entity;
 
+import java.util.Random;
+
 public class MathUtils {
+
+    public static final Random RANDOM = new Random();
 
     public static boolean isWithinDistance(Entity entity, Entity entity1, float distance) {
         float entityCentreX = (float)
