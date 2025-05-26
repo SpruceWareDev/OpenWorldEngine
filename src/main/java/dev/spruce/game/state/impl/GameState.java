@@ -54,6 +54,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     private long ticksAlive = 0;
     private int kills = 0;
+    private int difficulty = 0;
 
     public GameState(String name, boolean newGame, int seed) {
         this.name = name;
@@ -113,11 +114,18 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     @Override
     public void update(double delta) {
         ticksAlive++;
+        handleDifficulty();
         camera.update(delta);
         entityManager.update(delta);
         checkProjectileCollisions();
         inGameHUD.update(delta);
         particleRenderer.update(delta);
+    }
+
+    private void handleDifficulty() {
+        if (ticksAlive % (RenderPanel.TICK_RATE * 60) == 0) {
+            difficulty++;
+        }
     }
 
     private void checkProjectileCollisions() {
@@ -229,6 +237,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     public int getKills() {
         return kills;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 
     public int getSecondsAlive() {

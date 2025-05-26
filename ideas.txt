@@ -9,9 +9,9 @@ The player will fight a boss at the end of each area.
 
 (0.2-alpha)
 TODO:
-- Implement difficulty system that increases with time.
 - Add enemy spawning algorithm.
 - Implement difficulty scaling for enemy spawning algorithm.
 
 DONE:
 - Implement time tracker.
+- Implement difficulty system that increases with time.

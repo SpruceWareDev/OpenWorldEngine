@@ -9,6 +9,7 @@ import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.util.DifficultyUtils;
 import dev.spruce.game.util.RenderUtils;
 import dev.spruce.game.util.TimerUtils;
 
@@ -110,7 +111,15 @@ public class InGameHUD {
     }
 
     private void renderTimeDifficulty(Graphics graphics, int screenW, int screenH) {
-        graphics.setColor(new Color(0x6B000001, true));
+        Color backgroundColor;
+        if (gameState.getDifficulty() < DifficultyUtils.DIFFICULTY_NAMES.length - 1) {
+            int redLevel = (int) (120 * (gameState.getDifficulty() / (float) (DifficultyUtils.DIFFICULTY_NAMES.length - 1)));
+            backgroundColor = new Color(redLevel, 0, 0, 128);
+        } else {
+            backgroundColor = new Color(120, 0, 0, 128);
+        }
+
+        graphics.setColor(backgroundColor);
         graphics.fillRect(screenW - 270, 20, 260, 160);
 
         FontRenderer.drawString(
@@ -124,6 +133,10 @@ public class InGameHUD {
         FontRenderer.drawString(
                 graphics, "Kills: " + gameState.getKills(),
                 screenW - 260, 70, false, Color.white, Fonts.DEFAULT
+        );
+        FontRenderer.drawString(
+                graphics, "Difficulty: " + DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
+                screenW - 260, 90, false, Color.white, Fonts.DEFAULT
         );
     }
 }
