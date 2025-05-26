@@ -1,22 +1,17 @@
+#########################################################################
+Wizard rogue-like game with a focus on spellcasting in combat.
+Killing enemies will drop items that can be sacrificed to gain new spells.
+These spells can be used in combat, and can also be combined with other spells to create new effects.
+#########################################################################
+A portal will randomly spawn in each game that will takes the player to a new harder area.
+The player will fight a boss at the end of each area.
+#########################################################################
+
 (0.2-alpha)
 TODO:
--> Implement hostile entity classes
--> Implement test enemy
---> Test attacks
---> Basic Enemy AI
-FINISHED:
+- Implement difficulty system that increases with time.
+- Add enemy spawning algorithm.
+- Implement difficulty scaling for enemy spawning algorithm.
 
-
-(1.0-alpha) = Tasks for first alpha release
-
-TODO:
--> Make Wooden Rod, Wooden Staff Head and Wooden Staff textures
--> Implement spell HUD (will be next to hotbar?!?!? probably)
--> Implement spell GUI
--> Make crafting station texture
--> Make building system (for placing down objects in the world like stations)
-
-IN-PROGRESS:
--> Implement crafting station for basic recipes
-
-FINISHED:
+DONE:
+- Implement time tracker.

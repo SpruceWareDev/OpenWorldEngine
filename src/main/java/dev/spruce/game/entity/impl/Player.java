@@ -8,6 +8,7 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.Inventory;
 import dev.spruce.game.magic.ManaManager;
 import dev.spruce.game.magic.spell.SpellManager;
+import dev.spruce.game.magic.spell.impl.PlasmaShotSpell;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -32,6 +33,7 @@ public class Player extends DamageableEntity {
         this.inventory = new Inventory(8);
         this.manaManager = new ManaManager(10);
         this.spellManager = new SpellManager();
+        this.spellManager.addSpell(new PlasmaShotSpell());
     }
 
     @Override

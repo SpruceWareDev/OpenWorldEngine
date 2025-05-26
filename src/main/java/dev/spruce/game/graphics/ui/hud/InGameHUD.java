@@ -10,6 +10,7 @@ import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.RenderUtils;
+import dev.spruce.game.util.TimerUtils;
 
 import java.awt.*;
 
@@ -29,28 +30,18 @@ public class InGameHUD {
     }
 
     public void render(Graphics graphics) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
         int screenW = Window.getInstance().getWidth();
         int screenH = Window.getInstance().getHeight();
 
-        // Render development info
         FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
-        if (Game.debug) {
-            FontRenderer.drawString(graphics,
-                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
-                    10, 30, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
-                    10, 50, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
-                    10, 70, false, Color.white, Fonts.DEFAULT
-            );
-        }
+        renderHotbar(graphics, screenW, screenH);
+        renderTimeDifficulty(graphics, screenW, screenH);
+        renderDebugInfo(graphics);
+    }
 
-        // Render hotbar
+    private void renderHotbar(Graphics graphics, int screenW, int screenH) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+
         int slots = gameState.getPlayer().getInventory().getCapacity();
         float hotbarWidth = (slots * (ITEM_SLOT_SIZE + ITEM_SLOT_PADDING));
 
@@ -95,5 +86,44 @@ public class InGameHUD {
                 ))
                 - ITEM_SLOT_PADDING;
         RenderUtils.drawRect(graphics, hotbarX + (hotbarWidth / 2f), hotbarY - 8, manaWidth, 4, Color.BLUE);
+    }
+
+    private void renderDebugInfo(Graphics graphics) {
+        if (Game.debug) {
+            FontRenderer.drawString(graphics,
+                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
+                    10, 30, false, Color.white, Fonts.DEFAULT
+            );
+            FontRenderer.drawString(graphics,
+                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
+                    10, 50, false, Color.white, Fonts.DEFAULT
+            );
+            FontRenderer.drawString(graphics,
+                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
+                    10, 70, false, Color.white, Fonts.DEFAULT
+            );
+            FontRenderer.drawString(graphics,
+                    "Seconds Alive: " + gameState.getSecondsAlive(),
+                    10, 90, false, Color.white, Fonts.DEFAULT
+            );
+        }
+    }
+
+    private void renderTimeDifficulty(Graphics graphics, int screenW, int screenH) {
+        graphics.setColor(new Color(0x6B000001, true));
+        graphics.fillRect(screenW - 270, 20, 260, 160);
+
+        FontRenderer.drawString(
+                graphics, "Difficulty", screenW - 260, 22,
+                false, Color.white, Fonts.LARGE
+        );
+        FontRenderer.drawString(
+                graphics, "Time: " + TimerUtils.formatTime(gameState.getTicksAlive()) + "s",
+                screenW - 260, 50, false, Color.white, Fonts.DEFAULT
+        );
+        FontRenderer.drawString(
+                graphics, "Kills: " + gameState.getKills(),
+                screenW - 260, 70, false, Color.white, Fonts.DEFAULT
+        );
     }
 }

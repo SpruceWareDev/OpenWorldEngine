@@ -39,6 +39,10 @@ public class EntityManager {
 
             entity.update(delta);
             entity.updateParticles();
+
+            if (entity instanceof DamageableEntity damageable) {
+                damageable.handlePassiveDamage();
+            }
         }
     }
 

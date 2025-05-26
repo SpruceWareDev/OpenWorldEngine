@@ -45,8 +45,8 @@ public abstract class Entity implements Serializable {
 
     public void updateParticles() {
         if (onFire) {
-            float x = getX() + (MathUtils.RANDOM.nextFloat() * 2f) - 1f;
-            float y = getY() + (MathUtils.RANDOM.nextFloat() * 2f) - 1f;
+            int x = (int) (getX() + MathUtils.randomFloat(0, getEntityCollider().getBounds().width));
+            int y = (int) (getY() + MathUtils.randomFloat(0, getEntityCollider().getBounds().height));
             Game.getStateManager()
                     .getGameState()
                     .getParticleRenderer()
@@ -61,6 +61,13 @@ public abstract class Entity implements Serializable {
         int height = getEntityCollider().getBounds().height;
         graphics.setColor(Color.blue);
         graphics.drawRect(x, y, width, height);
+
+        // draw health of entity
+        if (this instanceof DamageableEntity damageable) {
+            int healthBarWidth = (int) ((damageable.getHealth() / (float) damageable.getMaxHealth()) * width);
+            graphics.setColor(Color.RED);
+            graphics.fillRect(x, y - 5, healthBarWidth, 3);
+        }
     }
 
     public void resetVelocity() {

@@ -13,9 +13,11 @@ import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
+import dev.spruce.game.graphics.screen.impl.SpellSelectionScreen;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.IMouseInput;
@@ -49,6 +51,9 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     private InGameHUD inGameHUD;
     private ParticleRenderer particleRenderer;
+
+    private long ticksAlive = 0;
+    private int kills = 0;
 
     public GameState(String name, boolean newGame, int seed) {
         this.name = name;
@@ -107,6 +112,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     @Override
     public void update(double delta) {
+        ticksAlive++;
         camera.update(delta);
         entityManager.update(delta);
         checkProjectileCollisions();
@@ -161,6 +167,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                     Game.getScreenManager().setScreen(new PauseScreen(this), true);
                 }
             }
+            case KeyEvent.VK_E -> Game.getScreenManager().setScreen(new SpellSelectionScreen(), true);
         }
     }
 
@@ -201,6 +208,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         }
     }
 
+    public void addKill() {
+        kills++;
+    }
+
     @Override
     public void onMouseRelease(int button, int x, int y) {
 
@@ -214,6 +225,18 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     @Override
     public void dispose() {
         //entityManager.dispose();
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public int getSecondsAlive() {
+        return (int) (ticksAlive / RenderPanel.TICK_RATE);
+    }
+
+    public long getTicksAlive() {
+        return ticksAlive;
     }
 
     public  Camera getCamera() {

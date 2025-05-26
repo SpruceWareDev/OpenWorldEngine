@@ -59,4 +59,15 @@ public class MathUtils {
         float deltaY = (float) (entity2.getY() - entity1.getY());
         return (float) Math.atan2(deltaY, deltaX);
     }
+
+    /**
+     * Generates a random float between min (inclusive) and max (exclusive).
+     *
+     * @param min The minimum value.
+     * @param max The maximum value.
+     * @return A random float between min and max.
+     */
+    public static float randomFloat(float min, float max) {
+        return min + RANDOM.nextFloat() * (max - min);
+    }
 }

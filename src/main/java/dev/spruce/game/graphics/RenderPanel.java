@@ -10,7 +10,7 @@ public class RenderPanel {
     public static final int FPS_TARGET = 240;
     public static final int TICK_RATE = 60;
 
-    private Game game;
+    private final Game game;
     private Canvas canvas;
     private Graphics graphics;
     private boolean running;

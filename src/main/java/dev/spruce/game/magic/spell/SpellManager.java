@@ -1,6 +1,7 @@
 package dev.spruce.game.magic.spell;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.entity.impl.projectile.RockPellet;
 import dev.spruce.game.magic.ManaManager;
 import dev.spruce.game.magic.spell.impl.BasicFireSpell;
 import dev.spruce.game.state.impl.GameState;
@@ -20,6 +21,12 @@ public class SpellManager implements Serializable {
         BasicFireSpell startingSpell = new BasicFireSpell();
         addSpell(startingSpell);
         currentSpell = startingSpell;
+    }
+
+    public void swapSpell(Spell spell) {
+        if (!spells.contains(spell))
+            throw new IllegalArgumentException("Spell not found in the spell list.");
+        this.currentSpell = spell;
     }
 
     public void castCurrentSpell(ManaManager manaManager, float x, float y, float angle) {
