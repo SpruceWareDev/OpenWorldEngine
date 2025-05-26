@@ -27,6 +27,7 @@ import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
 import dev.spruce.game.state.StateManager;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
 
@@ -52,6 +53,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     private InGameHUD inGameHUD;
     private ParticleRenderer particleRenderer;
 
+    private Spawner spawner;
     private long ticksAlive = 0;
     private int kills = 0;
     private int difficulty = 0;
@@ -81,6 +83,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         InputManager.getInstance().subscribeKey(this);
         camera.centerOn(player, false);
         particleRenderer = new ParticleRenderer();
+        spawner = new Spawner(this);
     }
 
     // Only called when a new game is started
@@ -91,7 +94,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager.spawn(player);
 
         // TODO: Remove this bc its to test entities
-        TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30, 20, 20);
+        TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30);
         entityManager.spawn(testEnemy);
     }
 
@@ -115,6 +118,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     public void update(double delta) {
         ticksAlive++;
         handleDifficulty();
+        spawner.update();
         camera.update(delta);
         entityManager.update(delta);
         checkProjectileCollisions();
@@ -134,6 +138,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 continue;
 
             for (Entity collidingEntity : entityManager.getEntities()) {
+                if (collidingEntity instanceof HostileEntity && projectile.getOwner() instanceof HostileEntity)
+                    continue;
                 if (collidingEntity.equals(entity) || projectile.getOwner().equals(collidingEntity))
                     continue;
                 if (!(collidingEntity instanceof DamageableEntity damageableEntity))

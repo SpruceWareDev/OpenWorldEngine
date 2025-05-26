@@ -7,6 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ParticleRenderer {
 
+    private static final int MAX_PARTICLES = 250;
+
     private final CopyOnWriteArrayList<Particle> particles = new CopyOnWriteArrayList<>();
 
     public void spawnParticle(float x, float y, float size, int lifetimeTicks, Particle.ParticleType type, Color color) {
@@ -14,6 +16,10 @@ public class ParticleRenderer {
     }
 
     public void update(double delta) {
+        if (particles.size() >= MAX_PARTICLES) {
+            particles.subList(0, particles.size() - MAX_PARTICLES).clear();
+        }
+
         for (Particle particle : particles) {
             particle.update(delta);
             if (particle.isDead()) {

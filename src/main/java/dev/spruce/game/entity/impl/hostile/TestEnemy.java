@@ -22,8 +22,8 @@ public class TestEnemy extends HostileEntity {
 
     private final AiStateMachine stateMachine;
 
-    public TestEnemy(float x, float y, float width, float height) {
-        super(x, y, width, height, 30);
+    public TestEnemy(float x, float y) {
+        super(x, y, 40, 40, 30);
         this.stateMachine = new AiStateMachine();
     }
 

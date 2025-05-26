@@ -7,11 +7,13 @@ A portal will randomly spawn in each game that will takes the player to a new ha
 The player will fight a boss at the end of each area.
 #########################################################################
 
-(0.2-alpha)
+(0.3-alpha)
 TODO:
-- Add enemy spawning algorithm.
-- Implement difficulty scaling for enemy spawning algorithm.
 
 DONE:
+
+(0.2-alpha)
 - Implement time tracker.
 - Implement difficulty system that increases with time.
+- Add enemy spawning algorithm.
+- Implement difficulty scaling for enemy spawning algorithm.
