@@ -11,15 +11,22 @@ public class GameLoader implements Runnable {
 
     private final String name;
     private final boolean newGame;
+    private int seed = 0;
 
     public GameLoader(String name, boolean newGame) {
         this.name = name;
         this.newGame = newGame;
     }
 
+    public GameLoader(String name, int seed) {
+        this.name = name;
+        this.newGame = true;
+        this.seed = seed;
+    }
+
     @Override
     public void run() {
-        this.loadedGame = new GameState(name, newGame);
+        this.loadedGame = new GameState(name, newGame, seed);
         this.loadedGame.init();
     }
 

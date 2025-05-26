@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public enum AttributeType implements Serializable {
     SMELTABLE,
-    FUEL;
+    FUEL,
+    CRAFTABLE;
 }

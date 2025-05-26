@@ -2,14 +2,22 @@ package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Fonts;
+import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
 import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.entity.impl.hostile.TestEnemy;
+import dev.spruce.game.entity.impl.projectile.Projectile;
+import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.font.FontRenderer;
+import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
+import dev.spruce.game.graphics.screen.impl.SpellSelectionScreen;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.IMouseInput;
@@ -17,7 +25,9 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
+import dev.spruce.game.state.StateManager;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.OverworldMap;
 
@@ -33,17 +43,25 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     private final String name;
     private final boolean newGame;
+    private int seed;
 
-    private static EntityManager entityManager;
-    private static Player player;
-    private static Camera camera;
-    private static Map map;
+    private EntityManager entityManager;
+    private Player player;
+    private Camera camera;
+    private Map map;
 
     private InGameHUD inGameHUD;
+    private ParticleRenderer particleRenderer;
 
-    public GameState(String name, boolean newGame) {
+    private Spawner spawner;
+    private long ticksAlive = 0;
+    private int kills = 0;
+    private int difficulty = 0;
+
+    public GameState(String name, boolean newGame, int seed) {
         this.name = name;
         this.newGame = newGame;
+        this.seed = seed;
     }
 
     @Override
@@ -51,41 +69,92 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         entityManager = new EntityManager(this);
         camera = new Camera(0, 0);
         if (newGame) {
-            map = new OverworldMap(128, 128);
-            map.generate();
-            player = new Player(map.getSpawnX(), map.getSpawnY());
-            entityManager.spawn(player);
+            newGameInit();
         } else {
             try {
-                map = FileManager.loadMap(name);
+                loadInit();
             } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-            List<Entity> loadedEntites;
-            try {
-                loadedEntites = FileManager.loadEntities(name);
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-            for (Entity e : loadedEntites) {
-                if (e instanceof Player) {
-                    player = (Player) e;
-                }
-                entityManager.spawn(e);
+                System.out.println("Failed to load game state: " + e.getMessage());
+                Game.getStateManager().setState(new MainMenuState(), true);
             }
         }
         inGameHUD = new InGameHUD(this);
         InputManager.getInstance().subscribeMouse(this);
         InputManager.getInstance().subscribeKey(this);
         camera.centerOn(player, false);
+        particleRenderer = new ParticleRenderer();
+        spawner = new Spawner(this);
+    }
+
+    // Only called when a new game is started
+    private void newGameInit() {
+        map = new OverworldMap(256, 256, seed);
+        map.generate(this);
+        player = new Player(map.getSpawnX(), map.getSpawnY());
+        entityManager.spawn(player);
+
+        // TODO: Remove this bc its to test entities
+        TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30);
+        entityManager.spawn(testEnemy);
+    }
+
+    // Only called when the game is loaded from a save
+    private void loadInit() throws IOException, ClassNotFoundException {
+        map = FileManager.loadMap(name);
+        seed = map.getSeed();
+
+        List<Entity> loadedEntities;
+        loadedEntities = FileManager.loadEntities(name);
+
+        for (Entity e : loadedEntities) {
+            if (e instanceof Player) {
+                player = (Player) e;
+            }
+            entityManager.spawn(e);
+        }
     }
 
     @Override
     public void update(double delta) {
+        ticksAlive++;
+        handleDifficulty();
+        spawner.update();
+        camera.update(delta);
         entityManager.update(delta);
+        checkProjectileCollisions();
         inGameHUD.update(delta);
+        particleRenderer.update(delta);
+    }
+
+    private void handleDifficulty() {
+        if (ticksAlive % (RenderPanel.TICK_RATE * (60L * (difficulty + 1))) == 0) {
+            difficulty++;
+        }
+    }
+
+    private void checkProjectileCollisions() {
+        for (Entity entity : entityManager.getOnScreenEntities()) {
+            if (!(entity instanceof Projectile projectile))
+                continue;
+
+            for (Entity collidingEntity : entityManager.getEntities()) {
+                if (collidingEntity instanceof HostileEntity && projectile.getOwner() instanceof HostileEntity)
+                    continue;
+                if (collidingEntity.equals(entity) || projectile.getOwner().equals(collidingEntity))
+                    continue;
+                if (!(collidingEntity instanceof DamageableEntity damageableEntity))
+                    continue;
+
+                if (collidingEntity.getEntityCollider().isPointColliding(projectile.getX(), projectile.getY())) {
+                    entityManager.despawn(projectile);
+                    damageableEntity.dealDamage(projectile.getDamage());
+
+                    if (projectile.isOnFire()) {
+                        damageableEntity.setOnFire(true);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -93,54 +162,38 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         camera.centerOn(player, true);
         map.render(graphics, camera);
         entityManager.render(graphics, camera);
+        particleRenderer.render(graphics, camera);
         inGameHUD.render(graphics);
     }
 
     @Override
-    public void dispose() {
-        //entityManager.dispose();
-    }
-
-    public static Camera getCamera() {
-        return camera;
-    }
-
-    public static EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public static Player getPlayer() {
-        return player;
-    }
-
-     public static Map getMap() {
-        return map;
-    }
-
-    @Override
     public void onKeyPress(int keyCode) {
-        switch (keyCode) {
-            case KeyEvent.VK_ESCAPE -> Game.getScreenManager().setScreen(new PauseScreen(this));
-        }
+        player.handleKey(keyCode);
     }
 
     @Override
     public void onKeyRelease(int keyCode) {
-
+        switch (keyCode) {
+            case KeyEvent.VK_ESCAPE -> {
+                if (Game.getScreenManager().isScreenOpen()) {
+                    Game.getScreenManager().closeScreen();
+                } else {
+                    Game.getScreenManager().setScreen(new PauseScreen(this), true);
+                }
+            }
+            case KeyEvent.VK_E -> Game.getScreenManager().setScreen(new SpellSelectionScreen(), true);
+        }
     }
 
     @Override
     public void onKeyTyped(int keyCode, char keyChar) {
-
     }
 
     @Override
     public void onMousePress(int button, int x, int y) {
-        this.player.handleClick(button, x, y);
+        if (Game.getStateManager().isPaused()) return;
+
+        this.player.handleClick(camera, button, x, y);
 
         // Entity interactions
         if (button == 1) {
@@ -148,8 +201,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 if (entity instanceof Player || !(entity instanceof Interactable))
                     continue;
 
-                float screenX = entity.getScreenX();
-                float screenY = entity.getScreenY();
+                float screenX = entity.getScreenX(camera);
+                float screenY = entity.getScreenY(camera);
                 float colliderX = (float) entity.getEntityCollider().getBounds().getX();
                 float colliderY = (float) entity.getEntityCollider().getBounds().getY();
                 float colliderW = (float) entity.getEntityCollider().getBounds().getWidth();
@@ -159,11 +212,18 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                                 (int) (screenX + colliderX), (int) (screenY + colliderY), (int) colliderW, (int) colliderH
                         ) && MathUtils.isWithinDistance(player, entity, Player.INTERACT_DISTANCE);
 
-                if (canInteract) {
+                if (canInteract && !player.isUsingSpells()) {
                     ((Interactable) entity).interact();
                 }
             }
+        } else if (button == 3) {
+            // TEST OF CRAFTING STATION
+            entityManager.spawn(new CraftingStation(x + camera.getX(), y + camera.getY()));
         }
+    }
+
+    public void addKill() {
+        kills++;
     }
 
     @Override
@@ -174,5 +234,54 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     @Override
     public void onMouseClick(int button, int x, int y) {
 
+    }
+
+    @Override
+    public void dispose() {
+        //entityManager.dispose();
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public int getSecondsAlive() {
+        return (int) (ticksAlive / RenderPanel.TICK_RATE);
+    }
+
+    public long getTicksAlive() {
+        return ticksAlive;
+    }
+
+    public  Camera getCamera() {
+        return camera;
+    }
+
+    public  EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public  Player getPlayer() {
+        return player;
+    }
+
+    public  Map getMap() {
+        return map;
+    }
+
+    public int getSeed() {
+        return seed;
+    }
+
+    public ParticleRenderer getParticleRenderer() {
+        return particleRenderer;
     }
 }

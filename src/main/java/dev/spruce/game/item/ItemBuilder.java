@@ -4,7 +4,7 @@ import dev.spruce.game.item.attribute.ItemAttribute;
 
 public class ItemBuilder {
 
-    private Item item;
+    private final Item item;
 
     public ItemBuilder(String itemName, String displayName) {
         item = new Item(itemName, displayName);

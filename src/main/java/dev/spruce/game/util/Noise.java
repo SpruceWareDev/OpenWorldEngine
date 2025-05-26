@@ -5,11 +5,11 @@ import java.util.Random;
 
 public class Noise implements Serializable {
 
-    private int octaves;
-    private float amplitude;
-    private float persistence;
-    private Random random;
-    private int seed;
+    private final int octaves;
+    private final float amplitude;
+    private final float persistence;
+    private final Random random;
+    private final int seed;
 
     public Noise(int octaves, float amplitude, float persistence, int seed) {
         this.octaves = octaves;

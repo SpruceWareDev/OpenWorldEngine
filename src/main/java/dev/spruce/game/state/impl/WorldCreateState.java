@@ -16,21 +16,35 @@ public class WorldCreateState extends State {
 
     private UIManager uiManager;
     private UITextBox worldName;
+    private UITextBox worldSeed;
 
     @Override
     public void init() {
         uiManager = new UIManager();
+
         worldName = new UITextBox(
                 0, 0, 200, 40,
-                ScreenSnapPoint.CENTER
+                ScreenSnapPoint.CENTER,
+                UITextBox.AllowedChars.ALPHA_NUMERIC
         );
         uiManager.addElement(worldName);
+
+        worldSeed = new UITextBox(
+                0, 0, 200, 40,
+                ScreenSnapPoint.CENTER,
+                UITextBox.AllowedChars.NUMERIC
+        );
+        uiManager.addElement(worldSeed);
+
         uiManager.addElement(new UIButton(
                 "Create",
                 Color.BLUE,
                 0, 0, 200, 80,
                 ScreenSnapPoint.CENTER,
-                () -> Game.getStateManager().setState(new GameLoadingState(worldName.getText(), true), true)
+                () -> Game.getStateManager()
+                        .setState(
+                                new GameLoadingState(worldName.getText(), Integer.parseInt(worldSeed.getText())), true
+                        )
         ));
     }
 

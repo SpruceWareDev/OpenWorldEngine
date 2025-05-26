@@ -3,7 +3,6 @@ package dev.spruce.game.item;
 import dev.spruce.game.item.attribute.AttributeType;
 import dev.spruce.game.item.attribute.ItemAttribute;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,12 @@ public class Item implements Serializable {
         return attributes.stream().anyMatch(attribute -> attribute.getType().equals(type));
     }
 
-    public ItemAttribute getAttribute(AttributeType type) {
+    public ItemAttribute getSingleAttribute(AttributeType type) {
         return attributes.stream().filter(attribute -> attribute.getType().equals(type)).toList().get(0);
+    }
+
+    public List<ItemAttribute> getAttributesOfType(AttributeType type) {
+        return attributes.stream().filter(attribute -> attribute.getType().equals(type)).toList();
     }
 
     public String getName() {

@@ -16,6 +16,7 @@ public class GameLoadingState extends State {
 
     private final String name;
     private final boolean newGame;
+    private int seed = 0;
 
     private StringBuilder loadingDots;
     private int loadingDotTimer = 0;
@@ -25,11 +26,17 @@ public class GameLoadingState extends State {
         this.newGame = newGame;
     }
 
+    public GameLoadingState(String name, int seed) {
+        this.name = name;
+        this.newGame = true;
+        this.seed = seed;
+    }
+
     @Override
     public void init() {
         this.loadingDots = new StringBuilder();
 
-        this.gameLoader = new GameLoader(name, newGame);
+        this.gameLoader = newGame ? new GameLoader(name, seed) : new GameLoader(name, false);
         this.loadingThread = new Thread(gameLoader);
         this.loadingThread.start();
     }

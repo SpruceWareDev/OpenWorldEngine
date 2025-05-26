@@ -1,11 +1,16 @@
 package dev.spruce.game.entity;
 
-import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.Game;
+import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.util.TimerUtils;
 
 public abstract class DamageableEntity extends Entity {
 
     private int health;
     private int maxHealth;
+
+    public static final int PASSIVE_DAMAGE_TICKS = TimerUtils.ticksFromSeconds(1);
+    private int passiveDamageTickTimer = 0;
 
     public DamageableEntity(float x, float y, float width, float height, int health) {
         super(x, y, width, height);
@@ -15,10 +20,22 @@ public abstract class DamageableEntity extends Entity {
 
     public void dealDamage(int amount) {
         if (health - amount <= 0) {
+            this.health = 0;
+            if (this instanceof HostileEntity) {
+                Game.getStateManager().getGameState().addKill();
+            }
             onDeath();
             return;
         }
         health -= amount;
+    }
+
+    public void handlePassiveDamage() {
+        if (isOnFire() && passiveDamageTickTimer >= PASSIVE_DAMAGE_TICKS) {
+            dealDamage(1);
+            passiveDamageTickTimer = 0;
+        }
+        passiveDamageTickTimer++;
     }
 
     public abstract void onDeath();

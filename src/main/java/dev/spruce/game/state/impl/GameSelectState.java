@@ -28,7 +28,7 @@ public class GameSelectState extends State {
                     0,
                     0,
                     100,
-                    80,
+                    40,
                     ScreenSnapPoint.CENTER,
                     () -> Game.getStateManager().setState(new GameLoadingState(game, false), true)
             ));

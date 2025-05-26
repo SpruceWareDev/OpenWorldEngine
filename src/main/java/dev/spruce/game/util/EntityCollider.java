@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class EntityCollider implements Serializable {
 
-    private Entity entity;
+    private final Entity entity;
     private Rectangle bounds;
 
     public EntityCollider(Entity entity, Rectangle bounds) {
@@ -37,6 +37,19 @@ public class EntityCollider implements Serializable {
                     (int) bounds.width,
                     (int) bounds.height
                 )
+        );
+    }
+
+    public boolean isPointColliding(float px, float py) {
+        return getWorldBounds().contains(px, py);
+    }
+
+    public Rectangle getWorldBounds() {
+        return new Rectangle(
+                (int) (entity.getX() + bounds.x),
+                (int) (entity.getY() + bounds.y),
+                (int) bounds.width,
+                (int) bounds.height
         );
     }
 

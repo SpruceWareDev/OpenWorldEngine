@@ -1,6 +1,9 @@
 package dev.spruce.game.entity;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.GameState;
 
@@ -13,12 +16,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class EntityManager {
 
     private final GameState gameState;
-
     private final CopyOnWriteArrayList<Entity> entities;
 
     public EntityManager(GameState gameState) {
+        this.entities = new CopyOnWriteArrayList<>();
         this.gameState = gameState;
-        entities = new CopyOnWriteArrayList<>();
     }
 
     public void spawn(Entity entity) {
@@ -35,16 +37,21 @@ public class EntityManager {
 
         // Update entities
         for (Entity entity : entities) {
-            if (!entity.isEntityOnScreen())
+            if (!shouldUpdate(entity))
                 continue;
 
             entity.update(delta);
+            entity.updateParticles();
+
+            if (entity instanceof DamageableEntity damageable) {
+                damageable.handlePassiveDamage();
+            }
         }
     }
 
     public void render(Graphics graphics, Camera camera) {
         for (Entity entity : entities) {
-            if (!entity.isEntityOnScreen())
+            if (!entity.isEntityOnScreen(gameState.getCamera()))
                 continue;
             entity.render(graphics, camera);
 
@@ -58,8 +65,15 @@ public class EntityManager {
         entities.clear();
     }
 
+    private boolean shouldUpdate(Entity entity) {
+        return (entity instanceof HostileEntity) ||
+               (entity instanceof Player) ||
+                (entity instanceof Projectile) ||
+               entity.isEntityOnScreen(gameState.getCamera());
+    }
+
     public List<Entity> getOnScreenEntities() {
-        return entities.stream().filter(Entity::isEntityOnScreen).toList();
+        return entities.stream().filter(entity -> entity.isEntityOnScreen(gameState.getCamera())).toList();
     }
 
     public CopyOnWriteArrayList<Entity> getEntities() {

@@ -1,12 +1,14 @@
 package dev.spruce.game.entity.impl;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
-import dev.spruce.game.entity.impl.projectile.Projectile;
-import dev.spruce.game.entity.impl.projectile.RockPellet;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.item.Inventory;
+import dev.spruce.game.magic.ManaManager;
+import dev.spruce.game.magic.spell.SpellManager;
+import dev.spruce.game.magic.spell.impl.PlasmaShotSpell;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -19,19 +21,29 @@ public class Player extends DamageableEntity {
     public static final float PLAYER_SPEED = 5f;
     public static final int INTERACT_DISTANCE = 125;
 
+    private final ManaManager manaManager;
+    private final SpellManager spellManager;
+
     private final Inventory inventory;
+    private int selectedSlot = 0;
+    private boolean usingSpells = false;
 
     public Player(float x, float y) {
         super(x, y, 32, 32, 100);
         this.inventory = new Inventory(8);
+        this.manaManager = new ManaManager(10);
+        this.spellManager = new SpellManager();
+        this.spellManager.addSpell(new PlasmaShotSpell());
     }
 
     @Override
     public void update(double delta) {
+        manaManager.update();
         move((float) delta);
     }
 
     private void move(float delta) {
+        GameState gs = Game.getStateManager().getGameState();
         resetVelocity();
         if (InputManager.getInstance().isKeyDown(KeyEvent.VK_W)) {
             setDy(-1);
@@ -45,7 +57,7 @@ public class Player extends DamageableEntity {
         }
 
         boolean collidingX = false, collidingY = false;
-        List<Entity> onScreenEntities = GameState.getEntityManager().getOnScreenEntities();
+        List<Entity> onScreenEntities = gs.getEntityManager().getOnScreenEntities();
 
         for (Entity entity : onScreenEntities) {
             if (getEntityCollider().checkCollision(entity, getDx() * delta * PLAYER_SPEED, 0f))
@@ -58,13 +70,26 @@ public class Player extends DamageableEntity {
         if(!collidingY) setY(getY() + (getDy() * delta * PLAYER_SPEED));
     }
 
-    public void handleClick(int button, int x, int y) {
+    public void handleClick(Camera camera, int button, int x, int y) {
         if (button != MouseEvent.BUTTON1) return;
+        if (usingSpells) {
+            float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
+            spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
+        }
+    }
 
-        float angle = (float) Math.atan2(y - getScreenY(), x - getScreenX());
-        float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
-        float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-        GameState.getEntityManager().spawn(new RockPellet(this, getX(), getY(), dx, dy, 16, 16));
+    public void handleKey(int keyCode) {
+        switch (keyCode) {
+            case KeyEvent.VK_1 -> selectedSlot = 0;
+            case KeyEvent.VK_2 -> selectedSlot = 1;
+            case KeyEvent.VK_3 -> selectedSlot = 2;
+            case KeyEvent.VK_4 -> selectedSlot = 3;
+            case KeyEvent.VK_5 -> selectedSlot = 4;
+            case KeyEvent.VK_6 -> selectedSlot = 5;
+            case KeyEvent.VK_7 -> selectedSlot = 6;
+            case KeyEvent.VK_8 -> selectedSlot = 7;
+            case KeyEvent.VK_R -> usingSpells = !usingSpells;
+        }
     }
 
     @Override
@@ -73,12 +98,28 @@ public class Player extends DamageableEntity {
         graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
     }
 
+    @Override
+    public void onDeath() {
+        System.out.println("Player died! omg");
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
 
-    @Override
-    public void onDeath() {
-        System.out.println("Player died! omg");
+    public ManaManager getManaManager() {
+        return manaManager;
+    }
+
+    public SpellManager getSpellManager() {
+        return spellManager;
+    }
+
+    public boolean isUsingSpells() {
+        return usingSpells;
+    }
+
+    public int getSelectedSlot() {
+        return selectedSlot;
     }
 }

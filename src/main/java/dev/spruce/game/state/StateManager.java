@@ -41,7 +41,17 @@ public class StateManager {
         finishedLoading = true;
     }
 
-    public void togglePause() {
-        paused = !paused;
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public GameState getGameState() {
+        if (!(currentState instanceof GameState))
+            throw new RuntimeException("Tried to access game state from another state!");
+        return (GameState) currentState;
     }
 }

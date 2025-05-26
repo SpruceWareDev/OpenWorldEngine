@@ -1,5 +1,6 @@
 package dev.spruce.game.entity.impl.environment;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.Interactable;
@@ -43,8 +44,9 @@ public class ItemStackEntity extends Entity implements Interactable {
 
     @Override
     public void interact() {
-        if (GameState.getPlayer().getInventory().addItem(itemStack)) {
-            GameState.getEntityManager().despawn(this);
+        GameState gs = Game.getStateManager().getGameState();
+        if (gs.getPlayer().getInventory().addItem(itemStack)) {
+            gs.getEntityManager().despawn(this);
         }
     }
 }

@@ -1,5 +1,6 @@
 package dev.spruce.game.entity.impl.projectile;
 
+import dev.spruce.game.Game;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.state.impl.GameState;
 
@@ -23,9 +24,10 @@ public abstract class Projectile extends Entity {
     }
 
     protected void handleLifetime() {
+        GameState gs = Game.getStateManager().getGameState();
         ticksAlive++;
         if (ticksAlive >= lifeTimeTicks) {
-            GameState.getEntityManager().despawn(this);
+            gs.getEntityManager().despawn(this);
         }
     }
 

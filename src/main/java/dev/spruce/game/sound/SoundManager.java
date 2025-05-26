@@ -37,6 +37,10 @@ public class SoundManager {
         audioThread.start();
     }
 
+    public int getActiveAudioThreads() {
+        return audioThreads.size();
+    }
+
     public static void init() {
         instance = new SoundManager();
     }

@@ -3,11 +3,18 @@ package dev.spruce.game.graphics;
 import dev.spruce.game.Game;
 import dev.spruce.game.input.InputManager;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class RenderPanel {
 
-    private Game game;
+    public static final int FPS_TARGET = 240;
+    public static final int TICK_RATE = 60;
+
+    private final Game game;
     private Canvas canvas;
     private Graphics graphics;
     private boolean running;
@@ -32,9 +39,12 @@ public class RenderPanel {
     }
 
     public void run() {
-        double ns = 1000000000.0 / 60.0;
+        double ns = 1000000000.0 / TICK_RATE;
+        double renderNs = 1000000000.0 / FPS_TARGET;
         double delta = 0;
+        double renderDelta = 0;
         long lastTime = System.nanoTime();
+        long renderTime = System.nanoTime();
         long timer = System.currentTimeMillis();
         int frames = 0;
         int updates = 0;
@@ -48,8 +58,14 @@ public class RenderPanel {
                 updates++;
                 delta--;
             }
-            render();
-            frames++;
+            now = System.nanoTime();
+            renderDelta += (now - renderTime) / renderNs;
+            renderTime = now;
+            while (renderDelta >= 1) {
+                render();
+                renderDelta--;
+                frames++;
+            }
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 Window.getInstance().setTitle(String.format("%s (%s ups, %s fps)", Game.FORMATTED_NAME, updates, frames));
