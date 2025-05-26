@@ -3,6 +3,7 @@ package dev.spruce.game.entity.impl.hostile;
 import dev.spruce.game.Game;
 import dev.spruce.game.ai.AiState;
 import dev.spruce.game.ai.AiStateMachine;
+import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.impl.projectile.Fireball;
 import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.graphics.Camera;
@@ -10,6 +11,7 @@ import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.world.Tile;
 
 import java.awt.*;
+import java.util.List;
 
 public class TestEnemy extends HostileEntity {
 
@@ -25,6 +27,7 @@ public class TestEnemy extends HostileEntity {
     public TestEnemy(float x, float y) {
         super(x, y, 40, 40, 30);
         this.stateMachine = new AiStateMachine();
+        enableCollision();
     }
 
     @Override
@@ -37,7 +40,17 @@ public class TestEnemy extends HostileEntity {
             case CHASING -> chase();
         }
 
-        applyVelocity(delta, MOVE_SPEED);
+        boolean collidingX = false, collidingY = false;
+        List<Entity> onScreenEntities = Game.getStateManager().getGameState().getEntityManager().getOnScreenEntities();
+
+        for (Entity entity : onScreenEntities) {
+            if (getEntityCollider().checkCollision(entity, (float) (getDx() * delta * MOVE_SPEED), 0f))
+                collidingX = true;
+            if (getEntityCollider().checkCollision(entity, 0f, (float) (getDy() * delta * MOVE_SPEED)))
+                collidingY = true;
+        }
+
+        applyVelocity(delta, MOVE_SPEED, collidingX, collidingY);
     }
 
     private void handleAiState() {

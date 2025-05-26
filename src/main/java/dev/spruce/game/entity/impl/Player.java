@@ -66,8 +66,7 @@ public class Player extends DamageableEntity {
                 collidingY = true;
         }
 
-        if(!collidingX) setX(getX() + (getDx() * delta * PLAYER_SPEED));
-        if(!collidingY) setY(getY() + (getDy() * delta * PLAYER_SPEED));
+        applyVelocity(delta, PLAYER_SPEED, collidingX, collidingY);
     }
 
     public void handleClick(Camera camera, int button, int x, int y) {

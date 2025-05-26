@@ -82,9 +82,9 @@ public abstract class Entity implements Serializable {
      @param delta delta time for updates (from update method)
      @param speed the speed the entity should move at
      */
-    protected void applyVelocity(double delta, float speed) {
-        setX((float) (getX() + (getDx() * delta * speed)));
-        setY((float) (getY() + (getDy() * delta * speed)));
+    protected void applyVelocity(double delta, float speed, boolean collidingX, boolean collidingY) {
+        if(!collidingX) setX((float) (getX() + (getDx() * delta * speed)));
+        if(!collidingY) setY((float) (getY() + (getDy() * delta * speed)));
     }
 
     public void enableCollision() {
