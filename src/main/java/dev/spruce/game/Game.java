@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Game {
 
     public static final String NAME = "Rogue Wizards";
-    public static final String VERSION = "alpha-0.2.1";
+    public static final String VERSION = "alpha-0.2";
     public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
 
     public static boolean debug = false;
