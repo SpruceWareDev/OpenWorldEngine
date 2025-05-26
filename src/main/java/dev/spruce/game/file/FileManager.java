@@ -13,6 +13,7 @@ public class FileManager {
 
     public static final String GAME_DATA_DIRECTORY = "gamedata";
     public static final String SAVES_DIRECTORY = GAME_DATA_DIRECTORY + File.separator + "saves";
+    public static final String SCREENSHOTS_DIRECTORY = GAME_DATA_DIRECTORY + File.separator + "screenshots";
 
     public static void checkDirectories() throws IOException {
         File dataDirectory = new File(GAME_DATA_DIRECTORY);
@@ -22,6 +23,10 @@ public class FileManager {
         File savesDirectory = new File(SAVES_DIRECTORY);
         if (!savesDirectory.exists()) {
             savesDirectory.mkdir();
+        }
+        File screenshotsDirectory = new File(SCREENSHOTS_DIRECTORY);
+        if (!screenshotsDirectory.exists()) {
+            screenshotsDirectory.mkdir();
         }
     }
 

@@ -1,6 +1,9 @@
 package dev.spruce.game.entity;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.GameState;
 
@@ -34,7 +37,7 @@ public class EntityManager {
 
         // Update entities
         for (Entity entity : entities) {
-            if (!entity.isEntityOnScreen(gameState.getCamera()))
+            if (!shouldUpdate(entity))
                 continue;
 
             entity.update(delta);
@@ -60,6 +63,13 @@ public class EntityManager {
 
     public void dispose() {
         entities.clear();
+    }
+
+    private boolean shouldUpdate(Entity entity) {
+        return (entity instanceof HostileEntity) ||
+               (entity instanceof Player) ||
+                (entity instanceof Projectile) ||
+               entity.isEntityOnScreen(gameState.getCamera());
     }
 
     public List<Entity> getOnScreenEntities() {

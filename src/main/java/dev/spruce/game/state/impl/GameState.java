@@ -123,7 +123,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     }
 
     private void handleDifficulty() {
-        if (ticksAlive % (RenderPanel.TICK_RATE * 60) == 0) {
+        if (ticksAlive % (RenderPanel.TICK_RATE * (60L * (difficulty + 1))) == 0) {
             difficulty++;
         }
     }

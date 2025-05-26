@@ -3,7 +3,11 @@ package dev.spruce.game.graphics;
 import dev.spruce.game.Game;
 import dev.spruce.game.input.InputManager;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class RenderPanel {
 
