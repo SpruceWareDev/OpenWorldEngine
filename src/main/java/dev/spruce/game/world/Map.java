@@ -57,6 +57,14 @@ public abstract class Map implements Serializable {
         }
     }
 
+    protected void fillMap(Tile tile) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tiles[x][y] = tile;
+            }
+        }
+    }
+
     public Tile getTile(int x, int y) {
         return tiles[x][y];
     }

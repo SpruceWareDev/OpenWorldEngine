@@ -6,15 +6,18 @@ import dev.spruce.game.sound.effect.AudioEffect;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class SoundPlayer implements Runnable {
 
     private String soundName;
     private AudioEffect[] effects;
+    private final int volume;
 
-    public SoundPlayer(String soundName, AudioEffect... effects) {
+    public SoundPlayer(String soundName, int volume, AudioEffect... effects) {
         this.soundName = soundName;
         this.effects = effects;
+        this.volume = volume;
     }
 
     @Override
@@ -31,6 +34,9 @@ public class SoundPlayer implements Runnable {
             SourceDataLine sourceLine = (SourceDataLine) AudioSystem.getLine(info);
             sourceLine.open(format);
             sourceLine.start();
+
+            FloatControl volumeControl = (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN);
+            volumeControl.setValue( 20.0f * (float) Math.log10( volume / 100.0 ) );
 
             byte[] audioBuffer = new byte[4096];
             int bytesRead;

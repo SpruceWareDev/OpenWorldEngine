@@ -65,7 +65,7 @@ public class MovingLetterEffect extends UIEffect {
             FontRenderer.drawString(
                     graphics, String.valueOf(character1.getCharacter()),
                     (int) (getX() + character1.getX()), (int) (getY() + character1.getY()),
-                    false, colour, Fonts.DEFAULT
+                    false, colour, Fonts.SMALL
             );
         }
     }

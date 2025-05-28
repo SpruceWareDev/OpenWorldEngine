@@ -1,7 +1,6 @@
 package dev.spruce.game.state.impl;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
@@ -10,11 +9,9 @@ import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.entity.impl.hostile.HostileEntity;
 import dev.spruce.game.entity.impl.hostile.TestEnemy;
 import dev.spruce.game.entity.impl.projectile.Projectile;
-import dev.spruce.game.entity.impl.station.CraftingStation;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.RenderPanel;
-import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.screen.impl.PauseScreen;
 import dev.spruce.game.graphics.screen.impl.SpellSelectionScreen;
@@ -22,21 +19,15 @@ import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.input.IKeyInput;
 import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
-import dev.spruce.game.item.ItemStack;
-import dev.spruce.game.item.Items;
 import dev.spruce.game.state.State;
-import dev.spruce.game.state.StateManager;
 import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
-import dev.spruce.game.world.maps.OverworldMap;
+import dev.spruce.game.world.maps.TestingMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.io.Serial;
-import java.io.Serializable;
-import java.nio.FloatBuffer;
 import java.util.List;
 
 public class GameState extends State implements IKeyInput, IMouseInput {
@@ -88,7 +79,8 @@ public class GameState extends State implements IKeyInput, IMouseInput {
 
     // Only called when a new game is started
     private void newGameInit() {
-        map = new OverworldMap(256, 256, seed);
+        map = new TestingMap();
+        //map = new OverworldMap(256, 256, seed);
         map.generate(this);
         player = new Player(map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);

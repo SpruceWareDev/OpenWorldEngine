@@ -11,6 +11,7 @@ public class SoundAssetManager extends AssetManager<String, String> {
     public SoundAssetManager() {
         sounds = new HashMap<>();
         sounds.put("test", "assets/sounds/test.wav");
+        sounds.put("fireball", "assets/sounds/fireball.wav");
     }
 
     @Override

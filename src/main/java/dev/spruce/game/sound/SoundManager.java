@@ -31,8 +31,8 @@ public class SoundManager {
         audioThreads.removeIf(thread -> !thread.isAlive());
     }
 
-    public void playSound(String soundName, AudioEffect... effects) {
-        Thread audioThread = new Thread(new SoundPlayer(soundName, effects));
+    public void playSound(String soundName, int volume, AudioEffect... effects) {
+        Thread audioThread = new Thread(new SoundPlayer(soundName, volume, effects));
         audioThreads.add(audioThread);
         audioThread.start();
     }

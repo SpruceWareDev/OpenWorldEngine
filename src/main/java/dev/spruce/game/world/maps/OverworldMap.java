@@ -1,6 +1,5 @@
 package dev.spruce.game.world.maps;
 
-import dev.spruce.game.Game;
 import dev.spruce.game.entity.impl.environment.AcaciaTree;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.Noise;
@@ -28,22 +27,15 @@ public class OverworldMap extends Map {
         generateWater(waterNoiseMap);
         // Generate spawn point
         generateSpawn();
+
         // Generate foliage
         generateFoliage(gameState);
     }
 
-    private void fillMap(Tile tile) {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                tiles[x][y] = tile;
-            }
-        }
-    }
-
     private void generateSpawn() {
         // Generate a spawn point not close to edges of world
-        spawnX = (int) (Math.random() * (width - (width / 3))) + width / 3;
-        spawnY = (int) (Math.random() * (height - (height / 3))) + height / 3;
+        spawnX = (int) (Math.random() * (width - ((double) width / 3))) + width / 3;
+        spawnY = (int) (Math.random() * (height - ((double) height / 3))) + height / 3;
 
         // Spawn a 3x3 cracked stone area around spawn point
         for (int x = spawnX - 1; x <= spawnX + 1; x++) {
