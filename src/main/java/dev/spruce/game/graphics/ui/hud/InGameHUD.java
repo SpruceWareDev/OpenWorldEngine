@@ -31,7 +31,7 @@ public class InGameHUD {
     }
 
     private void init() {
-        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, 'x', new Color(0x8100FFA6, true), 1.0f);
+        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '1', new Color(0x8100FFA6, true), 1.0f);
     }
 
     public void update(double delta) {
@@ -165,5 +165,11 @@ public class InGameHUD {
         RenderUtils.scissorStart(graphics, backgroundX + 22, backgroundY + 112, 216, 36);
         this.difficultyBarEffect.render(graphics);
         RenderUtils.scissorEnd(graphics);
+
+        FontRenderer.drawStringCentred(graphics,
+                DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
+                backgroundX + 130, backgroundY + 105,
+                Color.white, Fonts.LARGE
+        );
     }
 }

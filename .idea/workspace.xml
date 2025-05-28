@@ -69,7 +69,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
     "Gradle.Build OpenWorldEngine.executor": "Run",
-    "Gradle.OpenWorldEngine [:Main.main()].executor": "Debug",
+    "Gradle.OpenWorldEngine [:Main.main()].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

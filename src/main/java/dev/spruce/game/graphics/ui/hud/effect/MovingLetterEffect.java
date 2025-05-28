@@ -12,6 +12,7 @@ public class MovingLetterEffect extends UIEffect {
     private final Character character;
     private final Color colour;
     private final float speed;
+    private final int spacing = 20;
 
     private final List<RenderedCharacter> characters;
 
@@ -25,14 +26,14 @@ public class MovingLetterEffect extends UIEffect {
     }
 
     private void init() {
-        int horizontalNum = getWidth() / 20;
-        int verticalNum = getHeight() / 20;
+        int horizontalNum = getWidth() / spacing;
+        int verticalNum = getHeight() / spacing;
         //Generate characters in a diagonal pattern
         for (int i = 0; i < horizontalNum; i++) {
             //Generate rows of characters
             for (int j = 0; j < verticalNum; j++) {
-                float x = getX() + i * 20;
-                float y = getY() + j * 20;
+                float x = i * spacing;
+                float y = j * spacing;
                 characters.add(new RenderedCharacter(character, x, y));
             }
         }
@@ -46,11 +47,11 @@ public class MovingLetterEffect extends UIEffect {
             character1.setY((float) (character1.getY() + speed * deltaTime));
 
             // Reset position if it goes out of bounds
-            if (character1.getX() > getX() + getWidth()) {
-                character1.setX(getX());
+            if (getX() + character1.getX() > getX() + getWidth()) {
+                character1.setX(0);
             }
-            if (character1.getY() > getY() + getHeight()) {
-                character1.setY(getY());
+            if (getY() + character1.getY() > getY() + getHeight()) {
+                character1.setY(0);
             }
         }
     }
@@ -63,7 +64,7 @@ public class MovingLetterEffect extends UIEffect {
         for (RenderedCharacter character1 : characters) {
             FontRenderer.drawString(
                     graphics, String.valueOf(character1.getCharacter()),
-                    (int) character1.getX(), (int) character1.getY(),
+                    (int) (getX() + character1.getX()), (int) (getY() + character1.getY()),
                     false, colour, Fonts.DEFAULT
             );
         }

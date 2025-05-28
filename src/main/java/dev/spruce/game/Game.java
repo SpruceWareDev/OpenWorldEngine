@@ -56,7 +56,7 @@ public class Game {
         System.out.println("Sound manager initialized.");
 
         System.out.println("Initializing window...");
-        Window.init(1280, 720, FORMATTED_NAME);
+        Window.init(1200, 720, FORMATTED_NAME);
         System.out.println("Window initialized.");
 
         System.out.println("Initializing render panel...");
