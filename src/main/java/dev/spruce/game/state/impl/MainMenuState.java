@@ -45,7 +45,7 @@ public class MainMenuState extends State {
     @Override
     public void render(Graphics graphics) {
         FontRenderer.drawStringCentred(
-                graphics, Game.FORMATTED_NAME,
+                graphics, Game.NAME,
                 Window.getInstance().getWidth() / 2,
                 Window.getInstance().getHeight() / 4,
                 Color.WHITE, Fonts.TITLE

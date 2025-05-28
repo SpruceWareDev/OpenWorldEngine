@@ -43,4 +43,10 @@ public class FontRenderer {
 		g2d.drawString(text, x, y);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 	}
+
+	public static int getStringWidth(Graphics g, String text, Font font) {
+		g.setFont(font);
+		FontMetrics fm = g.getFontMetrics(font);
+		return fm.stringWidth(text);
+	}
 }

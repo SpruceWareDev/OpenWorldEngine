@@ -14,17 +14,26 @@ import java.io.IOException;
 
 public class Game {
 
+    // Game metadata
     public static final String NAME = "Rogue Wizards";
     public static final String VERSION = "alpha-0.2";
-    public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
+    public static final BuildVersion BUILD_VERSION = BuildVersion.DEVELOPMENT;
+    public static final String FORMATTED_NAME = String.format("%s (%s) (%s)", NAME, VERSION, BUILD_VERSION.name);
 
+    // Development flags
     public static boolean debug = false;
     public static boolean devSpawnMode = false;
+    public static boolean devInvincibility = false;
 
+    // Game components
     private RenderPanel renderPanel;
     private static StateManager stateManager;
     private static ScreenManager screenManager;
 
+    /**
+     * Starts the game engine.
+     * Initializes all necessary components and starts the main game loop.
+     */
     public void start() {
         System.out.println("Starting engine!");
         System.out.println(FORMATTED_NAME);
@@ -47,7 +56,7 @@ public class Game {
         System.out.println("Sound manager initialized.");
 
         System.out.println("Initializing window...");
-        Window.init(800, 600, FORMATTED_NAME);
+        Window.init(1280, 720, FORMATTED_NAME);
         System.out.println("Window initialized.");
 
         System.out.println("Initializing render panel...");
@@ -60,12 +69,22 @@ public class Game {
         renderPanel.run();
     }
 
+    /**
+     * Updates the game state and renders the current frame.
+     *
+     * @param delta Time since the last update in seconds.
+     */
     public void update(double delta) {
         SoundManager.getInstance().update();
         stateManager.update(delta);
         screenManager.update(delta);
     }
 
+    /**
+     * Renders the current game state to the provided graphics context.
+     *
+     * @param graphics The graphics context to render to.
+     */
     public void render(Graphics graphics) {
         stateManager.render(graphics);
         screenManager.render(graphics);

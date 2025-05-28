@@ -6,6 +6,7 @@ import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
+import dev.spruce.game.graphics.ui.hud.effect.MovingLetterEffect;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
@@ -22,12 +23,19 @@ public class InGameHUD {
     private static final int ITEM_SLOT_SIZE = 56;
     private static final int ITEM_SLOT_PADDING = 4;
 
+    private MovingLetterEffect difficultyBarEffect;
+
     public InGameHUD(GameState gameState) {
         this.gameState = gameState;
+        init();
+    }
+
+    private void init() {
+        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, 'x', new Color(0x8100FFA6, true), 1.0f);
     }
 
     public void update(double delta) {
-
+        this.difficultyBarEffect.update(delta);
     }
 
     public void render(Graphics graphics) {
@@ -126,8 +134,11 @@ public class InGameHUD {
             backgroundColor = new Color(120, 0, 0, 128);
         }
 
+        int backgroundX = screenW - 270;
+        int backgroundY = 20;
+
         graphics.setColor(backgroundColor);
-        graphics.fillRect(screenW - 270, 20, 260, 160);
+        graphics.fillRect(backgroundX, backgroundY, 260, 160);
 
         FontRenderer.drawString(
                 graphics, "Difficulty", screenW - 260, 22,
@@ -145,5 +156,14 @@ public class InGameHUD {
                 graphics, "Difficulty: " + DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
                 screenW - 260, 90, false, Color.white, Fonts.DEFAULT
         );
+
+        this.difficultyBarEffect.setX(backgroundX);
+        this.difficultyBarEffect.setY(backgroundY);
+
+        graphics.setColor(Color.white);
+        graphics.drawRect(backgroundX + 20, backgroundY + 110, 220, 40);
+        RenderUtils.scissorStart(graphics, backgroundX + 22, backgroundY + 112, 216, 36);
+        this.difficultyBarEffect.render(graphics);
+        RenderUtils.scissorEnd(graphics);
     }
 }

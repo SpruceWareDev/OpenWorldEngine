@@ -45,8 +45,8 @@
       <list>
         <option value="Interface" />
         <option value="package-info" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -69,7 +69,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
     "Gradle.Build OpenWorldEngine.executor": "Run",
-    "Gradle.OpenWorldEngine [:Main.main()].executor": "Run",
+    "Gradle.OpenWorldEngine [:Main.main()].executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",

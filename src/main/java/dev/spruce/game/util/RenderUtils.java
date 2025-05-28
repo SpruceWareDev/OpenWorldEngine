@@ -43,4 +43,14 @@ public class RenderUtils {
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.scale(1, 1);
     }
+
+    public static void scissorStart(Graphics graphics, int x, int y, int width, int height) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setClip(x, y, width, height);
+    }
+
+    public static void scissorEnd(Graphics graphics) {
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setClip(null);
+    }
 }

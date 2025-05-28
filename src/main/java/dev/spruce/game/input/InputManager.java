@@ -1,5 +1,6 @@
 package dev.spruce.game.input;
 
+import dev.spruce.game.BuildVersion;
 import dev.spruce.game.Game;
 
 import java.awt.event.*;
@@ -72,11 +73,12 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
             }
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_F3) {
-            Game.debug = !Game.debug;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_F4) {
-            Game.devSpawnMode = !Game.devSpawnMode;
+        if (Game.BUILD_VERSION.equals(BuildVersion.DEVELOPMENT)) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_F3 -> Game.debug = !Game.debug;
+                case KeyEvent.VK_F4 -> Game.devSpawnMode = !Game.devSpawnMode;
+                case KeyEvent.VK_F5 -> Game.devInvincibility = !Game.devInvincibility;
+            }
         }
     }
 

@@ -100,6 +100,8 @@ public class Player extends DamageableEntity {
 
     @Override
     public void onDeath() {
+        if (Game.devInvincibility)
+            return;
         Game.getStateManager().setState(new DeathState(Game.getStateManager().getGameState()), true);
     }
 

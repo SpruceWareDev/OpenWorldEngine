@@ -11,7 +11,7 @@ import java.awt.*;
 public class PlasmaBlast extends Projectile {
 
     public PlasmaBlast(Entity owner, float x, float y, float dx, float dy) {
-        super(owner, x, y, dx, dy, 10, 10, 20, TimerUtils.ticksFromSeconds(0.5f));
+        super(owner, x, y, dx, dy, 12, 12, 20, TimerUtils.ticksFromSeconds(0.5f));
     }
 
     @Override
@@ -34,8 +34,7 @@ public class PlasmaBlast extends Projectile {
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(new Color(0x4420DB));
+        graphics.setColor(new Color(0x6B20DB));
         graphics.fillOval((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
-
     }
 }
