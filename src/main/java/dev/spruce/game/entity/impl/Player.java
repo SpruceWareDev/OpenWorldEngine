@@ -9,6 +9,7 @@ import dev.spruce.game.item.Inventory;
 import dev.spruce.game.magic.ManaManager;
 import dev.spruce.game.magic.spell.SpellManager;
 import dev.spruce.game.magic.spell.impl.PlasmaShotSpell;
+import dev.spruce.game.state.impl.DeathState;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
@@ -99,7 +100,7 @@ public class Player extends DamageableEntity {
 
     @Override
     public void onDeath() {
-        System.out.println("Player died! omg");
+        Game.getStateManager().setState(new DeathState(Game.getStateManager().getGameState()), true);
     }
 
     public Inventory getInventory() {

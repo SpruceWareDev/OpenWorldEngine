@@ -19,6 +19,7 @@ public class Game {
     public static final String FORMATTED_NAME = String.format("%s (%s)", NAME, VERSION);
 
     public static boolean debug = false;
+    public static boolean devSpawnMode = false;
 
     private RenderPanel renderPanel;
     private static StateManager stateManager;

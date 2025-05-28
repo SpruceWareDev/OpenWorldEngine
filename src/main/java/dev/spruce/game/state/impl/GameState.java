@@ -217,8 +217,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
                 }
             }
         } else if (button == 3) {
-            // TEST OF CRAFTING STATION
-            entityManager.spawn(new CraftingStation(x + camera.getX(), y + camera.getY()));
+            if (Game.devSpawnMode) {
+                TestEnemy testEnemy = new TestEnemy(x + camera.getX(), y + camera.getY());
+                entityManager.spawn(testEnemy);
+            }
         }
     }
 

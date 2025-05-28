@@ -108,6 +108,13 @@ public class InGameHUD {
                     10, 90, false, Color.white, Fonts.DEFAULT
             );
         }
+        if (Game.devSpawnMode) {
+            FontRenderer.drawStringCentred(
+                    graphics, "Dev Spawn Mode",
+                    Window.getInstance().getWidth() / 2, 30,
+                    Color.YELLOW, Fonts.LARGE
+            );
+        }
     }
 
     private void renderTimeDifficulty(Graphics graphics, int screenW, int screenH) {

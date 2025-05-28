@@ -75,6 +75,9 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         if (e.getKeyCode() == KeyEvent.VK_F3) {
             Game.debug = !Game.debug;
         }
+        if (e.getKeyCode() == KeyEvent.VK_F4) {
+            Game.devSpawnMode = !Game.devSpawnMode;
+        }
     }
 
     @Override
