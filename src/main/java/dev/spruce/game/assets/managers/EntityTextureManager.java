@@ -4,6 +4,7 @@ import dev.spruce.game.assets.AssetManager;
 import dev.spruce.game.assets.ImageBundle;
 import dev.spruce.game.util.ImageUtils;
 
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class EntityTextureManager extends AssetManager<String, ImageBundle> {
@@ -13,6 +14,19 @@ public class EntityTextureManager extends AssetManager<String, ImageBundle> {
     public EntityTextureManager() {
         entityTextures = new HashMap<>();
         entityTextures.put("acacia_tree", new ImageBundle(ImageUtils.loadImage("assets/textures/entity_acacia_tree.png")));
+
+        // Player
+        BufferedImage playerSheet = ImageUtils.loadImage("assets/textures/entity_player_idle.png");
+        entityTextures.put("player_idle", new ImageBundle(
+            ImageUtils.cropImage(playerSheet, 0, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 150, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 300, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 450, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 600, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 750, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 900, 0, 150, 150),
+            ImageUtils.cropImage(playerSheet, 1050, 0, 150, 150)
+        ));
     }
 
     @Override

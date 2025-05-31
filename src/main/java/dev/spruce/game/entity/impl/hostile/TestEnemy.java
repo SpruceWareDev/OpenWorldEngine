@@ -69,7 +69,7 @@ public class TestEnemy extends HostileEntity {
             float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
             SoundManager.getInstance().playSound("fireball", 50);
             Game.getStateManager().getGameState().getEntityManager().spawn(new Fireball(this, getX(), getY(), dx, dy));
-            shootTimerTicks = SHOOT_DELAY_TICKS;
+            shootTimerTicks = SHOOT_DELAY_TICKS + (int) (Math.random() * 30) - 15;
         }
         shootTimerTicks--;
     }

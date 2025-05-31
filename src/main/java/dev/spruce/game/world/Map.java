@@ -49,10 +49,12 @@ public abstract class Map implements Serializable {
                         tile.getSize(), tile.getSize(), null
                 );
 
+                /*
                 if (Game.debug) {
                     graphics.setColor(Color.red);
                     graphics.drawRect((int) ((x * tile.getSize()) - camera.getX()), (int) ((y * tile.getSize()) - camera.getY()), tile.getSize(), tile.getSize());
                 }
+                 */
             }
         }
     }

@@ -16,4 +16,8 @@ public class ImageUtils {
         }
         return image;
     }
+
+    public static BufferedImage cropImage(BufferedImage source, int x, int y, int width, int height) {
+        return source.getSubimage(x, y, width, height);
+    }
 }

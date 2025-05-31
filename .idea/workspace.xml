@@ -77,7 +77,7 @@
     "git-widget-placeholder": "<unknown>",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/tom/Documents/GitHub/OpenWorldEngine/assets/sounds",
+    "last_opened_file_path": "/home/tom/Documents/GitHub/OpenWorldEngine/assets/textures",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -86,6 +86,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/textures" />
       <recent name="$PROJECT_DIR$/assets/sounds" />
     </key>
   </component>

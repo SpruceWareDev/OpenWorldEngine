@@ -1,6 +1,9 @@
 package dev.spruce.game.entity.impl;
 
 import dev.spruce.game.Game;
+import dev.spruce.game.assets.AssetManager;
+import dev.spruce.game.assets.Assets;
+import dev.spruce.game.assets.managers.EntityTextureManager;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
@@ -15,6 +18,7 @@ import dev.spruce.game.state.impl.GameState;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Player extends DamageableEntity {
@@ -29,6 +33,10 @@ public class Player extends DamageableEntity {
     private int selectedSlot = 0;
     private boolean usingSpells = false;
 
+    private final int ANIMATION_DELAY_TICKS = 10;
+    private int animationTicks = 0;
+    private int spriteIndex = 0;
+
     public Player(float x, float y) {
         super(x, y, 32, 32, 100);
         this.inventory = new Inventory(8);
@@ -41,6 +49,16 @@ public class Player extends DamageableEntity {
     public void update(double delta) {
         manaManager.update();
         move((float) delta);
+
+        if (animationTicks >= ANIMATION_DELAY_TICKS) {
+            if (spriteIndex + 1 >= Assets.getInstance().getEntityTextures().getAsset("player_idle").getImages().size()) {
+                spriteIndex = 0;
+            } else {
+                spriteIndex++;
+            }
+            animationTicks = 0;
+        }
+        animationTicks++;
     }
 
     private void move(float delta) {
@@ -94,8 +112,15 @@ public class Player extends DamageableEntity {
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(Color.BLUE);
-        graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
+        Graphics2D g2d = (Graphics2D) graphics;
+        //graphics.setColor(Color.BLUE);
+        //graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
+
+        BufferedImage texture = Assets.getInstance().getEntityTextures().getAsset("player_idle").getImages().get(spriteIndex);
+        g2d.drawImage(texture,
+                (int) ((getX() - camera.getX()) - (getWidth() * 10) / 2),
+                (int) ((getY() - camera.getY()) - (getWidth() * 10) / 2),
+                (int) getWidth() * 10, (int) getHeight() * 10, null);
     }
 
     @Override

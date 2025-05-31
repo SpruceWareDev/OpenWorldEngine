@@ -31,7 +31,7 @@ public class InGameHUD {
     }
 
     private void init() {
-        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '1', new Color(0x8100FFA6, true), 1.0f);
+        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '+', new Color(0x8100FFA6, true), 1.0f);
     }
 
     public void update(double delta) {
