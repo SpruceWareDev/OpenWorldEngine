@@ -133,7 +133,9 @@ public class Player extends DamageableEntity {
     public void onDeath() {
         if (Game.devInvincibility)
             return;
-        Game.getStateManager().setState(new DeathState(Game.getStateManager().getGameState()), true);
+        DeathState deathState = new DeathState(Game.getStateManager().getGameState());
+        Game.getStateManager().getGameState().dispose();
+        Game.getStateManager().setState(deathState, true);
     }
 
     public Inventory getInventory() {

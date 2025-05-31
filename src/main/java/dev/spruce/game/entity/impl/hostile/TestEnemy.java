@@ -54,6 +54,11 @@ public class TestEnemy extends HostileEntity {
                 collidingY = true;
         }
 
+        if (collidingX && collidingY) {
+            // If colliding in both directions, prioritize Y direction to avoid getting stuck
+            collidingX = false;
+        }
+
         applyVelocity(delta, MOVE_SPEED, collidingX, collidingY);
     }
 
