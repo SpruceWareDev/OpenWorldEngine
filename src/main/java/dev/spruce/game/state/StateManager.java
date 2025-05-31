@@ -4,6 +4,7 @@ import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.impl.GameState;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class StateManager {
 
@@ -49,10 +50,20 @@ public class StateManager {
         return paused;
     }
 
+    /*
     public GameState getGameState() {
         if (!(currentState instanceof GameState))
             throw new RuntimeException("Tried to access game state from another state!");
         return (GameState) currentState;
+    }
+
+     */
+
+    public Optional<GameState> getGameState() {
+        if (currentState instanceof GameState gameState) {
+            return Optional.of(gameState);
+        }
+        return Optional.empty();
     }
 
     public boolean isGameStateActive() {

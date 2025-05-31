@@ -24,8 +24,8 @@ public class Spawner {
 
         if (spawnTimer >= spawnIntervalTicks) {
             Player player = gameState.getPlayer();
-            int x = (int) player.getX() + (int) (Math.random() * 400 - 200);
-            int y = (int) player.getY() + (int) (Math.random() * 400 - 200);
+            int x = (int) player.getX() + (int) (Math.random() * 1000 - 500);
+            int y = (int) player.getY() + (int) (Math.random() * 1000 - 500);
 
             HostileEntity entity = getRandomHostile(x, y);
             gameState.getEntityManager().spawn(entity);

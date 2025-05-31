@@ -10,7 +10,7 @@ The player will fight a boss at the end of each area.
 (0.3-alpha)
 - TODO: Implement map switching to game state to allow for different areas.
 - TODO: Implement area interactable objects that have an area around which the player must enter to interact with them.
-- TODO: Implement a portal that spawns randomly in the game.
+- IN PROGRESS: Implement a portal that spawns randomly in the game.
 
 (0.2-alpha)
 - Implement time tracker.

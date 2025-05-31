@@ -62,7 +62,7 @@ public class Player extends DamageableEntity {
     }
 
     private void move(float delta) {
-        GameState gs = Game.getStateManager().getGameState();
+        GameState gs = Game.getStateManager().getGameState().get();
         resetVelocity();
         if (InputManager.getInstance().isKeyDown(KeyEvent.VK_W)) {
             setDy(-1);
@@ -133,8 +133,8 @@ public class Player extends DamageableEntity {
     public void onDeath() {
         if (Game.devInvincibility)
             return;
-        DeathState deathState = new DeathState(Game.getStateManager().getGameState());
-        Game.getStateManager().getGameState().dispose();
+        DeathState deathState = new DeathState(Game.getStateManager().getGameState().get());
+        Game.getStateManager().getGameState().get().dispose();
         Game.getStateManager().setState(deathState, true);
     }
 

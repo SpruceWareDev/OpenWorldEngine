@@ -6,6 +6,7 @@ import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.particle.Particle;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
+import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.MathUtils;
 
 import java.awt.*;
@@ -47,10 +48,7 @@ public abstract class Entity implements Serializable {
         if (onFire) {
             int x = (int) (getX() + MathUtils.randomFloat(0, getEntityCollider().getBounds().width));
             int y = (int) (getY() + MathUtils.randomFloat(0, getEntityCollider().getBounds().height));
-            Game.getStateManager()
-                    .getGameState()
-                    .getParticleRenderer()
-                    .spawnParticle(x, y, 5f, 10, Particle.ParticleType.SQUARE, Color.ORANGE);
+            GameUtils.spawnParticle(new Particle(x, y, 5f, 10, Particle.ParticleType.SQUARE, Color.ORANGE));
         }
     }
 
@@ -70,6 +68,10 @@ public abstract class Entity implements Serializable {
         }
     }
 
+    /**
+     * Resets the velocity of the entity to zero.
+     * This can be useful when the entity stops moving or collides with something.
+     */
     public void resetVelocity() {
         dx = 0;
         dy = 0;

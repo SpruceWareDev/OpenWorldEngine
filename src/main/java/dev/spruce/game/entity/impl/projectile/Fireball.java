@@ -6,6 +6,7 @@ import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.particle.Particle;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.state.StateManager;
+import dev.spruce.game.util.GameUtils;
 
 import java.awt.*;
 
@@ -23,10 +24,7 @@ public class Fireball extends Projectile {
         setY(getY() + (getDy() * (float) delta));
 
         for (int i = 0; i < 2; i++) {
-            Game.getStateManager()
-                    .getGameState()
-                    .getParticleRenderer()
-                    .spawnParticle(getX(), getY(), 5f, 50, Particle.ParticleType.SQUARE, Color.ORANGE);
+            GameUtils.spawnParticle(new Particle(getX(), getY(), 5f, 50, Particle.ParticleType.SQUARE, Color.ORANGE));
 
         }
     }

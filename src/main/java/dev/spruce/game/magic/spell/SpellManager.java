@@ -30,10 +30,11 @@ public class SpellManager implements Serializable {
     }
 
     public void castCurrentSpell(ManaManager manaManager, float x, float y, float angle) {
-        GameState gs = Game.getStateManager().getGameState();
-        if (manaManager.removeMana(currentSpell.getManaCost())) {
-            currentSpell.cast(gs, x, y, angle);
-        }
+        Game.getStateManager().getGameState().ifPresent(gameState -> {
+            if (manaManager.removeMana(currentSpell.getManaCost())) {
+                currentSpell.cast(gameState, x, y, angle);
+            }
+        });
     }
 
     public void addSpell(Spell spell) {

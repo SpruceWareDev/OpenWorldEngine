@@ -14,6 +14,7 @@ public class SoundManager {
     private static SoundManager instance;
 
     public static final AudioFormat DEFAULT_FORMAT = new AudioFormat(44100, 16, 2, true, false);
+    public static final int MAX_AUDIO_THREADS = 64;
 
     private CopyOnWriteArrayList<Thread> audioThreads;
 
@@ -32,6 +33,9 @@ public class SoundManager {
     }
 
     public void playSound(String soundName, int volume, AudioEffect... effects) {
+        if (getActiveAudioThreads() >= MAX_AUDIO_THREADS)
+            return;
+
         Thread audioThread = new Thread(new SoundPlayer(soundName, volume, effects));
         audioThreads.add(audioThread);
         audioThread.start();

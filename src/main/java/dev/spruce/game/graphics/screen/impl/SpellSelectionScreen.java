@@ -9,6 +9,7 @@ import dev.spruce.game.input.IMouseInput;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.magic.spell.Spell;
 import dev.spruce.game.magic.spell.SpellManager;
+import dev.spruce.game.util.GameUtils;
 
 import java.awt.*;
 
@@ -23,7 +24,7 @@ public class SpellSelectionScreen extends Screen implements IMouseInput {
     @Override
     public void init() {
         InputManager.getInstance().subscribeMouse(this);
-        this.spellManager = Game.getStateManager().getGameState().getPlayer().getSpellManager();
+        this.spellManager = GameUtils.getPlayer().getSpellManager();
     }
 
     @Override

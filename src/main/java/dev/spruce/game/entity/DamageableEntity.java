@@ -2,6 +2,7 @@ package dev.spruce.game.entity;
 
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.TimerUtils;
 
 public abstract class DamageableEntity extends Entity {
@@ -22,7 +23,7 @@ public abstract class DamageableEntity extends Entity {
         if (health - amount <= 0) {
             this.health = 0;
             if (this instanceof HostileEntity) {
-                Game.getStateManager().getGameState().addKill();
+                Game.getStateManager().getGameState().ifPresent(GameState::addKill);
             }
             onDeath();
             return;

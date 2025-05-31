@@ -44,9 +44,10 @@ public class ItemStackEntity extends Entity implements Interactable {
 
     @Override
     public void interact() {
-        GameState gs = Game.getStateManager().getGameState();
-        if (gs.getPlayer().getInventory().addItem(itemStack)) {
-            gs.getEntityManager().despawn(this);
-        }
+        Game.getStateManager().getGameState().ifPresent(gameState -> {
+            if (gameState.getPlayer().getInventory().addItem(itemStack)) {
+                gameState.getEntityManager().despawn(this);
+            }
+        });
     }
 }

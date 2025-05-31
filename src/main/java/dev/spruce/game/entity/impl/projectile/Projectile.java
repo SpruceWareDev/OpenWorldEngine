@@ -24,13 +24,13 @@ public abstract class Projectile extends Entity {
     }
 
     protected void handleLifetime() {
-        if (!Game.getStateManager().isGameStateActive())
-            return;
-        GameState gs = Game.getStateManager().getGameState();
-        ticksAlive++;
-        if (ticksAlive >= lifeTimeTicks) {
-            gs.getEntityManager().despawn(this);
-        }
+        Game.getStateManager()
+                .getGameState().ifPresent(((gameState) -> {
+                    ticksAlive++;
+                    if (ticksAlive >= lifeTimeTicks) {
+                        gameState.getEntityManager().despawn(this);
+                    }
+                }));
     }
 
     public Entity getOwner() {

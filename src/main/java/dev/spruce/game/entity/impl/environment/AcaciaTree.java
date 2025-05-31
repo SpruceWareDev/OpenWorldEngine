@@ -39,8 +39,9 @@ public class AcaciaTree extends DamageableEntity {
 
     @Override
     public void onDeath() {
-        GameState gs = Game.getStateManager().getGameState();
-        gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
-        gs.getEntityManager().despawn(this);
+        Game.getStateManager().getGameState().ifPresent(gameState -> {
+            gameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
+            gameState.getEntityManager().despawn(this);
+        });
     }
 }

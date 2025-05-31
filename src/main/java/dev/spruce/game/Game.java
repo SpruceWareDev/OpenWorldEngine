@@ -16,7 +16,7 @@ public class Game {
 
     // Game metadata
     public static final String NAME = "Rogue Wizards";
-    public static final String VERSION = "alpha-0.2";
+    public static final String VERSION = "0.2";
     public static final BuildVersion BUILD_VERSION = BuildVersion.DEVELOPMENT;
     public static final String FORMATTED_NAME = String.format("%s (%s) (%s)", NAME, VERSION, BUILD_VERSION.name);
 

@@ -15,6 +15,10 @@ public class ParticleRenderer {
         particles.add(new Particle(x, y, size, lifetimeTicks, type, color));
     }
 
+    public void spawnParticle(Particle particle) {
+        particles.add(particle);
+    }
+
     public void update(double delta) {
         if (particles.size() >= MAX_PARTICLES) {
             particles.subList(0, particles.size() - MAX_PARTICLES).clear();

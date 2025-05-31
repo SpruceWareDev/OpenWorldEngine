@@ -3,7 +3,9 @@ package dev.spruce.game.entity.impl.projectile;
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.Colours;
 import dev.spruce.game.graphics.particle.Particle;
+import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.TimerUtils;
 
 import java.awt.*;
@@ -21,20 +23,14 @@ public class PlasmaBlast extends Projectile {
         setY(getY() + (getDy() * (float) delta));
 
         for (int i = 0; i < 2; i++) {
-            Game.getStateManager()
-                    .getGameState()
-                    .getParticleRenderer()
-                    .spawnParticle(
-                            getX(), getY(), 8f, 100,
-                            Particle.ParticleType.SQUARE, Color.BLUE
-                    );
-
+            GameUtils.spawnParticle(new Particle(getX(), getY(), 8f, 100,
+                    Particle.ParticleType.SQUARE, Colours.BLUE));
         }
     }
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(new Color(0x6B20DB));
+        graphics.setColor(Colours.ULTRA_VIOLET);
         graphics.fillOval((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
     }
 }

@@ -32,9 +32,10 @@ public class CraftingStation extends StationEntity {
 
     @Override
     public void onDeath() {
-        GameState gs = Game.getStateManager().getGameState();
-        gs.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.CRAFTING_STATION), getX(), getY()));
-        gs.getEntityManager().despawn(this);
+        Game.getStateManager().getGameState().ifPresent(gameState -> {
+            gameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.CRAFTING_STATION), getX(), getY()));
+            gameState.getEntityManager().despawn(this);
+        });
     }
 
     @Override
