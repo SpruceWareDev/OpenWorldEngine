@@ -27,15 +27,14 @@ public class EntityCollider implements Serializable {
         Rectangle otherBounds = new Rectangle(
                 (int) (other.getX() + other.getEntityCollider().getBounds().x),
                 (int) (other.getY() + other.getEntityCollider().getBounds().y),
-                (int) other.getEntityCollider().bounds.width,
-                (int) other.getEntityCollider().bounds.height);
+                other.getEntityCollider().bounds.width,
+                other.getEntityCollider().bounds.height);
 
         return otherBounds.intersects(
                 new Rectangle(
                     (int) (entity.getX() + bounds.x + offsetX),
                     (int) (entity.getY() + bounds.y + offsetY),
-                    (int) bounds.width,
-                    (int) bounds.height
+                        bounds.width, bounds.height
                 )
         );
     }
@@ -48,8 +47,7 @@ public class EntityCollider implements Serializable {
         return new Rectangle(
                 (int) (entity.getX() + bounds.x),
                 (int) (entity.getY() + bounds.y),
-                (int) bounds.width,
-                (int) bounds.height
+                bounds.width, bounds.height
         );
     }
 

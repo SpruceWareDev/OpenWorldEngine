@@ -54,4 +54,8 @@ public class StateManager {
             throw new RuntimeException("Tried to access game state from another state!");
         return (GameState) currentState;
     }
+
+    public boolean isGameStateActive() {
+        return currentState instanceof GameState;
+    }
 }

@@ -7,6 +7,7 @@ import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.impl.projectile.Fireball;
 import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.Colours;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.world.Tile;
@@ -33,6 +34,8 @@ public class TestEnemy extends HostileEntity {
 
     @Override
     public void update(double delta) {
+        if (!Game.getStateManager().isGameStateActive())
+            return;
         resetVelocity();
         handleAiState();
 
@@ -84,7 +87,7 @@ public class TestEnemy extends HostileEntity {
 
     @Override
     public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(Color.red);
+        graphics.setColor(Colours.ENGLISH_VIOLET);
         graphics.fillRect(
                 (int) (getX() - camera.getX()),
                 (int) (getY() - camera.getY()),

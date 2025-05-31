@@ -24,6 +24,8 @@ public abstract class Projectile extends Entity {
     }
 
     protected void handleLifetime() {
+        if (!Game.getStateManager().isGameStateActive())
+            return;
         GameState gs = Game.getStateManager().getGameState();
         ticksAlive++;
         if (ticksAlive >= lifeTimeTicks) {

@@ -85,6 +85,12 @@ public class Player extends DamageableEntity {
                 collidingY = true;
         }
 
+        // Stop player from getting stuck inside other entities if their colliders overlap
+        if (collidingX && collidingY) {
+            // If colliding in both directions, prioritize Y direction to avoid getting stuck
+            collidingX = false;
+        }
+
         applyVelocity(delta, PLAYER_SPEED, collidingX, collidingY);
     }
 
