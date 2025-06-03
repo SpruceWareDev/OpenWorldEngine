@@ -14,6 +14,7 @@ import dev.spruce.game.graphics.Colours;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.util.TimerUtils;
 import dev.spruce.game.world.Tile;
 
 import java.awt.*;
@@ -25,7 +26,7 @@ public class TestEnemy extends HostileEntity {
     private static final float MOVE_SPEED = 180f;
 
     // Timer values for attacking
-    private static final int SHOOT_DELAY_TICKS = 120;
+    private static final int SHOOT_DELAY_TICKS = TimerUtils.ticksFromSeconds(1f);
     private int shootTimerTicks = 0;
 
     private final AiStateMachine stateMachine;
@@ -83,7 +84,7 @@ public class TestEnemy extends HostileEntity {
             float angle = MathUtils.getAngle(this, player);
             float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
             float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-            SoundManager.getInstance().playSound("fireball", 50);
+            //SoundManager.getInstance().playSound("fireball", 50);
             GameUtils.spawnEntity(new Fireball(this, getX(), getY(), dx, dy));
             shootTimerTicks = SHOOT_DELAY_TICKS + (int) (Math.random() * 30) - 15;
         }

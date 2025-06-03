@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ParticleRenderer {
 
-    private static final int MAX_PARTICLES = 250;
+    private static final int MAX_PARTICLES = 1000;
 
     private final CopyOnWriteArrayList<Particle> particles = new CopyOnWriteArrayList<>();
 
