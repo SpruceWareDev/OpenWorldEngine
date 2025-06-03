@@ -42,14 +42,6 @@ public abstract class Map implements Serializable {
             for (int y = startY; y < endY; y++) {
                 Tile tile = tiles[x][y];
                 Raylib.Texture texture = Assets.getInstance().getTileTextures().getAsset(tile.getId());
-                /*
-                g2d.drawImage(texture,
-                        (int) ((x * tile.getSize()) - camera.getX()),
-                        (int) ((y * tile.getSize()) - camera.getY()),
-                        tile.getSize(), tile.getSize(), null
-                );
-
-                 */
 
                 RenderUtils.drawTextureScaled(texture,
                         (int) ((x * tile.getSize()) - camera.getX()),

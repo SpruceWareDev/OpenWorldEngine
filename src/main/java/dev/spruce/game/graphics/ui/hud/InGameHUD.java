@@ -15,6 +15,9 @@ import dev.spruce.game.util.RenderUtils;
 import dev.spruce.game.util.TimerUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
 
 public class InGameHUD {
 
@@ -25,17 +28,33 @@ public class InGameHUD {
 
     private MovingLetterEffect difficultyBarEffect;
 
+    // Profiler stuff
+    private static final int PROFILER_UPDATE_TICKS = TimerUtils.ticksFromSeconds(1f);
+    private int profilerTimer = 0;
+    private List<String> profiles;
+
     public InGameHUD(GameState gameState) {
         this.gameState = gameState;
         init();
     }
 
     private void init() {
+        this.profiles = new ArrayList<>();
         this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '+', new Color(0x8100FFA6, true), 1.0f);
     }
 
     public void update(double delta) {
         this.difficultyBarEffect.update(delta);
+
+        // Profiler
+        if (profilerTimer >= PROFILER_UPDATE_TICKS) {
+            profiles.clear();
+            for (String profile : Game.getProfiler().getProfiles().keySet()) {
+                profiles.add(profile + ": " + Game.getProfiler().getProfiles().get(profile) + "ns");
+            }
+            profilerTimer = 0;
+        }
+        profilerTimer++;
     }
 
     public void render() {
@@ -70,6 +89,15 @@ public class InGameHUD {
                     "Seconds Alive: " + gameState.getSecondsAlive(),
                     10, 90, 20, Colors.WHITE
             );
+
+            // Profiler
+            int i = 0;
+            for (String profile : profiles) {
+                Raylib.DrawText(
+                        profile, 400, 10 + (i * 20), 20, Colors.WHITE
+                );
+                i++;
+            }
         }
         if (Game.devSpawnMode) {
             Raylib.DrawText(

@@ -9,6 +9,7 @@ import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
+import dev.spruce.game.util.Profiler;
 
 import java.io.IOException;
 
@@ -30,6 +31,9 @@ public class Game {
     private static StateManager stateManager;
     private static ScreenManager screenManager;
 
+    // Development tools
+    private static Profiler profiler;
+
     /**
      * Starts the game engine.
      * Initializes all necessary components and starts the main game loop.
@@ -37,6 +41,9 @@ public class Game {
     public void start() {
         System.out.println("Starting engine!");
         System.out.println(FORMATTED_NAME);
+
+        profiler = new Profiler();
+        profiler.init();
 
         System.out.println("Initializing file manager...");
         try {
@@ -92,5 +99,9 @@ public class Game {
 
     public static ScreenManager getScreenManager() {
         return screenManager;
+    }
+
+    public static Profiler getProfiler() {
+        return profiler;
     }
 }

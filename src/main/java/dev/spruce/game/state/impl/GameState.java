@@ -143,12 +143,19 @@ public class GameState extends State {
     public void render() {
         camera.centerOn(player, false);
 
-        //Raylib.BeginMode2D(camera.getCamera2D());
+        Game.getProfiler().startProfile("map");
         map.render(camera);
+        Game.getProfiler().endProfile("map");
+
+        Game.getProfiler().startProfile("entities");
         entityManager.render(camera);
+        Game.getProfiler().endProfile("entities");
+
+        Game.getProfiler().startProfile("particles");
         particleRenderer.render(camera);
+        Game.getProfiler().endProfile("particles");
+
         inGameHUD.render();
-        //Raylib.EndMode2D();
     }
 
     /*
