@@ -4,6 +4,7 @@ import dev.spruce.game.assets.Assets;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.screen.ScreenManager;
+import dev.spruce.game.input.InputManager;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
 import dev.spruce.game.state.impl.GameState;
@@ -46,6 +47,8 @@ public class Game {
         }
         System.out.println("File manager initialized.");
 
+        InputManager.getInstance().init();
+
         System.out.println("Initializing sound manager...");
         SoundManager.init();
         System.out.println("Sound manager initialized.");
@@ -69,6 +72,7 @@ public class Game {
      */
     public void update(double delta) {
         SoundManager.getInstance().update();
+        InputManager.getInstance().pollInputs();
         stateManager.update(delta);
         screenManager.update(delta);
     }

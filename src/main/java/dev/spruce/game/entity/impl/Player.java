@@ -45,6 +45,7 @@ public class Player extends DamageableEntity {
         this.manaManager = new ManaManager(10);
         this.spellManager = new SpellManager();
         this.spellManager.addSpell(new PlasmaShotSpell());
+        usingSpells = true;
     }
 
     @Override

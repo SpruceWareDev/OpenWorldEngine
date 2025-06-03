@@ -1,5 +1,7 @@
 package dev.spruce.game.graphics.ui.hud;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.assets.Fonts;
@@ -44,9 +46,37 @@ public class InGameHUD {
         FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
         renderHotbar(graphics, screenW, screenH);
         renderTimeDifficulty(graphics, screenW, screenH);
-        renderDebugInfo(graphics);
 
          */
+
+        renderDebugInfo();
+    }
+
+    private void renderDebugInfo() {
+        if (Game.debug) {
+            Raylib.DrawText(
+                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
+                    10, 30, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
+                    10, 50, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
+                    10, 70, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Seconds Alive: " + gameState.getSecondsAlive(),
+                    10, 90, 20, Colors.WHITE
+            );
+        }
+        if (Game.devSpawnMode) {
+            Raylib.DrawText(
+                    "Dev Spawn Mode",
+                    100, 100, 20, Colors.YELLOW
+            );
+        }
     }
 
     /*
@@ -97,34 +127,6 @@ public class InGameHUD {
                 ))
                 - ITEM_SLOT_PADDING;
         RenderUtils.drawRect(graphics, hotbarX + (hotbarWidth / 2f), hotbarY - 8, manaWidth, 4, Color.BLUE);
-    }
-
-    private void renderDebugInfo(Graphics graphics) {
-        if (Game.debug) {
-            FontRenderer.drawString(graphics,
-                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
-                    10, 30, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
-                    10, 50, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
-                    10, 70, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Seconds Alive: " + gameState.getSecondsAlive(),
-                    10, 90, false, Color.white, Fonts.DEFAULT
-            );
-        }
-        if (Game.devSpawnMode) {
-            FontRenderer.drawStringCentred(
-                    graphics, "Dev Spawn Mode",
-                    Window.getInstance().getWidth() / 2, 30,
-                    Color.YELLOW, Fonts.LARGE
-            );
-        }
     }
 
     private void renderTimeDifficulty(Graphics graphics, int screenW, int screenH) {

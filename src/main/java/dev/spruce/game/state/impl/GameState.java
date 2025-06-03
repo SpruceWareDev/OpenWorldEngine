@@ -172,10 +172,6 @@ public class GameState extends State {
     }
 
     @Override
-    public void onKeyTyped(int keyCode, char keyChar) {
-    }
-
-    @Override
     public void onMousePress(int button, int x, int y) {
         if (Game.getStateManager().isPaused()) return;
 
