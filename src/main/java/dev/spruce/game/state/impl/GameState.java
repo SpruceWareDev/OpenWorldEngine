@@ -113,7 +113,7 @@ public class GameState extends State {
     }
 
     private void handleDifficulty() {
-        if (ticksAlive % (RenderPanel.FPS_TARGET * (512L * (difficulty + 1))) == 0) {
+        if (ticksAlive % (RenderPanel.FPS_TARGET * (60L * (difficulty + 1))) == 0) {
             difficulty++;
         }
     }

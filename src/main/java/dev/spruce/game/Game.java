@@ -67,7 +67,7 @@ public class Game {
         Assets.getInstance();
 
         System.out.println("Starting renderer...");
-        stateManager = new StateManager(new GameState("nuts", true, 1290));
+        stateManager = new StateManager(new MainMenuState());
         screenManager = new ScreenManager();
         renderPanel.run();
     }
