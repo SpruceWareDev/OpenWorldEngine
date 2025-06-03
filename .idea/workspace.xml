@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/hostile/TestEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/hostile/TestEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/Fireball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/Fireball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/ParticleRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/ParticleRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/SoundManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/sound/SoundManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Colours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Colours.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/Particle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

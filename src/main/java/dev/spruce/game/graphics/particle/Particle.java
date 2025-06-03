@@ -3,6 +3,7 @@ package dev.spruce.game.graphics.particle;
 import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.graphics.Colours;
 import dev.spruce.game.util.RenderUtils;
 
 import java.awt.*;
@@ -33,7 +34,7 @@ public class Particle {
     }
 
     public void render(Camera camera) {
-        color = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.min(255 - (int) (255 * ((float) lifetimeTracker / lifetimeTicks)), 255));
+        //color = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.min(255 - (int) (255 * ((float) lifetimeTracker / lifetimeTicks)), 255));
 
         /* TODO: Remake this shit properly
         switch (ParticleType.CIRCLE) {
@@ -42,7 +43,9 @@ public class Particle {
             case TRIANGLE -> RenderUtils.drawTriangle(graphics, x - camera.getX(), y - camera.getY(), size, size, color);
         }
          */
-        Raylib.DrawRectangle((int) (x - camera.getX()), (int) (y - camera.getY()), (int) size, (int) size, Colors.ORANGE);
+        byte alpha = (byte) Math.min(255 - (int) (255 * ((float) lifetimeTracker / lifetimeTicks)), 255);
+        Raylib.Color rayColor = Colours.FIREBALL_PARTICLE;
+        Raylib.DrawRectangle((int) (x - camera.getX()), (int) (y - camera.getY()), (int) size, (int) size, rayColor.a(alpha));
     }
 
     protected void updateLifetime() {
