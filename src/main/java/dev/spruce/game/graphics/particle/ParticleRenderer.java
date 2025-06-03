@@ -32,9 +32,9 @@ public class ParticleRenderer {
         }
     }
 
-    public void render(Graphics graphics, Camera camera) {
+    public void render(Camera camera) {
         for (Particle particle : particles) {
-            particle.render(graphics, camera);
+            particle.render(camera);
         }
     }
 

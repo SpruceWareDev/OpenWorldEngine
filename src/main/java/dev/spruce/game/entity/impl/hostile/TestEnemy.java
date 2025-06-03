@@ -1,5 +1,7 @@
 package dev.spruce.game.entity.impl.hostile;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.ai.AiState;
 import dev.spruce.game.ai.AiStateMachine;
@@ -97,13 +99,10 @@ public class TestEnemy extends HostileEntity {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(Colours.ENGLISH_VIOLET);
-        graphics.fillRect(
-                (int) (getX() - camera.getX()),
-                (int) (getY() - camera.getY()),
-                (int) getWidth(), (int) getHeight()
-        );
+    public void render(Camera camera) {
+        int x = (int) (getX() - camera.getX());
+        int y = (int) (getY() - camera.getY());
+        Raylib.DrawRectangle(x, y, (int) getWidth(), (int) getHeight(), Colors.DARKBLUE);
     }
 
     @Override

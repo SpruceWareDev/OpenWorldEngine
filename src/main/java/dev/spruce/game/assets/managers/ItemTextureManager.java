@@ -1,24 +1,32 @@
 package dev.spruce.game.assets.managers;
 
+import com.raylib.Raylib;
 import dev.spruce.game.assets.AssetManager;
 import dev.spruce.game.util.ImageUtils;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-public class ItemTextureManager extends AssetManager<String, BufferedImage> {
+public class ItemTextureManager extends AssetManager<String, Raylib.Texture> {
 
-    private final HashMap<String, BufferedImage> itemTextures;
+    private final HashMap<String, Raylib.Texture> itemTextures;
 
     public ItemTextureManager() {
         itemTextures = new HashMap<>();
-        itemTextures.put("log", ImageUtils.loadImage("assets/textures/item_log.png"));
-        itemTextures.put("charcoal", ImageUtils.loadImage("assets/textures/item_charcoal.png"));
-        itemTextures.put("crafting_station", ImageUtils.loadImage("assets/textures/item_crafting_station.png"));
+        itemTextures.put("log", Raylib.LoadTexture("assets/textures/item_log.png"));
+        itemTextures.put("charcoal", Raylib.LoadTexture("assets/textures/item_charcoal.png"));
+        itemTextures.put("crafting_station", Raylib.LoadTexture("assets/textures/item_crafting_station.png"));
     }
 
     @Override
-    public BufferedImage getAsset(String assetId) {
+    public Raylib.Texture getAsset(String assetId) {
         return itemTextures.get(assetId);
+    }
+
+    @Override
+    public void dispose() {
+        for (Raylib.Texture texture : itemTextures.values()) {
+            Raylib.UnloadTexture(texture);
+        }
     }
 }

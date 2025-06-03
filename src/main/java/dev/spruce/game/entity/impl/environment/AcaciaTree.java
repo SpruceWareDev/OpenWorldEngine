@@ -1,5 +1,7 @@
 package dev.spruce.game.entity.impl.environment;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.entity.DamageableEntity;
@@ -12,6 +14,7 @@ import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.item.Items;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
+import dev.spruce.game.util.RenderUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,11 +33,11 @@ public class AcaciaTree extends DamageableEntity {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        BufferedImage texture = Assets.getInstance().getEntityTextures().getAsset("acacia_tree").getSingle().get();
+    public void render(Camera camera) {
+        Raylib.Texture texture = Assets.getInstance().getEntityTextures().getAsset("acacia_tree").getSingle().get();
         int x = (int) (getX() - camera.getX());
         int y = (int) (getY() - camera.getY());
-        graphics.drawImage(texture, x, y, (int) getWidth(), (int) getHeight(), null);
+        RenderUtils.drawTextureScaled(texture, x, y, (int) getWidth(), (int) getHeight(), Colors.WHITE);
     }
 
     @Override

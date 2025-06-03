@@ -1,5 +1,7 @@
 package dev.spruce.game.entity.impl.environment;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.entity.Entity;
@@ -11,6 +13,7 @@ import dev.spruce.game.sound.effect.AudioEffect;
 import dev.spruce.game.sound.effect.impl.BitCrushEffect;
 import dev.spruce.game.sound.effect.impl.ReverbEffect;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.util.RenderUtils;
 
 import javax.sound.sampled.AudioFormat;
 import java.awt.*;
@@ -30,12 +33,11 @@ public class ItemStackEntity extends Entity implements Interactable {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.drawImage(
-                Assets.getInstance().getItemTextures().getAsset(itemStack.getItem().getName()),
-                (int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight(), null
-        );
+    public void render(Camera camera) {
+        Raylib.Texture texture = Assets.getInstance().getItemTextures().getAsset(itemStack.getItem().getName());
+        int x = (int) (getX() - camera.getX());
+        int y = (int) (getY() - camera.getY());
+        RenderUtils.drawTextureScaled(texture, x, y, (int) getWidth(), (int) getHeight(), Colors.WHITE);
     }
 
     public ItemStack getItemStack() {

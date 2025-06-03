@@ -4,7 +4,6 @@ import dev.spruce.game.Game;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.entity.EntityManager;
-import dev.spruce.game.entity.Interactable;
 import dev.spruce.game.entity.impl.Player;
 import dev.spruce.game.entity.impl.hostile.HostileEntity;
 import dev.spruce.game.entity.impl.hostile.TestEnemy;
@@ -13,24 +12,16 @@ import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
-import dev.spruce.game.graphics.screen.impl.PauseScreen;
-import dev.spruce.game.graphics.screen.impl.SpellSelectionScreen;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
-import dev.spruce.game.input.IKeyInput;
-import dev.spruce.game.input.IMouseInput;
-import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.State;
-import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.maps.TestingMap;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.List;
 
-public class GameState extends State implements IKeyInput, IMouseInput {
+public class GameState extends State {
 
     private final String name;
     private final boolean newGame;
@@ -70,8 +61,6 @@ public class GameState extends State implements IKeyInput, IMouseInput {
             }
         }
         inGameHUD = new InGameHUD(this);
-        InputManager.getInstance().subscribeMouse(this);
-        InputManager.getInstance().subscribeKey(this);
         camera.centerOn(player, false);
         particleRenderer = new ParticleRenderer();
         spawner = new Spawner(this);
@@ -119,7 +108,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     }
 
     private void handleDifficulty() {
-        if (ticksAlive % (RenderPanel.TICK_RATE * (60L * (difficulty + 1))) == 0) {
+        if (ticksAlive % (RenderPanel.FPS_TARGET * (60L * (difficulty + 1))) == 0) {
             difficulty++;
         }
     }
@@ -150,14 +139,15 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     }
 
     @Override
-    public void render(Graphics graphics) {
+    public void render() {
         camera.centerOn(player, true);
-        map.render(graphics, camera);
-        entityManager.render(graphics, camera);
-        particleRenderer.render(graphics, camera);
-        inGameHUD.render(graphics);
+        map.render(camera);
+        entityManager.render(camera);
+        particleRenderer.render(camera);
+        inGameHUD.render();
     }
 
+    /*
     @Override
     public void onKeyPress(int keyCode) {
         player.handleKey(keyCode);
@@ -216,18 +206,10 @@ public class GameState extends State implements IKeyInput, IMouseInput {
         }
     }
 
+     */
+
     public void addKill() {
         kills++;
-    }
-
-    @Override
-    public void onMouseRelease(int button, int x, int y) {
-
-    }
-
-    @Override
-    public void onMouseClick(int button, int x, int y) {
-
     }
 
     @Override
@@ -244,7 +226,7 @@ public class GameState extends State implements IKeyInput, IMouseInput {
     }
 
     public int getSecondsAlive() {
-        return (int) (ticksAlive / RenderPanel.TICK_RATE);
+        return (int) (ticksAlive / RenderPanel.FPS_TARGET);
     }
 
     public long getTicksAlive() {

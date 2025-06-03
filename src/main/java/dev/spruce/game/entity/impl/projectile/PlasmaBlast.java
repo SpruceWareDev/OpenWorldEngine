@@ -1,5 +1,7 @@
 package dev.spruce.game.entity.impl.projectile;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
@@ -29,8 +31,9 @@ public class PlasmaBlast extends Projectile {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(Colours.ULTRA_VIOLET);
-        graphics.fillOval((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
+    public void render(Camera camera) {
+        int x = (int) (getX() - camera.getX());
+        int y = (int) (getY() - camera.getY());
+        Raylib.DrawRectangle(x, y, (int) getWidth(), (int) getHeight(), Colors.PURPLE);
     }
 }

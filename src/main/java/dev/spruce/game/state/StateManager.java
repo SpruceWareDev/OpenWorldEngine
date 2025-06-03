@@ -27,16 +27,15 @@ public class StateManager {
         currentState.update(delta);
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
         if (!finishedLoading)
             return;
-        currentState.render(graphics);
+        currentState.render();
     }
 
     public void setState(State state, boolean shouldInit) {
         finishedLoading = false;
         currentState.dispose();
-        if (shouldInit) InputManager.getInstance().unsubscribeAll();
         currentState = state;
         if (shouldInit) currentState.init();
         finishedLoading = true;

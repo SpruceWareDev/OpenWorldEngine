@@ -3,9 +3,7 @@ package dev.spruce.game.graphics.ui.hud;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.assets.Fonts;
-import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.ui.hud.effect.MovingLetterEffect;
 import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
@@ -38,7 +36,8 @@ public class InGameHUD {
         this.difficultyBarEffect.update(delta);
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
+        /*
         int screenW = Window.getInstance().getWidth();
         int screenH = Window.getInstance().getHeight();
 
@@ -46,8 +45,11 @@ public class InGameHUD {
         renderHotbar(graphics, screenW, screenH);
         renderTimeDifficulty(graphics, screenW, screenH);
         renderDebugInfo(graphics);
+
+         */
     }
 
+    /*
     private void renderHotbar(Graphics graphics, int screenW, int screenH) {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
@@ -172,4 +174,6 @@ public class InGameHUD {
                 Color.white, Fonts.LARGE
         );
     }
+
+     */
 }

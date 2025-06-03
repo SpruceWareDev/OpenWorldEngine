@@ -15,9 +15,9 @@ public class ScreenManager {
         currentScreen.update(delta);
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
         if (currentScreen == null) return;
-        currentScreen.render(graphics);
+        currentScreen.render();
     }
 
     public void setScreen(Screen screen, boolean pauseCurrentState) {

@@ -1,10 +1,9 @@
 package dev.spruce.game.entity;
 
-import dev.spruce.game.Game;
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.graphics.Camera;
-import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.particle.Particle;
-import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.EntityCollider;
 import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.MathUtils;
@@ -42,7 +41,7 @@ public abstract class Entity implements Serializable {
 
     public abstract void update(double delta);
 
-    public abstract void render(Graphics graphics, Camera camera);
+    public abstract void render(Camera camera);
 
     public void updateParticles() {
         if (onFire) {
@@ -52,19 +51,17 @@ public abstract class Entity implements Serializable {
         }
     }
 
-    protected void renderBoundingBox(Graphics graphics, Camera camera) {
+    protected void renderBoundingBox(Camera camera) {
         int x = (int) (getX() + getEntityCollider().getBounds().x - camera.getX());
         int y = (int) (getY() + getEntityCollider().getBounds().y - camera.getY());
         int width = getEntityCollider().getBounds().width;
         int height = getEntityCollider().getBounds().height;
-        graphics.setColor(Color.blue);
-        graphics.drawRect(x, y, width, height);
+        Raylib.DrawRectangle(x, y, width, height, Colors.BLUE);
 
         // draw health of entity
         if (this instanceof DamageableEntity damageable) {
             int healthBarWidth = (int) ((damageable.getHealth() / (float) damageable.getMaxHealth()) * width);
-            graphics.setColor(Color.RED);
-            graphics.fillRect(x, y - 5, healthBarWidth, 3);
+            Raylib.DrawRectangle(x, y - 5, healthBarWidth, 3, Colors.RED);
         }
     }
 
@@ -109,9 +106,9 @@ public abstract class Entity implements Serializable {
 
     public boolean isEntityOnScreen(Camera camera) {
         return getScreenX(camera) + width > 0 &&
-                getScreenX(camera) < Window.getInstance().getWidth() &&
+                getScreenX(camera) < Raylib.GetRenderWidth() &&
                 getScreenY(camera) + height > 0 &&
-                getScreenY(camera) < Window.getInstance().getHeight();
+                getScreenY(camera) < Raylib.GetRenderHeight();
     }
 
     public EntityCollider getEntityCollider() {

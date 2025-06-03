@@ -1,6 +1,6 @@
 package dev.spruce.game.graphics.ui.component;
 
-import dev.spruce.game.graphics.Window;
+import com.raylib.Raylib;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,21 +24,21 @@ public class UIManager {
         }
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
         for (ScreenSnapPoint snapPoint : ScreenSnapPoint.values()) {
             switch (snapPoint) {
                 case CENTER -> {
                     int i = 0;
                     for (UIElement element : getBySnapPoint(snapPoint)) {
-                        int x = (Window.getInstance().getWidth() / 2) - (element.getWidth() / 2);
-                        int y = (Window.getInstance().getHeight() / 2) + ((element.getHeight() + 2) * i);
+                        int x = (Raylib.GetRenderWidth() / 2) - (element.getWidth() / 2);
+                        int y = (Raylib.GetRenderHeight() / 2) + ((element.getHeight() + 2) * i);
                         element.setX(x);
                         element.setY(y);
-                        element.render(graphics);
+                        element.render();
                         i++;
                     }
                 }
-                case NONE -> getBySnapPoint(snapPoint).forEach(uiElement -> uiElement.render(graphics));
+                case NONE -> getBySnapPoint(snapPoint).forEach(UIElement::render);
             }
         }
     }

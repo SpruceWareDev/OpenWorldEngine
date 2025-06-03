@@ -1,56 +1,28 @@
 package dev.spruce.game.util;
 
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
+import com.raylib.Raylib;
+
+import static com.raylib.Raylib.DrawTexturePro;
 
 public class RenderUtils {
 
-    public static void drawRect(Graphics graphics, float x, float y, float width, float height, Color color) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        Rectangle2D.Double rect = new Rectangle2D.Double(x, y, width, height);
-        graphics2D.setColor(color);
-        graphics2D.fill(rect);
-    }
+    public static void drawTextureScaled(Raylib.Texture texture, int posX, int posY, int targetWidth, int targetHeight, Raylib.Color tint) {
+        Raylib.Rectangle src = new Raylib.Rectangle();
+        src.x(0);
+        src.y(0);
+        src.width(texture.width());
+        src.height(texture.height());
 
-    public static void drawOval(Graphics graphics, float x, float y, float width, float height, Color color) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setColor(color);
-        Shape oval = new Ellipse2D.Float(x, y, width, height);
-        graphics2D.fill(oval);
-    }
+        Raylib.Rectangle dest = new Raylib.Rectangle();
+        dest.x(posX);
+        dest.y(posY);
+        dest.width(targetWidth);
+        dest.height(targetHeight);
 
-    public static void drawTriangle(Graphics graphics, float x, float y, float width, float height, Color color) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setColor(color);
+        Raylib.Vector2 origin = new Raylib.Vector2();
+        origin.x(0);
+        origin.y(0);
 
-        Path2D.Float triangle = new Path2D.Float();
-        triangle.moveTo(x, y + height);
-        triangle.lineTo(x + width / 2, y);
-        triangle.lineTo(x + width, y + height);
-        triangle.closePath();
-
-        graphics2D.fill(triangle);
-    }
-
-    public static void scale(Graphics graphics, float scaleX, float scaleY) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.scale(scaleX, scaleY);
-    }
-
-    public static void endScale(Graphics graphics) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.scale(1, 1);
-    }
-
-    public static void scissorStart(Graphics graphics, int x, int y, int width, int height) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setClip(x, y, width, height);
-    }
-
-    public static void scissorEnd(Graphics graphics) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setClip(null);
+        DrawTexturePro(texture, src, dest, origin, 0.0f, tint);
     }
 }

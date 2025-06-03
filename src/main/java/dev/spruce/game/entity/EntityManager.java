@@ -49,14 +49,14 @@ public class EntityManager {
         }
     }
 
-    public void render(Graphics graphics, Camera camera) {
+    public void render(Camera camera) {
         for (Entity entity : entities) {
             if (!entity.isEntityOnScreen(gameState.getCamera()))
                 continue;
-            entity.render(graphics, camera);
+            entity.render(camera);
 
             if (Game.debug) {
-                entity.renderBoundingBox(graphics, camera);
+                entity.renderBoundingBox(camera);
             }
         }
     }

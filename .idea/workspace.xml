@@ -6,12 +6,53 @@
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/ai/AiStateMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/ai/AiStateMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/AssetManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/AssetManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/Assets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/Assets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/ImageBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/ImageBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/EntityTextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/EntityTextureManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/ItemTextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/ItemTextureManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/SoundAssetManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/SoundAssetManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/TileTextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/assets/managers/TileTextureManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/EntityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/EntityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/AcaciaTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/AcaciaTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/ItemStackEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/environment/ItemStackEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/hostile/TestEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/hostile/TestEnemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/ScreenSnapPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/ScreenSnapPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/Fireball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/Fireball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/PlasmaBlast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/PlasmaBlast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/RockPellet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/projectile/RockPellet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/CraftingStation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/StationEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/entity/impl/station/StationType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/RenderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/RenderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Window.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/Particle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/ParticleRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/particle/ParticleRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/Screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/ScreenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/CraftingStationScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/PauseScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/screen/impl/SpellSelectionScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/UIElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/UIElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/UIManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/UIManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameSelectState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameSelectState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/impl/UIButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/component/impl/UITextBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/ui/hud/InGameHUD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/StateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/DeathState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/DeathState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameSelectState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/MainMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/MainMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/WorldCreateState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/RenderUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/RenderUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/TimerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/TimerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,12 +110,13 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
     "Gradle.Build OpenWorldEngine.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
     "Gradle.OpenWorldEngine [:Main.main()].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "<unknown>",
+    "git-widget-placeholder": "RaylibRewrite",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/tom/Documents/GitHub/OpenWorldEngine/assets/textures",

@@ -18,4 +18,9 @@ public class SoundAssetManager extends AssetManager<String, String> {
     public String getAsset(String assetId) {
         return sounds.get(assetId);
     }
+
+    @Override
+    public void dispose() {
+
+    }
 }

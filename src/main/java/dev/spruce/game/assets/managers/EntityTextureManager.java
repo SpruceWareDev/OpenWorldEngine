@@ -1,5 +1,6 @@
 package dev.spruce.game.assets.managers;
 
+import com.raylib.Raylib;
 import dev.spruce.game.assets.AssetManager;
 import dev.spruce.game.assets.ImageBundle;
 import dev.spruce.game.util.ImageUtils;
@@ -13,8 +14,10 @@ public class EntityTextureManager extends AssetManager<String, ImageBundle> {
 
     public EntityTextureManager() {
         entityTextures = new HashMap<>();
-        entityTextures.put("acacia_tree", new ImageBundle(ImageUtils.loadImage("assets/textures/entity_acacia_tree.png")));
+        entityTextures.put("acacia_tree", new ImageBundle(Raylib.LoadTexture("assets/textures/entity_acacia_tree.png")));
 
+        // TODO: Add back player textures at a later time.
+        /*
         // Player
         BufferedImage playerSheet = ImageUtils.loadImage("assets/textures/entity_player_idle.png");
         entityTextures.put("player_idle", new ImageBundle(
@@ -27,10 +30,19 @@ public class EntityTextureManager extends AssetManager<String, ImageBundle> {
             ImageUtils.cropImage(playerSheet, 900, 0, 150, 150),
             ImageUtils.cropImage(playerSheet, 1050, 0, 150, 150)
         ));
+
+         */
     }
 
     @Override
     public ImageBundle getAsset(String assetId) {
         return entityTextures.get(assetId);
+    }
+
+    @Override
+    public void dispose() {
+        for (ImageBundle imageBundle : entityTextures.values()) {
+            imageBundle.dispose();
+        }
     }
 }

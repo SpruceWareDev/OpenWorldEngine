@@ -17,7 +17,7 @@ public abstract class UIElement {
 
     public abstract void update();
 
-    public abstract void render(Graphics graphics);
+    public abstract void render();
 
     public void dispose() {}
 

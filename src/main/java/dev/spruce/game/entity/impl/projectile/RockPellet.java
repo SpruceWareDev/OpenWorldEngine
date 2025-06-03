@@ -1,8 +1,11 @@
 package dev.spruce.game.entity.impl.projectile;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.util.RenderUtils;
 
 import java.awt.*;
 
@@ -20,8 +23,9 @@ public class RockPellet extends Projectile {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        graphics.setColor(Color.GRAY);
-        graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
+    public void render(Camera camera) {
+        int x = (int) (getX() - camera.getX());
+        int y = (int) (getY() - camera.getY());
+        Raylib.DrawRectangle(x, y, (int) getWidth(), (int) getHeight(), Colors.GRAY);
     }
 }

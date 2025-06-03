@@ -1,5 +1,7 @@
 package dev.spruce.game.entity.impl;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.AssetManager;
 import dev.spruce.game.assets.Assets;
@@ -117,16 +119,22 @@ public class Player extends DamageableEntity {
     }
 
     @Override
-    public void render(Graphics graphics, Camera camera) {
-        Graphics2D g2d = (Graphics2D) graphics;
+    public void render(Camera camera) {
         //graphics.setColor(Color.BLUE);
         //graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
 
+        /*
         BufferedImage texture = Assets.getInstance().getEntityTextures().getAsset("player_idle").getImages().get(spriteIndex);
         g2d.drawImage(texture,
                 (int) ((getX() - camera.getX()) - (getWidth() * 10) / 2),
                 (int) ((getY() - camera.getY()) - (getWidth() * 10) / 2),
                 (int) getWidth() * 10, (int) getHeight() * 10, null);
+
+         */
+
+        int x = (int) (getX() - camera.getX());
+        int y = (int) (getY() - camera.getY());
+        Raylib.DrawRectangle(x, y, (int) getWidth(), (int) getHeight(), Colors.RED);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package dev.spruce.game.graphics.particle;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.util.RenderUtils;
 
@@ -30,14 +32,17 @@ public class Particle {
         y += yVel;
     }
 
-    public void render(Graphics graphics, Camera camera) {
+    public void render(Camera camera) {
         color = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.min(255 - (int) (255 * ((float) lifetimeTracker / lifetimeTicks)), 255));
 
+        /* TODO: Remake this shit properly
         switch (ParticleType.CIRCLE) {
             case CIRCLE -> RenderUtils.drawOval(graphics, x - camera.getX(), y - camera.getY(), size, size, color);
             case SQUARE -> RenderUtils.drawRect(graphics, x - camera.getX(), y - camera.getY(), size, size, color);
             case TRIANGLE -> RenderUtils.drawTriangle(graphics, x - camera.getX(), y - camera.getY(), size, size, color);
         }
+         */
+        Raylib.DrawRectangle((int) (x - camera.getX()), (int) (y - camera.getY()), (int) size, (int) size, Colors.ORANGE);
     }
 
     protected void updateLifetime() {

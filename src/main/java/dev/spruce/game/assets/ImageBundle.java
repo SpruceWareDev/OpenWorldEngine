@@ -1,5 +1,7 @@
 package dev.spruce.game.assets;
 
+import com.raylib.Raylib;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,19 +10,25 @@ import java.util.Optional;
 
 public class ImageBundle {
 
-    private final List<BufferedImage> images;
+    private final List<Raylib.Texture> images;
 
-    public ImageBundle(BufferedImage... imagesIn) {
+    public ImageBundle(Raylib.Texture... imagesIn) {
         images = new ArrayList<>();
         images.addAll(Arrays.stream(imagesIn).toList());
     }
 
-    public Optional<BufferedImage> getSingle() {
+    public Optional<Raylib.Texture> getSingle() {
         if (images.isEmpty()) return Optional.empty();
         return Optional.of(images.get(0));
     }
 
-    public List<BufferedImage> getImages() {
+    public List<Raylib.Texture> getImages() {
         return images;
+    }
+
+    public void dispose() {
+        for (Raylib.Texture texture : images) {
+            Raylib.UnloadTexture(texture);
+        }
     }
 }

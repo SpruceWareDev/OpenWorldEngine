@@ -1,5 +1,6 @@
 package dev.spruce.game.graphics;
 
+import com.raylib.Raylib;
 import dev.spruce.game.entity.Entity;
 import dev.spruce.game.util.MathUtils;
 
@@ -29,8 +30,8 @@ public class Camera implements Serializable {
     }
 
     public void centerOn(float x, float y, boolean interpolated) {
-        targetX = x - Window.getInstance().getWidth() / 2f;
-        targetY = y - Window.getInstance().getHeight() / 2f;
+        targetX = x - Raylib.GetRenderWidth() / 2f;
+        targetY = y - Raylib.GetRenderHeight() / 2f;
         interpolateCamera = interpolated;
     }
 

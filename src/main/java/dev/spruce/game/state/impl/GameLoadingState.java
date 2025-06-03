@@ -1,8 +1,9 @@
 package dev.spruce.game.state.impl;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.assets.Fonts;
-import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.state.State;
 import dev.spruce.game.util.GameLoader;
@@ -59,8 +60,8 @@ public class GameLoadingState extends State {
     }
 
     @Override
-    public void render(Graphics graphics) {
-        FontRenderer.drawStringCentred(graphics, "Loading" + loadingDots.toString(), Window.getInstance().getWidth() / 2, Window.getInstance().getHeight() / 3, Color.WHITE, Fonts.TITLE);
+    public void render() {
+        Raylib.DrawText("Loading" + loadingDots.toString(), 10, 10, 22, Colors.WHITE);
     }
 
     @Override
