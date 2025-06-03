@@ -98,6 +98,8 @@ public class GameState extends State {
 
     @Override
     public void update(double delta) {
+        Game.getProfiler().startProfile("game_tick");
+
         ticksAlive++;
         handleDifficulty();
         spawner.update();
@@ -106,6 +108,8 @@ public class GameState extends State {
         checkProjectileCollisions();
         inGameHUD.update(delta);
         particleRenderer.update(delta);
+
+        Game.getProfiler().endProfile("game_tick");
     }
 
     private void handleDifficulty() {

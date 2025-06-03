@@ -6,7 +6,7 @@ import static com.raylib.Raylib.DrawTexturePro;
 
 public class RenderUtils {
 
-    // Pre-allocate these statically or reuse outside the draw call for even more gains
+    // Pre-allocate these statically to improve texture rendering performance
     private static final Raylib.Rectangle src = new Raylib.Rectangle();
     private static final Raylib.Rectangle dest = new Raylib.Rectangle();
     private static final Raylib.Vector2 origin = new Raylib.Vector2();
@@ -21,7 +21,7 @@ public class RenderUtils {
         dest.y(posY);
         dest.width(targetWidth);
         dest.height(targetHeight);
-        
+
         origin.x(0);
         origin.y(0);
 
