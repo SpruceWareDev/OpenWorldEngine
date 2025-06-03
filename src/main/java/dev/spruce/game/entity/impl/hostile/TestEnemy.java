@@ -22,7 +22,7 @@ import java.util.List;
 public class TestEnemy extends HostileEntity {
 
     // TODO: Make standard move speeds for all entities in a static class
-    private static final float MOVE_SPEED = 4.5f;
+    private static final float MOVE_SPEED = 180f;
 
     // Timer values for attacking
     private static final int SHOOT_DELAY_TICKS = 120;

@@ -25,7 +25,7 @@ import java.util.List;
 
 public class Player extends DamageableEntity {
 
-    public static final float PLAYER_SPEED = 5f;
+    public static final float PLAYER_SPEED = 200f;
     public static final int INTERACT_DISTANCE = 125;
 
     private final ManaManager manaManager;
@@ -52,6 +52,7 @@ public class Player extends DamageableEntity {
         manaManager.update();
         move((float) delta);
 
+        /*
         if (animationTicks >= ANIMATION_DELAY_TICKS) {
             if (spriteIndex + 1 >= Assets.getInstance().getEntityTextures().getAsset("player_idle").getImages().size()) {
                 spriteIndex = 0;
@@ -61,6 +62,8 @@ public class Player extends DamageableEntity {
             animationTicks = 0;
         }
         animationTicks++;
+
+         */
     }
 
     private void move(float delta) {

@@ -6,7 +6,7 @@ import dev.spruce.game.state.impl.GameState;
 
 public abstract class Projectile extends Entity {
 
-    public static final float BASE_SPEED = 12f;
+    public static final float BASE_SPEED = 500f;
 
     private Entity owner;
     private int damage;

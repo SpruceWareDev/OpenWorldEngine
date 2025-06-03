@@ -54,6 +54,8 @@ public class Game {
         renderPanel = new RenderPanel(this, FORMATTED_NAME, 1280, 720);
         System.out.println("Render panel initialized.");
 
+        Assets.getInstance();
+
         System.out.println("Starting renderer...");
         stateManager = new StateManager(new GameState("nuts", true, 1290));
         screenManager = new ScreenManager();

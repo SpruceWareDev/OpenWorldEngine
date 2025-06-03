@@ -1,5 +1,6 @@
 package dev.spruce.game.state.impl;
 
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.entity.DamageableEntity;
 import dev.spruce.game.entity.Entity;
@@ -108,7 +109,7 @@ public class GameState extends State {
     }
 
     private void handleDifficulty() {
-        if (ticksAlive % (RenderPanel.FPS_TARGET * (60L * (difficulty + 1))) == 0) {
+        if (ticksAlive % (RenderPanel.FPS_TARGET * (512L * (difficulty + 1))) == 0) {
             difficulty++;
         }
     }
@@ -140,11 +141,14 @@ public class GameState extends State {
 
     @Override
     public void render() {
-        camera.centerOn(player, true);
+        camera.centerOn(player, false);
+
+        //Raylib.BeginMode2D(camera.getCamera2D());
         map.render(camera);
         entityManager.render(camera);
         particleRenderer.render(camera);
         inGameHUD.render();
+        //Raylib.EndMode2D();
     }
 
     /*
