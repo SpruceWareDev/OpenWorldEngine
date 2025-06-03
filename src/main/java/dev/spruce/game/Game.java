@@ -6,6 +6,7 @@ import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
+import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
 
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class Game {
         System.out.println("Render panel initialized.");
 
         System.out.println("Starting renderer...");
-        stateManager = new StateManager(new MainMenuState());
+        stateManager = new StateManager(new GameState("nuts", true, 1290));
         screenManager = new ScreenManager();
         renderPanel.run();
     }

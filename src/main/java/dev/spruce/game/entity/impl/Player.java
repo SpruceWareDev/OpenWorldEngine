@@ -66,14 +66,14 @@ public class Player extends DamageableEntity {
     private void move(float delta) {
         GameState gs = Game.getStateManager().getGameState().get();
         resetVelocity();
-        if (InputManager.getInstance().isKeyDown(KeyEvent.VK_W)) {
+        if (Raylib.IsKeyDown(Raylib.KEY_W)) {
             setDy(-1);
-        } else if (InputManager.getInstance().isKeyDown(KeyEvent.VK_S)) {
+        } else if (Raylib.IsKeyDown(Raylib.KEY_S)) {
             setDy(1);
         }
-        if (InputManager.getInstance().isKeyDown(KeyEvent.VK_A)) {
+        if (Raylib.IsKeyDown(Raylib.KEY_A)) {
             setDx(-1);
-        } else if (InputManager.getInstance().isKeyDown(KeyEvent.VK_D)) {
+        } else if (Raylib.IsKeyDown(Raylib.KEY_D)) {
             setDx(1);
         }
 
