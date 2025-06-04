@@ -1,5 +1,6 @@
 #########################################################################
 Wizard rogue-like game with a focus on spell casting in combat.
+#########################################################################
 Killing enemies will drop items that can be sacrificed to gain new spells.
 These spells can be used in combat, and can also be combined with other spells to create new effects.
 #########################################################################
@@ -10,6 +11,11 @@ The player will fight a boss at the end of each area.
 (0.3-alpha)
 - TODO: Implement map switching to game state to allow for different areas.
 - TODO: Implement area interactable objects that have an area around which the player must enter to interact with them.
+- TODO: Implement items.
+- TODO: Implement item effects.
+- TODO: Implement 2 basic items: mana potion and health potion.
+
+- IN PROGRESS: Implement items.
 - IN PROGRESS: Implement a portal that spawns randomly in the game.
 
 (0.2-alpha)

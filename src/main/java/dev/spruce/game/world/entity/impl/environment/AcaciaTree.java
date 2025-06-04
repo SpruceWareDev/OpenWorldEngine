@@ -8,8 +8,6 @@ import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.util.EntityCollider;
 import dev.spruce.game.util.RenderUtils;
 import dev.spruce.game.world.entity.DamageableEntity;
-import dev.spruce.game.world.item.ItemStack;
-import dev.spruce.game.world.item.Items;
 
 import java.awt.*;
 
@@ -37,7 +35,6 @@ public class AcaciaTree extends DamageableEntity {
     @Override
     public void onDeath() {
         Game.getStateManager().getGameState().ifPresent(gameState -> {
-            gameState.getEntityManager().spawn(new ItemStackEntity(new ItemStack(Items.LOG), getX(), getY()));
             gameState.getEntityManager().despawn(this);
         });
     }

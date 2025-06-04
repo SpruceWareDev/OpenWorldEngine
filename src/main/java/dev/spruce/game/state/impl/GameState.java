@@ -142,7 +142,7 @@ public class GameState extends State {
 
     @Override
     public void render() {
-        camera.centerOn(player, false);
+        camera.centerOn(player, true);
         Game.getProfiler().startProfile("map");
         map.render(camera);
         Game.getProfiler().endProfile("map");

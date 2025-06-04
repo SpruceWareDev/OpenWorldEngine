@@ -6,6 +6,7 @@ import dev.spruce.game.Game;
 import dev.spruce.game.ai.AiState;
 import dev.spruce.game.ai.AiStateMachine;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.util.TimerUtils;
@@ -81,7 +82,7 @@ public class TestEnemy extends HostileEntity {
             float angle = MathUtils.getAngle(this, player);
             float dx = (float) Math.cos(angle) * Projectile.BASE_SPEED;
             float dy = (float) Math.sin(angle) * Projectile.BASE_SPEED;
-            //SoundManager.getInstance().playSound("fireball", 50);
+            SoundManager.getInstance().playSound("fireball", 50);
             GameUtils.spawnEntity(new Fireball(this, getX(), getY(), dx, dy));
             shootTimerTicks = SHOOT_DELAY_TICKS + (int) (Math.random() * 30) - 15;
         }

@@ -20,8 +20,8 @@ public class Camera implements Serializable {
     }
 
     public void update(double delta) {
-        this.x = interpolateCamera ? MathUtils.lerp(this.x, targetX, 0.1f) : targetX;
-        this.y = interpolateCamera ? MathUtils.lerp(this.y, targetY, 0.1f) : targetY;
+        this.x = interpolateCamera ? MathUtils.lerp(this.x, targetX, (float) delta * (Math.abs(this.x - targetX) / 20f)) : targetX;
+        this.y = interpolateCamera ? MathUtils.lerp(this.y, targetY, (float) delta * (Math.abs(this.y - targetY) / 20f)) : targetY;
     }
 
     public void move(float x, float y) {

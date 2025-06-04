@@ -8,7 +8,6 @@ import dev.spruce.game.state.impl.DeathState;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.world.entity.DamageableEntity;
 import dev.spruce.game.world.entity.Entity;
-import dev.spruce.game.world.item.Inventory;
 import dev.spruce.game.world.magic.ManaManager;
 import dev.spruce.game.world.magic.spell.SpellManager;
 import dev.spruce.game.world.magic.spell.impl.PlasmaShotSpell;
@@ -25,21 +24,15 @@ public class Player extends DamageableEntity {
     private final ManaManager manaManager;
     private final SpellManager spellManager;
 
-    private final Inventory inventory;
-    private int selectedSlot = 0;
-    private boolean usingSpells = false;
-
-    private final int ANIMATION_DELAY_TICKS = 10;
-    private int animationTicks = 0;
-    private int spriteIndex = 0;
+    //private final int ANIMATION_DELAY_TICKS = 10;
+    //private int animationTicks = 0;
+    //private int spriteIndex = 0;
 
     public Player(float x, float y) {
         super(x, y, 32, 32, 100);
-        this.inventory = new Inventory(8);
         this.manaManager = new ManaManager(10);
         this.spellManager = new SpellManager();
         this.spellManager.addSpell(new PlasmaShotSpell());
-        usingSpells = true;
     }
 
     @Override
@@ -96,31 +89,12 @@ public class Player extends DamageableEntity {
 
     public void handleClick(Camera camera, int button, int x, int y) {
         if (button != MouseEvent.BUTTON1) return;
-        if (usingSpells) {
-            float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
-            spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
-        }
-    }
-
-    public void handleKey(int keyCode) {
-        switch (keyCode) {
-            case KeyEvent.VK_1 -> selectedSlot = 0;
-            case KeyEvent.VK_2 -> selectedSlot = 1;
-            case KeyEvent.VK_3 -> selectedSlot = 2;
-            case KeyEvent.VK_4 -> selectedSlot = 3;
-            case KeyEvent.VK_5 -> selectedSlot = 4;
-            case KeyEvent.VK_6 -> selectedSlot = 5;
-            case KeyEvent.VK_7 -> selectedSlot = 6;
-            case KeyEvent.VK_8 -> selectedSlot = 7;
-            case KeyEvent.VK_R -> usingSpells = !usingSpells;
-        }
+        float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
+        spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
     }
 
     @Override
     public void render(Camera camera) {
-        //graphics.setColor(Color.BLUE);
-        //graphics.fillRect((int) (getX() - camera.getX()), (int) (getY() - camera.getY()), (int) getWidth(), (int) getHeight());
-
         /*
         BufferedImage texture = Assets.getInstance().getEntityTextures().getAsset("player_idle").getImages().get(spriteIndex);
         g2d.drawImage(texture,
@@ -144,23 +118,11 @@ public class Player extends DamageableEntity {
         Game.getStateManager().setState(deathState, true);
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
-
     public ManaManager getManaManager() {
         return manaManager;
     }
 
     public SpellManager getSpellManager() {
         return spellManager;
-    }
-
-    public boolean isUsingSpells() {
-        return usingSpells;
-    }
-
-    public int getSelectedSlot() {
-        return selectedSlot;
     }
 }
