@@ -6,6 +6,7 @@ import dev.spruce.game.Game;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.state.impl.DeathState;
 import dev.spruce.game.state.impl.GameState;
+import dev.spruce.game.world.Tile;
 import dev.spruce.game.world.entity.DamageableEntity;
 import dev.spruce.game.world.entity.Entity;
 import dev.spruce.game.world.magic.ManaManager;
@@ -19,7 +20,7 @@ import java.util.List;
 public class Player extends DamageableEntity {
 
     public static final float PLAYER_SPEED = 200f;
-    public static final int INTERACT_DISTANCE = 125;
+    public static final float INTERACT_DISTANCE = Tile.SIZE * 1.5f;
 
     private final ManaManager manaManager;
     private final SpellManager spellManager;
@@ -113,9 +114,11 @@ public class Player extends DamageableEntity {
     public void onDeath() {
         if (Game.devInvincibility)
             return;
-        DeathState deathState = new DeathState(Game.getStateManager().getGameState().get());
-        Game.getStateManager().getGameState().get().dispose();
-        Game.getStateManager().setState(deathState, true);
+        Game.getStateManager().getGameState().ifPresent(gameState -> {
+            DeathState deathState = new DeathState(gameState);
+            gameState.dispose();
+            Game.getStateManager().setState(deathState);
+        });
     }
 
     public ManaManager getManaManager() {

@@ -1,17 +1,22 @@
 package dev.spruce.game.state.impl;
 
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
 import dev.spruce.game.graphics.ui.hud.InGameHUD;
+import dev.spruce.game.input.IKeyInput;
+import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.State;
+import dev.spruce.game.util.MathUtils;
 import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.entity.DamageableEntity;
 import dev.spruce.game.world.entity.Entity;
 import dev.spruce.game.world.entity.EntityManager;
+import dev.spruce.game.world.entity.Interactable;
 import dev.spruce.game.world.entity.impl.Player;
 import dev.spruce.game.world.entity.impl.hostile.HostileEntity;
 import dev.spruce.game.world.entity.impl.hostile.TestEnemy;
@@ -21,10 +26,9 @@ import dev.spruce.game.world.maps.TestingMap;
 import java.io.IOException;
 import java.util.List;
 
-public class GameState extends State {
+public class GameState extends State implements IKeyInput {
 
     private final String name;
-    private final boolean newGame;
     private int seed;
 
     private EntityManager entityManager;
@@ -40,59 +44,32 @@ public class GameState extends State {
     private int kills = 0;
     private int difficulty = 0;
 
-    public GameState(String name, boolean newGame, int seed) {
+    public GameState(String name, int seed) {
         this.name = name;
-        this.newGame = newGame;
         this.seed = seed;
     }
 
     @Override
     public void init() {
-        entityManager = new EntityManager(this);
-        camera = new Camera(0, 0);
-        if (newGame) {
-            newGameInit();
-        } else {
-            try {
-                loadInit();
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Failed to load game state: " + e.getMessage());
-                Game.getStateManager().setState(new MainMenuState(), true);
-            }
-        }
+        InputManager.getInstance().subscribeKey(this);
+        worldInit();
         inGameHUD = new InGameHUD(this);
         camera.centerOn(player, false);
         particleRenderer = new ParticleRenderer();
         spawner = new Spawner(this);
     }
 
-    // Only called when a new game is started
-    private void newGameInit() {
+    /**
+     * Initializes the world by creating the entity manager, camera, map, and player.
+     * This method is called during the initialization of the game state.
+     */
+    private void worldInit() {
+        entityManager = new EntityManager(this);
+        camera = new Camera(0, 0);
         map = new TestingMap();
-        //map = new OverworldMap(256, 256, seed);
         map.generate(this);
         player = new Player(map.getSpawnX(), map.getSpawnY());
         entityManager.spawn(player);
-
-        // TODO: Remove this bc its to test entities
-        TestEnemy testEnemy = new TestEnemy(map.getSpawnX() + 30, map.getSpawnY() + 30);
-        entityManager.spawn(testEnemy);
-    }
-
-    // Only called when the game is loaded from a save
-    private void loadInit() throws IOException, ClassNotFoundException {
-        map = FileManager.loadMap(name);
-        seed = map.getSeed();
-
-        List<Entity> loadedEntities;
-        loadedEntities = FileManager.loadEntities(name);
-
-        for (Entity e : loadedEntities) {
-            if (e instanceof Player) {
-                player = (Player) e;
-            }
-            entityManager.spawn(e);
-        }
     }
 
     @Override
@@ -109,12 +86,20 @@ public class GameState extends State {
         Game.getProfiler().endProfile("game_tick");
     }
 
+    /**
+     * Increases the difficulty every 60 seconds.
+     * This will be replaced with a more complex system later.
+     */
     private void handleDifficulty() {
         if (ticksAlive % (RenderPanel.FPS_TARGET * (60L * (difficulty + 1))) == 0) {
             difficulty++;
         }
     }
 
+    /**
+     * Checks for collisions between projectiles and entities.
+     * If a projectile collides with a damageable entity, it deals damage and despawns the projectile.
+     */
     private void checkProjectileCollisions() {
         for (Entity entity : entityManager.getOnScreenEntities()) {
             if (!(entity instanceof Projectile projectile))
@@ -155,14 +140,22 @@ public class GameState extends State {
         inGameHUD.render();
     }
 
-    /*
     @Override
     public void onKeyPress(int keyCode) {
-        player.handleKey(keyCode);
+        if (keyCode == Raylib.KEY_E) {
+            for (Entity entity : entityManager.getOnScreenEntities()) {
+                if (entity instanceof Interactable interactable) {
+                    if (MathUtils.isWithinDistance(player, entity, Player.INTERACT_DISTANCE)) {
+                        interactable.interact();
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void onKeyRelease(int keyCode) {
+        /*
         switch (keyCode) {
             case KeyEvent.VK_ESCAPE -> {
                 if (Game.getScreenManager().isScreenOpen()) {
@@ -173,8 +166,15 @@ public class GameState extends State {
             }
             case KeyEvent.VK_E -> Game.getScreenManager().setScreen(new SpellSelectionScreen(), true);
         }
+         */
     }
 
+    @Override
+    public void onKeyTyped(int keyCode, char keyChar) {
+
+    }
+
+    /*
     @Override
     public void onMousePress(int button, int x, int y) {
         if (Game.getStateManager().isPaused()) return;

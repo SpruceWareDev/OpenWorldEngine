@@ -29,7 +29,7 @@ public class MainMenuState extends State {
                 .y((float) Raylib.GetRenderHeight() / 2)
                 .width(400).height(32);
         if(Raylib.GuiButton(startButton, "Start Run") == 1) {
-            Game.getStateManager().setState(new GameState("AHHHH", true, 1234), true);
+            Game.getStateManager().setState(new GameState("AHHHH", 1234));
         }
 
         Raylib.Rectangle journalButton = new Raylib.Rectangle()

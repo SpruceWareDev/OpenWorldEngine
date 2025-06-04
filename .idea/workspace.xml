@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d671efa-7088-421a-abd0-a24b0b913444" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/item/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/environment/Portal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/environment/StagePortal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ideas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ideas.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/graphics/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/StateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/DeathState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/DeathState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameLoadingState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/Interactable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/Interactable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/MainMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/state/impl/MainMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/GameLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/GameLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/Spawner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/util/Spawner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/EntityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/EntityManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/environment/AcaciaTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/environment/AcaciaTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/environment/ItemStackEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/hostile/HostileEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/hostile/HostileEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/hostile/TestEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/entity/impl/hostile/TestEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/maps/TestingMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/spruce/game/world/maps/TestingMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

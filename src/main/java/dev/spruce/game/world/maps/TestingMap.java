@@ -4,6 +4,7 @@ import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.Tile;
 import dev.spruce.game.world.TileManager;
+import dev.spruce.game.world.entity.impl.environment.StagePortal;
 
 public class TestingMap extends Map {
 
@@ -17,6 +18,11 @@ public class TestingMap extends Map {
     @Override
     public void generate(GameState gameState) {
         fillMap(TileManager.getInstance().GRASS);
+        gameState.getEntityManager().spawn(
+                new StagePortal(
+                        getSpawnX() + Tile.SIZE * 2, getSpawnY() + Tile.SIZE * 2
+                )
+        );
     }
 
     @Override

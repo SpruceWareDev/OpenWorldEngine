@@ -7,6 +7,7 @@ import dev.spruce.game.graphics.particle.Particle;
 import dev.spruce.game.util.EntityCollider;
 import dev.spruce.game.util.GameUtils;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.world.Tile;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -62,6 +63,17 @@ public abstract class Entity implements Serializable {
         if (this instanceof DamageableEntity damageable) {
             int healthBarWidth = (int) ((damageable.getHealth() / (float) damageable.getMaxHealth()) * width);
             Raylib.DrawRectangle(x, y - 5, healthBarWidth, 3, Colors.RED);
+        }
+    }
+
+    protected void renderInteractionArea(Camera camera) {
+        if (this instanceof Interactable interactable) {
+            Raylib.DrawCircleLines(
+                (int) (getScreenX(camera) + (float) getEntityCollider().getBounds().width / 2),
+                (int) (getScreenY(camera) + (float) getEntityCollider().getBounds().height / 2),
+                interactable.radius(),
+                Colors.YELLOW
+            );
         }
     }
 

@@ -51,7 +51,7 @@ public class GameLoadingState extends State {
         }
 
         if (!loadingThread.isAlive()) {
-            Game.getStateManager().setState(this.gameLoader.getLoadedGame(), false);
+            Game.getStateManager().setState(this.gameLoader.getLoadedGame());
         }
     }
 

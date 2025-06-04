@@ -26,7 +26,7 @@ public class GameLoader implements Runnable {
 
     @Override
     public void run() {
-        this.loadedGame = new GameState(name, newGame, seed);
+        this.loadedGame = new GameState(name, seed);
         this.loadedGame.init();
     }
 

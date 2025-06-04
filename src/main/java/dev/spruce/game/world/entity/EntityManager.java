@@ -55,6 +55,7 @@ public class EntityManager {
 
             if (Game.debug) {
                 entity.renderBoundingBox(camera);
+                entity.renderInteractionArea(camera);
             }
         }
     }

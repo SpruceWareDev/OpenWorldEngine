@@ -1,5 +1,6 @@
 package dev.spruce.game.state;
 
+import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.impl.GameState;
 
 import java.util.Optional;
@@ -31,11 +32,12 @@ public class StateManager {
         currentState.render();
     }
 
-    public void setState(State state, boolean shouldInit) {
+    public void setState(State state) {
         finishedLoading = false;
         currentState.dispose();
         currentState = state;
-        if (shouldInit) currentState.init();
+        InputManager.getInstance().unsubscribeAll();
+        currentState.init();
         finishedLoading = true;
     }
 

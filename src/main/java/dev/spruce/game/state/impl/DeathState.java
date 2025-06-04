@@ -37,7 +37,7 @@ public class DeathState extends State {
                 .width(400).height(32);
         if (Raylib.GuiButton(respawnButton, "Respawn") == 1) {
             gameState.getPlayer().setHealth(gameState.getPlayer().getMaxHealth());
-            Game.getStateManager().setState(gameState, false);
+            Game.getStateManager().setState(gameState);
         }
     }
 
