@@ -3,12 +3,8 @@ package dev.spruce.game.state.impl;
 import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.assets.Fonts;
-import dev.spruce.game.graphics.font.FontRenderer;
 import dev.spruce.game.state.State;
 import dev.spruce.game.util.GameLoader;
-
-import java.awt.*;
 
 public class GameLoadingState extends State {
 

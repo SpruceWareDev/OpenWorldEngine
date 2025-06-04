@@ -3,19 +3,11 @@ package dev.spruce.game.state.impl;
 import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.assets.Fonts;
-import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.ui.component.ScreenSnapPoint;
-import dev.spruce.game.graphics.ui.component.UIManager;
-import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.State;
-
-import java.awt.*;
 
 public class DeathState extends State {
 
     private final GameState gameState;
-    //private UIManager uiManager;
 
     public DeathState(GameState gameState) {
         this.gameState = gameState;
@@ -23,26 +15,7 @@ public class DeathState extends State {
 
     @Override
     public void init() {
-        /*
-        this.uiManager = new UIManager();
-        this.uiManager.addElement(
-                new UIButton(
-                        "Respawn",
-                        Color.BLUE,
-                        Window.getInstance().getWidth() / 2 - 50,
-                        Window.getInstance().getHeight() / 2 + 50,
-                        100, 40,
-                        ScreenSnapPoint.CENTER,
-                        () -> {
-                            gameState.getPlayer().setHealth(gameState.getPlayer().getMaxHealth());
-                            InputManager.getInstance().subscribeKey(gameState);
-                            InputManager.getInstance().subscribeMouse(gameState);
-                            Game.getStateManager().setState(gameState, false);
-                        }
-                )
-        );
 
-         */
     }
 
     @Override
@@ -52,8 +25,20 @@ public class DeathState extends State {
 
     @Override
     public void render() {
-        Raylib.DrawText("YOU DIED", 10, 10, 22, Colors.WHITE);
-        //uiManager.render(graphics);
+        Raylib.DrawText(
+                "YOU DIED",
+                Raylib.GetRenderWidth() / 2 - Raylib.MeasureText("YOU DIED", 22) / 2,
+                Raylib.GetRenderHeight() / 3, 22, Colors.WHITE
+        );
+
+        Raylib.Rectangle respawnButton = new Raylib.Rectangle()
+                .x((float) Raylib.GetRenderWidth() / 2 - 200)
+                .y((float) Raylib.GetRenderHeight() / 2)
+                .width(400).height(32);
+        if (Raylib.GuiButton(respawnButton, "Respawn") == 1) {
+            gameState.getPlayer().setHealth(gameState.getPlayer().getMaxHealth());
+            Game.getStateManager().setState(gameState, false);
+        }
     }
 
     @Override

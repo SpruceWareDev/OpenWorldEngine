@@ -1,10 +1,8 @@
 package dev.spruce.game.graphics.particle;
 
-import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.Colours;
-import dev.spruce.game.util.RenderUtils;
 
 import java.awt.*;
 

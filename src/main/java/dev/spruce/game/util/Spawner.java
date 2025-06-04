@@ -1,9 +1,9 @@
 package dev.spruce.game.util;
 
-import dev.spruce.game.entity.Entity;
-import dev.spruce.game.entity.impl.Player;
-import dev.spruce.game.entity.impl.hostile.HostileEntity;
-import dev.spruce.game.entity.impl.hostile.TestEnemy;
+import dev.spruce.game.world.entity.Entity;
+import dev.spruce.game.world.entity.impl.Player;
+import dev.spruce.game.world.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.world.entity.impl.hostile.TestEnemy;
 import dev.spruce.game.state.impl.GameState;
 
 public class Spawner {

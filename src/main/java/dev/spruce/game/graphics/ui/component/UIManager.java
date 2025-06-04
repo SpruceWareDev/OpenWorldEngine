@@ -2,7 +2,6 @@ package dev.spruce.game.graphics.ui.component;
 
 import com.raylib.Raylib;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

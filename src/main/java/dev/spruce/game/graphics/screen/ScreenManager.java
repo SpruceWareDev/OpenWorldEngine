@@ -1,10 +1,6 @@
 package dev.spruce.game.graphics.screen;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.util.RenderUtils;
-
-import java.awt.*;
-import java.util.Optional;
 
 public class ScreenManager {
 

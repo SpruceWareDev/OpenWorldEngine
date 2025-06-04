@@ -23,7 +23,6 @@ public class Game {
 
     // Development flags
     public static boolean debug = false;
-    public static boolean devSpawnMode = false;
     public static boolean devInvincibility = false;
 
     // Game components

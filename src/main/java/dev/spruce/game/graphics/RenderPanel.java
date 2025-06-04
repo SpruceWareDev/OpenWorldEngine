@@ -3,9 +3,6 @@ package dev.spruce.game.graphics;
 import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.input.InputManager;
-
-import java.awt.*;
 
 public class RenderPanel {
 
@@ -23,6 +20,7 @@ public class RenderPanel {
     private void initRaylib(String windowTitle, int width, int height) {
         Raylib.InitWindow(width, height, windowTitle);
         Raylib.SetTargetFPS(FPS_TARGET);
+        Raylib.SetExitKey(Raylib.KEY_NULL);
     }
 
     public void run() {

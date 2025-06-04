@@ -4,7 +4,6 @@ import com.raylib.Raylib;
 import dev.spruce.game.BuildVersion;
 import dev.spruce.game.Game;
 
-import java.awt.event.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class InputManager {
@@ -74,7 +73,6 @@ public class InputManager {
         if (Game.BUILD_VERSION.equals(BuildVersion.DEVELOPMENT)) {
             switch (keyCode) {
                 case Raylib.KEY_F3 -> Game.debug = !Game.debug;
-                case Raylib.KEY_F4 -> Game.devSpawnMode = !Game.devSpawnMode;
                 case Raylib.KEY_F5 -> Game.devInvincibility = !Game.devInvincibility;
             }
         }

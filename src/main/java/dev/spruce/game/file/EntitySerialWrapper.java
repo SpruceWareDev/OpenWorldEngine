@@ -1,6 +1,6 @@
 package dev.spruce.game.file;
 
-import dev.spruce.game.entity.Entity;
+import dev.spruce.game.world.entity.Entity;
 
 import java.io.Serializable;
 import java.util.List;

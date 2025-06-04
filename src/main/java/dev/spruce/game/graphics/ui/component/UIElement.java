@@ -1,7 +1,5 @@
 package dev.spruce.game.graphics.ui.component;
 
-import java.awt.*;
-
 public abstract class UIElement {
 
     private int x, y, width, height;

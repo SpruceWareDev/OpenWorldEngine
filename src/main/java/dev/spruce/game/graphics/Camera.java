@@ -1,8 +1,8 @@
 package dev.spruce.game.graphics;
 
 import com.raylib.Raylib;
-import dev.spruce.game.entity.Entity;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.world.entity.Entity;
 
 import java.io.Serializable;
 

@@ -1,8 +1,8 @@
 package dev.spruce.game.util;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.entity.Entity;
-import dev.spruce.game.entity.impl.Player;
+import dev.spruce.game.world.entity.Entity;
+import dev.spruce.game.world.entity.impl.Player;
 import dev.spruce.game.graphics.particle.Particle;
 
 /**

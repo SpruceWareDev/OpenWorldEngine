@@ -3,22 +3,15 @@ package dev.spruce.game.graphics.ui.hud;
 import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.assets.Assets;
-import dev.spruce.game.assets.Fonts;
 import dev.spruce.game.graphics.Colours;
-import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.ui.hud.effect.MovingLetterEffect;
-import dev.spruce.game.item.ItemStack;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.DifficultyUtils;
-import dev.spruce.game.util.RenderUtils;
 import dev.spruce.game.util.TimerUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 public class InGameHUD {
 
@@ -145,12 +138,6 @@ public class InGameHUD {
                 );
                 i++;
             }
-        }
-        if (Game.devSpawnMode) {
-            Raylib.DrawText(
-                    "Dev Spawn Mode",
-                    100, 100, 20, Colors.YELLOW
-            );
         }
     }
 

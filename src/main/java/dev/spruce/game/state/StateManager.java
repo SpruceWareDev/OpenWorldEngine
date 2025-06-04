@@ -1,9 +1,7 @@
 package dev.spruce.game.state;
 
-import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.impl.GameState;
 
-import java.awt.*;
 import java.util.Optional;
 
 public class StateManager {

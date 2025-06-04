@@ -4,12 +4,9 @@ import com.raylib.Colors;
 import com.raylib.Raylib;
 import dev.spruce.game.assets.Assets;
 import dev.spruce.game.graphics.Camera;
-
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.RenderUtils;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 public abstract class Map implements Serializable {

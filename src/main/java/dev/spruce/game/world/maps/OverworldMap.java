@@ -1,11 +1,11 @@
 package dev.spruce.game.world.maps;
 
-import dev.spruce.game.entity.impl.environment.AcaciaTree;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.Noise;
 import dev.spruce.game.world.Map;
 import dev.spruce.game.world.Tile;
 import dev.spruce.game.world.TileManager;
+import dev.spruce.game.world.entity.impl.environment.AcaciaTree;
 
 public class OverworldMap extends Map {
 

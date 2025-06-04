@@ -1,7 +1,5 @@
 package dev.spruce.game.state;
 
-import java.awt.*;
-
 public abstract class State {
 
     public abstract void init();

@@ -1,14 +1,6 @@
 package dev.spruce.game.state.impl;
 
-import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.entity.DamageableEntity;
-import dev.spruce.game.entity.Entity;
-import dev.spruce.game.entity.EntityManager;
-import dev.spruce.game.entity.impl.Player;
-import dev.spruce.game.entity.impl.hostile.HostileEntity;
-import dev.spruce.game.entity.impl.hostile.TestEnemy;
-import dev.spruce.game.entity.impl.projectile.Projectile;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.RenderPanel;
@@ -17,6 +9,13 @@ import dev.spruce.game.graphics.ui.hud.InGameHUD;
 import dev.spruce.game.state.State;
 import dev.spruce.game.util.Spawner;
 import dev.spruce.game.world.Map;
+import dev.spruce.game.world.entity.DamageableEntity;
+import dev.spruce.game.world.entity.Entity;
+import dev.spruce.game.world.entity.EntityManager;
+import dev.spruce.game.world.entity.impl.Player;
+import dev.spruce.game.world.entity.impl.hostile.HostileEntity;
+import dev.spruce.game.world.entity.impl.hostile.TestEnemy;
+import dev.spruce.game.world.entity.impl.projectile.Projectile;
 import dev.spruce.game.world.maps.TestingMap;
 
 import java.io.IOException;
@@ -99,7 +98,6 @@ public class GameState extends State {
     @Override
     public void update(double delta) {
         Game.getProfiler().startProfile("game_tick");
-
         ticksAlive++;
         handleDifficulty();
         spawner.update();
@@ -108,7 +106,6 @@ public class GameState extends State {
         checkProjectileCollisions();
         inGameHUD.update(delta);
         particleRenderer.update(delta);
-
         Game.getProfiler().endProfile("game_tick");
     }
 
@@ -146,19 +143,15 @@ public class GameState extends State {
     @Override
     public void render() {
         camera.centerOn(player, false);
-
         Game.getProfiler().startProfile("map");
         map.render(camera);
         Game.getProfiler().endProfile("map");
-
         Game.getProfiler().startProfile("entities");
         entityManager.render(camera);
         Game.getProfiler().endProfile("entities");
-
         Game.getProfiler().startProfile("particles");
         particleRenderer.render(camera);
         Game.getProfiler().endProfile("particles");
-
         inGameHUD.render();
     }
 
