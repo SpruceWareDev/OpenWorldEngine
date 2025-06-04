@@ -88,9 +88,10 @@ public class Player extends DamageableEntity {
         applyVelocity(delta, PLAYER_SPEED, collidingX, collidingY);
     }
 
-    public void handleClick(Camera camera, int button, int x, int y) {
-        if (button != MouseEvent.BUTTON1) return;
-        float angle = (float) Math.atan2(y - getScreenY(camera), x - getScreenX(camera));
+    public void handleSpellCasting(Camera camera) {
+        if (!Raylib.IsMouseButtonDown(Raylib.MOUSE_BUTTON_LEFT))
+            return;
+        float angle = (float) Math.atan2(Raylib.GetMouseY() - getScreenY(camera), Raylib.GetMouseX() - getScreenX(camera));
         spellManager.castCurrentSpell(manaManager, getX(), getY(), angle);
     }
 

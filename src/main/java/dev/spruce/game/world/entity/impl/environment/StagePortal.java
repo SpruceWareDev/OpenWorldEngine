@@ -2,12 +2,14 @@ package dev.spruce.game.world.entity.impl.environment;
 
 import com.raylib.Colors;
 import com.raylib.Raylib;
+import dev.spruce.game.Game;
 import dev.spruce.game.graphics.Camera;
+import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.world.Tile;
 
 public class StagePortal extends Portal {
 
-    private Raylib.Color color = Colors.RED;
+    private final Raylib.Color color = Colors.RED;
 
     public StagePortal(float x, float y) {
         super(x, y, 64, 128);
@@ -30,7 +32,7 @@ public class StagePortal extends Portal {
     @Override
     public void interact() {
         System.out.println("Interacted with Stage Portal at (" + getX() + ", " + getY() + ")");
-        color = Colors.GREEN; // Change color on interaction
+        Game.getStateManager().getGameState().ifPresent(GameState::activateStageTransition);
     }
 
     @Override

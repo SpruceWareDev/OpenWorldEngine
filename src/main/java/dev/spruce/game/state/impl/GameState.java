@@ -1,8 +1,8 @@
 package dev.spruce.game.state.impl;
 
 import com.raylib.Raylib;
+import com.raylib.Test;
 import dev.spruce.game.Game;
-import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.Camera;
 import dev.spruce.game.graphics.RenderPanel;
 import dev.spruce.game.graphics.particle.ParticleRenderer;
@@ -18,13 +18,12 @@ import dev.spruce.game.world.entity.Entity;
 import dev.spruce.game.world.entity.EntityManager;
 import dev.spruce.game.world.entity.Interactable;
 import dev.spruce.game.world.entity.impl.Player;
+import dev.spruce.game.world.entity.impl.hostile.Boss;
 import dev.spruce.game.world.entity.impl.hostile.HostileEntity;
-import dev.spruce.game.world.entity.impl.hostile.TestEnemy;
+import dev.spruce.game.world.entity.impl.hostile.TestBoss;
 import dev.spruce.game.world.entity.impl.projectile.Projectile;
+import dev.spruce.game.world.maps.OverworldMap;
 import dev.spruce.game.world.maps.TestingMap;
-
-import java.io.IOException;
-import java.util.List;
 
 public class GameState extends State implements IKeyInput {
 
@@ -43,6 +42,11 @@ public class GameState extends State implements IKeyInput {
     private long ticksAlive = 0;
     private int kills = 0;
     private int difficulty = 0;
+
+    private int stages = 0;
+    private boolean transitioning = false;
+    private boolean bossActive = false;
+    private boolean bossCompleted = false;
 
     public GameState(String name, int seed) {
         this.name = name;
@@ -77,9 +81,11 @@ public class GameState extends State implements IKeyInput {
         Game.getProfiler().startProfile("game_tick");
         ticksAlive++;
         handleDifficulty();
+        handleBosses();
         spawner.update();
         camera.update(delta);
         entityManager.update(delta);
+        player.handleSpellCasting(camera);
         checkProjectileCollisions();
         inGameHUD.update(delta);
         particleRenderer.update(delta);
@@ -93,6 +99,49 @@ public class GameState extends State implements IKeyInput {
     private void handleDifficulty() {
         if (ticksAlive % (RenderPanel.FPS_TARGET * (60L * (difficulty + 1))) == 0) {
             difficulty++;
+        }
+    }
+
+    /**
+     * Activates the stage transition.
+     * If the boss is not completed and not active, it spawns a new boss.
+     * If the boss is completed, it clears the entities, generates a new map,
+     * and resets the player position.
+     */
+    public void activateStageTransition() {
+        if (transitioning) return;
+        if (!bossCompleted && !bossActive) {
+            bossActive = true;
+            getEntityManager().spawn(new TestBoss(
+                player.getX() + 100, player.getY() + 100, 64, 64
+            ));
+        } else if (bossCompleted) {
+            transitioning = true;
+            stages++;
+            this.entityManager.getEntities().clear();
+            this.map = new OverworldMap(100, 100, seed);
+            this.map.generate(this);
+            this.player.setX(this.map.getSpawnX());
+            this.player.setY(this.map.getSpawnY());
+            this.entityManager.spawn(this.player);
+            this.camera.centerOn(player, false);
+            bossCompleted = false;
+            transitioning = false;
+        }
+    }
+
+    private void handleBosses() {
+        if (bossActive && !bossCompleted) {
+            int bossesAlive = 0;
+            for (Entity entity : entityManager.getEntities()) {
+                if (entity instanceof Boss) {
+                    bossesAlive++;
+                }
+            }
+            if (bossesAlive == 0) {
+                bossCompleted = true;
+                bossActive = false;
+            }
         }
     }
 
@@ -235,6 +284,10 @@ public class GameState extends State implements IKeyInput {
 
     public long getTicksAlive() {
         return ticksAlive;
+    }
+
+    public int getStages() {
+        return stages;
     }
 
     public  Camera getCamera() {

@@ -31,10 +31,7 @@ public class Spawner {
 
         if (spawnTimer >= spawnIntervalTicks) {
             Player player = gameState.getPlayer();
-            int x = (int) player.getX() + (int) (Math.random() * 1000 - 500);
-            int y = (int) player.getY() + (int) (Math.random() * 1000 - 500);
-
-            List<HostileEntity> hostiles = generateHostiles(x, y);
+            List<HostileEntity> hostiles = generateHostiles(player);
             for (HostileEntity hostile : hostiles) {
                 gameState.getEntityManager().spawn(hostile);
                 lastSpawnedHostile = hostile;
@@ -44,11 +41,15 @@ public class Spawner {
         spawnTimer++;
     }
 
-    private List<HostileEntity> generateHostiles(int x, int y) {
-        int spawnTokens = BASE_SPAWN_TOKENS + (gameState.getDifficulty() * BASE_SPAWN_TOKENS);
+    private List<HostileEntity> generateHostiles(Player player) {
+        int spawnTokens = BASE_SPAWN_TOKENS + ((gameState.getDifficulty() ^ 2) * BASE_SPAWN_TOKENS);
+        System.out.println("Spawning hostiles with " + spawnTokens + " tokens at player position: " + player.getX() + ", " + player.getY());
         List<HostileEntity> hostiles = new ArrayList<>();
 
         while (spawnTokens > 0) {
+            int x = (int) player.getX() + (int) (Math.random() * 1000 - 500);
+            int y = (int) player.getY() + (int) (Math.random() * 1000 - 500);
+
             HostileEntity hostile = getRandomHostile(spawnTokens, x, y);
             hostiles.add(hostile);
             spawnTokens -= hostile.getSpawnCost();
