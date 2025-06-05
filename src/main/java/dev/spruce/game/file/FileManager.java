@@ -1,11 +1,10 @@
 package dev.spruce.game.file;
 
-import dev.spruce.game.entity.Entity;
+import dev.spruce.game.world.entity.Entity;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.world.Map;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

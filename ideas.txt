@@ -1,5 +1,6 @@
 #########################################################################
 Wizard rogue-like game with a focus on spell casting in combat.
+#########################################################################
 Killing enemies will drop items that can be sacrificed to gain new spells.
 These spells can be used in combat, and can also be combined with other spells to create new effects.
 #########################################################################
@@ -8,12 +9,20 @@ The player will fight a boss at the end of each area.
 #########################################################################
 
 (0.3-alpha)
-- TODO: Implement map switching to game state to allow for different areas.
-- TODO: Implement area interactable objects that have an area around which the player must enter to interact with them.
-- IN PROGRESS: Implement a portal that spawns randomly in the game.
+- TODO: Implement item effects.
+- TODO: Implement 2 basic items: mana potion and health potion.
+- TODO: Make the first proper enemy.
+- TODO: Rewrite test enemy AI attack to add movement.
+- TODO: Implement enemies dropping items.
+
+- IN PROGRESS: Implement map switching to game state to allow for different areas.
+- IN PROGRESS: Implement items.
+
+- DONE: Implement a portals.
+- DONE: Implement area interactable objects that have an area around which the player must enter to interact with them.
 
 (0.2-alpha)
-- Implement time tracker.
-- Implement difficulty system that increases with time.
-- Add enemy spawning algorithm.
-- Implement difficulty scaling for enemy spawning algorithm.
+- DONE: Implement time tracker.
+- DONE: Implement difficulty system that increases with time.
+- DONE: Add enemy spawning algorithm.
+- DONE: Implement difficulty scaling for enemy spawning algorithm.

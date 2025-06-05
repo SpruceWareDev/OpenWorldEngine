@@ -7,4 +7,5 @@ package dev.spruce.game.assets;
  */
 public abstract class AssetManager<I, T> {
     public abstract T getAsset(I assetId);
+    public abstract void dispose();
 }

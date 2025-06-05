@@ -1,6 +1,5 @@
 package dev.spruce.game.world;
 
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 public class Tile implements Serializable {

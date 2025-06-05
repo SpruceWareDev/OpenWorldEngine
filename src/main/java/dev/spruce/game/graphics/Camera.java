@@ -1,7 +1,8 @@
 package dev.spruce.game.graphics;
 
-import dev.spruce.game.entity.Entity;
+import com.raylib.Raylib;
 import dev.spruce.game.util.MathUtils;
+import dev.spruce.game.world.entity.Entity;
 
 import java.io.Serializable;
 
@@ -19,8 +20,8 @@ public class Camera implements Serializable {
     }
 
     public void update(double delta) {
-        this.x = interpolateCamera ? MathUtils.lerp(this.x, targetX, 0.1f) : targetX;
-        this.y = interpolateCamera ? MathUtils.lerp(this.y, targetY, 0.1f) : targetY;
+        this.x = interpolateCamera ? MathUtils.lerp(this.x, targetX, (float) delta * (Math.abs(this.x - targetX) / 20f)) : targetX;
+        this.y = interpolateCamera ? MathUtils.lerp(this.y, targetY, (float) delta * (Math.abs(this.y - targetY) / 20f)) : targetY;
     }
 
     public void move(float x, float y) {
@@ -29,8 +30,8 @@ public class Camera implements Serializable {
     }
 
     public void centerOn(float x, float y, boolean interpolated) {
-        targetX = x - Window.getInstance().getWidth() / 2f;
-        targetY = y - Window.getInstance().getHeight() / 2f;
+        targetX = x - Raylib.GetRenderWidth() / 2f;
+        targetY = y - Raylib.GetRenderHeight() / 2f;
         interpolateCamera = interpolated;
     }
 

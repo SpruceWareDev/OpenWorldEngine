@@ -1,13 +1,8 @@
 package dev.spruce.game.graphics;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.input.InputManager;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class RenderPanel {
 
@@ -15,75 +10,54 @@ public class RenderPanel {
     public static final int TICK_RATE = 60;
 
     private final Game game;
-    private Canvas canvas;
-    private Graphics graphics;
-    private boolean running;
+    //private Thread tickThread;
 
-    public RenderPanel(Game game) {
+    public RenderPanel(Game game, String windowTitle, int width, int height) {
         this.game = game;
-        initCanvas();
-        running = true;
+        initRaylib(windowTitle, width, height);
     }
 
-    private void initCanvas() {
-        canvas = new Canvas();
-        canvas.setSize(Window.getInstance().getSize());
-        canvas.addKeyListener(InputManager.getInstance());
-        canvas.addMouseListener(InputManager.getInstance());
-        canvas.addMouseMotionListener(InputManager.getInstance());
-        Window.getInstance().add(canvas);
-        canvas.createBufferStrategy(3);
-        canvas.setFocusable(true);
-        canvas.requestFocus();
-        canvas.setVisible(true);
+    private void initRaylib(String windowTitle, int width, int height) {
+        Raylib.InitWindow(width, height, windowTitle);
+        Raylib.SetTargetFPS(FPS_TARGET);
+        Raylib.SetExitKey(Raylib.KEY_NULL);
     }
 
     public void run() {
-        double ns = 1000000000.0 / TICK_RATE;
-        double renderNs = 1000000000.0 / FPS_TARGET;
-        double delta = 0;
-        double renderDelta = 0;
-        long lastTime = System.nanoTime();
-        long renderTime = System.nanoTime();
-        long timer = System.currentTimeMillis();
-        int frames = 0;
-        int updates = 0;
+        while (!Raylib.WindowShouldClose()) {
+            game.update(Raylib.GetFrameTime());
 
-        while (running) {
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-            while (delta >= 1) {
-                update(delta);
-                updates++;
-                delta--;
-            }
-            now = System.nanoTime();
-            renderDelta += (now - renderTime) / renderNs;
-            renderTime = now;
-            while (renderDelta >= 1) {
-                render();
-                renderDelta--;
-                frames++;
-            }
-            if (System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
-                Window.getInstance().setTitle(String.format("%s (%s ups, %s fps)", Game.FORMATTED_NAME, updates, frames));
-                updates = 0;
-                frames = 0;
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Colors.BLACK);
+            game.render();
+            Raylib.DrawFPS(10, 10);
+            Raylib.EndDrawing();
+        }
+        game.dispose();
+        Raylib.CloseWindow();
+    }
+
+    /*
+    private class TickHandler implements Runnable {
+
+        @Override
+        public void run() {
+            double ns = 1000000000.0 / TICK_RATE;
+            double delta = 0;
+            double lastTime = System.nanoTime();
+
+            while (!Raylib.WindowShouldClose()) {
+                long now = System.nanoTime();
+                delta += (now - lastTime) / ns;
+                lastTime = now;
+                while (delta >= 1) {
+                    game.update(delta);
+                    delta--;
+                }
+                now = System.nanoTime();
             }
         }
     }
 
-    private void update(double delta) {
-        game.update(delta);
-    }
-
-    private void render() {
-        graphics = canvas.getBufferStrategy().getDrawGraphics();
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, Window.getInstance().getSize().width, Window.getInstance().getSize().height);
-        game.render(graphics);
-        canvas.getBufferStrategy().show();
-    }
+     */
 }

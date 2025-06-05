@@ -3,7 +3,6 @@ package dev.spruce.game.state;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.state.impl.GameState;
 
-import java.awt.*;
 import java.util.Optional;
 
 public class StateManager {
@@ -27,18 +26,18 @@ public class StateManager {
         currentState.update(delta);
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
         if (!finishedLoading)
             return;
-        currentState.render(graphics);
+        currentState.render();
     }
 
-    public void setState(State state, boolean shouldInit) {
+    public void setState(State state) {
         finishedLoading = false;
         currentState.dispose();
-        if (shouldInit) InputManager.getInstance().unsubscribeAll();
         currentState = state;
-        if (shouldInit) currentState.init();
+        InputManager.getInstance().unsubscribeAll();
+        currentState.init();
         finishedLoading = true;
     }
 

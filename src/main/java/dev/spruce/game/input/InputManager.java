@@ -1,12 +1,12 @@
 package dev.spruce.game.input;
 
+import com.raylib.Raylib;
 import dev.spruce.game.BuildVersion;
 import dev.spruce.game.Game;
 
-import java.awt.event.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class InputManager implements KeyListener, MouseListener, MouseMotionListener {
+public class InputManager {
 
     private static InputManager instance;
 
@@ -17,7 +17,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
     private int mouseX, mouseY;
 
     public void init() {
-        keys = new boolean[256];
+        keys = new boolean[512];
         keySubscribers = new CopyOnWriteArrayList<>();
         mouseSubscribers = new CopyOnWriteArrayList<>();
     }
@@ -51,88 +51,59 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
         return mouseSubscribers.contains(input);
     }
 
-    public boolean isKeyDown(int keyCode) {
-        if (keyCode > 0 && keyCode < keys.length - 1)
-            return keys[keyCode];
-        return false;
-    }
+    public void pollInputs() {
+        for (int i = 0; i < keys.length; i++) {
+            boolean previousState = keys[i];
+            boolean nextState = Raylib.IsKeyDown(i);
+            if (previousState && !nextState) {
+                keyReleased(i);
+            } else if (!previousState && nextState) {
+                keyPressed(i);
+            }
+            keys[i] = Raylib.IsKeyDown(i);
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        for (IKeyInput input : keySubscribers) {
-            input.onKeyTyped(e.getKeyCode(), e.getKeyChar());
         }
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() > 0 && e.getKeyCode() < keys.length - 1) {
-            keys[e.getKeyCode()] = true;
-            for (IKeyInput input : keySubscribers) {
-                input.onKeyPress(e.getKeyCode());
-            }
+    public void keyPressed(int keyCode) {
+        for (IKeyInput input : keySubscribers) {
+            input.onKeyPress(keyCode);
         }
 
         if (Game.BUILD_VERSION.equals(BuildVersion.DEVELOPMENT)) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_F3 -> Game.debug = !Game.debug;
-                case KeyEvent.VK_F4 -> Game.devSpawnMode = !Game.devSpawnMode;
-                case KeyEvent.VK_F5 -> Game.devInvincibility = !Game.devInvincibility;
+            switch (keyCode) {
+                case Raylib.KEY_F3 -> Game.debug = !Game.debug;
+                case Raylib.KEY_F5 -> Game.devInvincibility = !Game.devInvincibility;
             }
         }
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() > 0 && e.getKeyCode() < keys.length - 1) {
-            keys[e.getKeyCode()] = false;
-            for (IKeyInput input : keySubscribers) {
-                input.onKeyRelease(e.getKeyCode());
-            }
+    public void keyReleased(int keyCode) {
+        for (IKeyInput input : keySubscribers) {
+            input.onKeyRelease(keyCode);
         }
     }
 
-    @Override
+    /*
     public void mouseClicked(MouseEvent e) {
         for (IMouseInput input : mouseSubscribers) {
             input.onMouseClick(e.getButton(), e.getX(), e.getY());
         }
     }
 
-    @Override
     public void mousePressed(MouseEvent e) {
         for (IMouseInput input : mouseSubscribers) {
             input.onMousePress(e.getButton(), e.getX(), e.getY());
         }
     }
 
-    @Override
     public void mouseReleased(MouseEvent e) {
         for (IMouseInput input : mouseSubscribers) {
             input.onMouseRelease(e.getButton(), e.getX(), e.getY());
         }
     }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-    }
+     */
 
     public int getMouseX() {
         return mouseX;

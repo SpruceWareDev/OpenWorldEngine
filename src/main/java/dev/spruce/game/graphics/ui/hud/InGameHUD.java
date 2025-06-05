@@ -1,20 +1,17 @@
 package dev.spruce.game.graphics.ui.hud;
 
+import com.raylib.Colors;
+import com.raylib.Raylib;
 import dev.spruce.game.Game;
-import dev.spruce.game.assets.Assets;
-import dev.spruce.game.assets.Fonts;
-import dev.spruce.game.graphics.Window;
-import dev.spruce.game.graphics.font.FontRenderer;
-import dev.spruce.game.graphics.particle.ParticleRenderer;
-import dev.spruce.game.graphics.ui.hud.effect.MovingLetterEffect;
-import dev.spruce.game.item.ItemStack;
+import dev.spruce.game.graphics.Colours;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.util.DifficultyUtils;
-import dev.spruce.game.util.RenderUtils;
 import dev.spruce.game.util.TimerUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InGameHUD {
 
@@ -23,7 +20,12 @@ public class InGameHUD {
     private static final int ITEM_SLOT_SIZE = 56;
     private static final int ITEM_SLOT_PADDING = 4;
 
-    private MovingLetterEffect difficultyBarEffect;
+    //private MovingLetterEffect difficultyBarEffect;
+
+    // Profiler stuff
+    private static final int PROFILER_UPDATE_TICKS = TimerUtils.ticksFromSeconds(1f);
+    private int profilerTimer = 0;
+    private List<String> profiles;
 
     public InGameHUD(GameState gameState) {
         this.gameState = gameState;
@@ -31,23 +33,115 @@ public class InGameHUD {
     }
 
     private void init() {
-        this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '+', new Color(0x8100FFA6, true), 1.0f);
+        this.profiles = new ArrayList<>();
+        //this.difficultyBarEffect = new MovingLetterEffect(0, 0, 260, 160, '+', new Color(0x8100FFA6, true), 1.0f);
     }
 
     public void update(double delta) {
-        this.difficultyBarEffect.update(delta);
+        //this.difficultyBarEffect.update(delta);
+
+        // Profiler
+        if (profilerTimer >= PROFILER_UPDATE_TICKS) {
+            profiles.clear();
+            for (String profile : Game.getProfiler().getProfiles().keySet()) {
+                profiles.add(profile + ": " + Game.getProfiler().getProfiles().get(profile) + "ns");
+            }
+            profilerTimer = 0;
+        }
+        profilerTimer++;
     }
 
-    public void render(Graphics graphics) {
-        int screenW = Window.getInstance().getWidth();
-        int screenH = Window.getInstance().getHeight();
-
+    public void render() {
+        int screenW = Raylib.GetRenderWidth();
+        int screenH = Raylib.GetRenderHeight();
+        /*
         FontRenderer.drawString(graphics, Game.FORMATTED_NAME, 10, 10, false, Color.white, Fonts.DEFAULT);
         renderHotbar(graphics, screenW, screenH);
-        renderTimeDifficulty(graphics, screenW, screenH);
-        renderDebugInfo(graphics);
+         */
+
+        renderDebugInfo();
+        renderTimeDifficulty(screenW, screenH);
+    }
+    private void renderTimeDifficulty(int screenW, int screenH) {
+        Color backgroundColor;
+        if (gameState.getDifficulty() < DifficultyUtils.DIFFICULTY_NAMES.length - 1) {
+            int redLevel = (int) (120 * (gameState.getDifficulty() / (float) (DifficultyUtils.DIFFICULTY_NAMES.length - 1)));
+            backgroundColor = new Color(redLevel, 0, 0, 128);
+        } else {
+            backgroundColor = new Color(120, 0, 0, 128);
+        }
+
+        int backgroundX = screenW - 270;
+        int backgroundY = 20;
+
+        Raylib.DrawRectangle(backgroundX, backgroundY, 260, 160, Colours.awtToRay(backgroundColor));
+
+        Raylib.DrawText("Difficulty", screenW - 260, 22, 30, Colors.WHITE);
+        Raylib.DrawText(
+                "Time: " + TimerUtils.formatTime(gameState.getTicksAlive()) + "s",
+                screenW - 260, 50, 22, Colors.WHITE
+        );
+        Raylib.DrawText(
+                "Kills: " + gameState.getKills(),
+                screenW - 260, 70, 22, Colors.WHITE
+        );
+        Raylib.DrawText(
+                "Difficulty: " + DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
+                screenW - 260, 90, 22, Colors.WHITE
+        );
+
+        /*
+
+        //this.difficultyBarEffect.setX(backgroundX);
+        //this.difficultyBarEffect.setY(backgroundY);
+
+        graphics.setColor(Color.white);
+        graphics.drawRect(backgroundX + 20, backgroundY + 110, 220, 40);
+        //RenderUtils.scissorStart(graphics, backgroundX + 22, backgroundY + 112, 216, 36);
+        //this.difficultyBarEffect.render(graphics);
+        //RenderUtils.scissorEnd(graphics);
+
+        FontRenderer.drawStringCentred(graphics,
+                DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
+                backgroundX + 130, backgroundY + 105,
+                Color.white, Fonts.LARGE
+        );
+
+         */
     }
 
+
+    private void renderDebugInfo() {
+        if (Game.debug) {
+            Raylib.DrawText(
+                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
+                    10, 30, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
+                    10, 50, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
+                    10, 70, 20, Colors.WHITE
+            );
+            Raylib.DrawText(
+                    "Seconds Alive: " + gameState.getSecondsAlive(),
+                    10, 90, 20, Colors.WHITE
+            );
+
+            // Profiler
+            int i = 0;
+            for (String profile : profiles) {
+                Raylib.DrawText(
+                        profile, 400, 10 + (i * 20), 20, Colors.WHITE
+                );
+                i++;
+            }
+        }
+    }
+
+    /*
     private void renderHotbar(Graphics graphics, int screenW, int screenH) {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
@@ -97,79 +191,5 @@ public class InGameHUD {
         RenderUtils.drawRect(graphics, hotbarX + (hotbarWidth / 2f), hotbarY - 8, manaWidth, 4, Color.BLUE);
     }
 
-    private void renderDebugInfo(Graphics graphics) {
-        if (Game.debug) {
-            FontRenderer.drawString(graphics,
-                    "Entity Count: " + gameState.getEntityManager().getEntities().size(),
-                    10, 30, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Active audio threads: " + SoundManager.getInstance().getActiveAudioThreads(),
-                    10, 50, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Particle Count: " + gameState.getParticleRenderer().getParticleCount(),
-                    10, 70, false, Color.white, Fonts.DEFAULT
-            );
-            FontRenderer.drawString(graphics,
-                    "Seconds Alive: " + gameState.getSecondsAlive(),
-                    10, 90, false, Color.white, Fonts.DEFAULT
-            );
-        }
-        if (Game.devSpawnMode) {
-            FontRenderer.drawStringCentred(
-                    graphics, "Dev Spawn Mode",
-                    Window.getInstance().getWidth() / 2, 30,
-                    Color.YELLOW, Fonts.LARGE
-            );
-        }
-    }
-
-    private void renderTimeDifficulty(Graphics graphics, int screenW, int screenH) {
-        Color backgroundColor;
-        if (gameState.getDifficulty() < DifficultyUtils.DIFFICULTY_NAMES.length - 1) {
-            int redLevel = (int) (120 * (gameState.getDifficulty() / (float) (DifficultyUtils.DIFFICULTY_NAMES.length - 1)));
-            backgroundColor = new Color(redLevel, 0, 0, 128);
-        } else {
-            backgroundColor = new Color(120, 0, 0, 128);
-        }
-
-        int backgroundX = screenW - 270;
-        int backgroundY = 20;
-
-        graphics.setColor(backgroundColor);
-        graphics.fillRect(backgroundX, backgroundY, 260, 160);
-
-        FontRenderer.drawString(
-                graphics, "Difficulty", screenW - 260, 22,
-                false, Color.white, Fonts.LARGE
-        );
-        FontRenderer.drawString(
-                graphics, "Time: " + TimerUtils.formatTime(gameState.getTicksAlive()) + "s",
-                screenW - 260, 50, false, Color.white, Fonts.DEFAULT
-        );
-        FontRenderer.drawString(
-                graphics, "Kills: " + gameState.getKills(),
-                screenW - 260, 70, false, Color.white, Fonts.DEFAULT
-        );
-        FontRenderer.drawString(
-                graphics, "Difficulty: " + DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
-                screenW - 260, 90, false, Color.white, Fonts.DEFAULT
-        );
-
-        this.difficultyBarEffect.setX(backgroundX);
-        this.difficultyBarEffect.setY(backgroundY);
-
-        graphics.setColor(Color.white);
-        graphics.drawRect(backgroundX + 20, backgroundY + 110, 220, 40);
-        RenderUtils.scissorStart(graphics, backgroundX + 22, backgroundY + 112, 216, 36);
-        this.difficultyBarEffect.render(graphics);
-        RenderUtils.scissorEnd(graphics);
-
-        FontRenderer.drawStringCentred(graphics,
-                DifficultyUtils.getDifficultyName(gameState.getDifficulty()),
-                backgroundX + 130, backgroundY + 105,
-                Color.white, Fonts.LARGE
-        );
-    }
+     */
 }

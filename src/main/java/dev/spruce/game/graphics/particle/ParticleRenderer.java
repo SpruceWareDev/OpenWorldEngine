@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ParticleRenderer {
 
-    private static final int MAX_PARTICLES = 250;
+    private static final int MAX_PARTICLES = 4096;
 
     private final CopyOnWriteArrayList<Particle> particles = new CopyOnWriteArrayList<>();
 
@@ -32,9 +32,9 @@ public class ParticleRenderer {
         }
     }
 
-    public void render(Graphics graphics, Camera camera) {
+    public void render(Camera camera) {
         for (Particle particle : particles) {
-            particle.render(graphics, camera);
+            particle.render(camera);
         }
     }
 

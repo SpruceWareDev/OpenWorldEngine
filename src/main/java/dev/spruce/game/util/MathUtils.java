@@ -1,6 +1,6 @@
 package dev.spruce.game.util;
 
-import dev.spruce.game.entity.Entity;
+import dev.spruce.game.world.entity.Entity;
 
 import java.util.Random;
 

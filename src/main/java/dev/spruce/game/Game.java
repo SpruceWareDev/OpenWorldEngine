@@ -1,15 +1,16 @@
 package dev.spruce.game;
 
+import dev.spruce.game.assets.Assets;
 import dev.spruce.game.file.FileManager;
 import dev.spruce.game.graphics.RenderPanel;
-import dev.spruce.game.graphics.Window;
 import dev.spruce.game.graphics.screen.ScreenManager;
 import dev.spruce.game.input.InputManager;
 import dev.spruce.game.sound.SoundManager;
 import dev.spruce.game.state.StateManager;
+import dev.spruce.game.state.impl.GameState;
 import dev.spruce.game.state.impl.MainMenuState;
+import dev.spruce.game.util.Profiler;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Game {
@@ -22,13 +23,15 @@ public class Game {
 
     // Development flags
     public static boolean debug = false;
-    public static boolean devSpawnMode = false;
     public static boolean devInvincibility = false;
 
     // Game components
     private RenderPanel renderPanel;
     private static StateManager stateManager;
     private static ScreenManager screenManager;
+
+    // Development tools
+    private static Profiler profiler;
 
     /**
      * Starts the game engine.
@@ -38,9 +41,8 @@ public class Game {
         System.out.println("Starting engine!");
         System.out.println(FORMATTED_NAME);
 
-        System.out.println("Initializing input manager...");
-        InputManager.getInstance().init();
-        System.out.println("Input manager initialized.");
+        profiler = new Profiler();
+        profiler.init();
 
         System.out.println("Initializing file manager...");
         try {
@@ -51,17 +53,17 @@ public class Game {
         }
         System.out.println("File manager initialized.");
 
+        InputManager.getInstance().init();
+
         System.out.println("Initializing sound manager...");
         SoundManager.init();
         System.out.println("Sound manager initialized.");
 
-        System.out.println("Initializing window...");
-        Window.init(1200, 720, FORMATTED_NAME);
-        System.out.println("Window initialized.");
-
         System.out.println("Initializing render panel...");
-        renderPanel = new RenderPanel(this);
+        renderPanel = new RenderPanel(this, FORMATTED_NAME, 1280, 720);
         System.out.println("Render panel initialized.");
+
+        Assets.getInstance();
 
         System.out.println("Starting renderer...");
         stateManager = new StateManager(new MainMenuState());
@@ -76,18 +78,18 @@ public class Game {
      */
     public void update(double delta) {
         SoundManager.getInstance().update();
+        InputManager.getInstance().pollInputs();
         stateManager.update(delta);
         screenManager.update(delta);
     }
 
-    /**
-     * Renders the current game state to the provided graphics context.
-     *
-     * @param graphics The graphics context to render to.
-     */
-    public void render(Graphics graphics) {
-        stateManager.render(graphics);
-        screenManager.render(graphics);
+    public void render() {
+        stateManager.render();
+        screenManager.render();
+    }
+
+    public void dispose() {
+        Assets.getInstance().dispose();
     }
 
     public static StateManager getStateManager() {
@@ -96,5 +98,9 @@ public class Game {
 
     public static ScreenManager getScreenManager() {
         return screenManager;
+    }
+
+    public static Profiler getProfiler() {
+        return profiler;
     }
 }

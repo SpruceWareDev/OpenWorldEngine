@@ -1,7 +1,5 @@
 package dev.spruce.game.graphics.ui.component;
 
-import java.awt.*;
-
 public abstract class UIElement {
 
     private int x, y, width, height;
@@ -17,7 +15,7 @@ public abstract class UIElement {
 
     public abstract void update();
 
-    public abstract void render(Graphics graphics);
+    public abstract void render();
 
     public void dispose() {}
 

@@ -1,10 +1,6 @@
 package dev.spruce.game.graphics.screen;
 
 import dev.spruce.game.Game;
-import dev.spruce.game.util.RenderUtils;
-
-import java.awt.*;
-import java.util.Optional;
 
 public class ScreenManager {
 
@@ -15,9 +11,9 @@ public class ScreenManager {
         currentScreen.update(delta);
     }
 
-    public void render(Graphics graphics) {
+    public void render() {
         if (currentScreen == null) return;
-        currentScreen.render(graphics);
+        currentScreen.render();
     }
 
     public void setScreen(Screen screen, boolean pauseCurrentState) {

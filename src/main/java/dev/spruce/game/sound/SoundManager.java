@@ -1,12 +1,8 @@
 package dev.spruce.game.sound;
 
-import dev.spruce.game.assets.Assets;
 import dev.spruce.game.sound.effect.AudioEffect;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import javax.sound.sampled.AudioFormat;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SoundManager {
@@ -14,7 +10,7 @@ public class SoundManager {
     private static SoundManager instance;
 
     public static final AudioFormat DEFAULT_FORMAT = new AudioFormat(44100, 16, 2, true, false);
-    public static final int MAX_AUDIO_THREADS = 64;
+    public static final int MAX_AUDIO_THREADS = 32;
 
     private CopyOnWriteArrayList<Thread> audioThreads;
 

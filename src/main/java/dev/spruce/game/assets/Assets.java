@@ -37,6 +37,13 @@ public class Assets {
         return soundAssetManager;
     }
 
+    public void dispose() {
+        tileTextureManager.dispose();
+        entityTextureManager.dispose();
+        itemTextureManager.dispose();
+        soundAssetManager.dispose();
+    }
+
     public static Assets getInstance() {
         if (instance == null) {
             instance = new Assets();
